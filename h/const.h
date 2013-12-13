@@ -23,7 +23,7 @@
 
 
  /* constants concerning keywords */
-#define		KEYWORDNUM			28
+#define		KEYWORDNUM			(sizeof keywords / sizeof *keywords)
 #define		FIRSTKEYWORD			400
 #define		LASTKEYWORD			427
 #define		DEF				1

@@ -1,0 +1,145 @@
+def T = \x.\y.x;;
+def F = \x.\y.y;;
+
+def neg = \b.\x.\y.(b y x);;
+def andb = \b1.\b2.\x.\y.(b1 (b2 x y) y);;
+def orb = \b1.\b2.\x.\y.(b1 x (b2 x y));;
+
+def start1 = \z.(z F F);;
+def start2 = \z.(z F F F);;
+def start3 = \z.(z F F F F);;
+def start4 = \z.(z F F F F F);;
+def start5 = \z.(z F F F F F F);;
+def start6 = \z.(z F F F F F F F);;
+
+def two = \x.\y.(x(x y));;
+ 
+def two1 = \x1.(\x.\y.(x(x y)) 
+\t.\z.(x1 \f.(t \b1.\b2.(f b1 b2)) \b1.\b2.(z b1 b2)));;
+
+
+def two2 = \x1.(\x.\y.(x(x y)) 
+\t.\z.(x1 \f.(t \b1.\b2.\b3.(f b1 b2 b3)) \b1.\b2.\b3.(z b1 b2 b3)));;
+
+def two3 = \x1.(\x.\y.(x(x y)) 
+\t.\z.(x1 \f.(t \b1.\b2.\b3.\b4.(f b1 b2 b3 b4)) \b1.\b2.\b3.\b4.(z b1 b2 b3 b4)));;
+
+def two4 = \x1.(\x.\y.(x(x y)) 
+\t.\z.(x1 \f.(t \b1.\b2.\b3.\b4.\b5.(f b1 b2 b3 b4 b5)) \b1.\b2.\b3.\b4.\b5.(z b1 b2 b3 b4 b5)));;
+
+def two5 = \x1.(\x.\y.(x(x y)) 
+\t.\z.(x1 \f.(t \b1.\b2.\b3.\b4.\b5.\b6.(f b1 b2 b3 b4 b5 b6)) \b1.\b2.\b3.\b4.\b5.\b6.(z b1 b2 b3 b4 b5 b6)));;
+
+def two6 = \x1.(\x.\y.(x(x y)) 
+\t.\z.(x1 \f.(t \b1.\b2.\b3.\b4.\b5.\b6.\b7.(f b1 b2 b3 b4 b5 b6 b7)) \b1.\b2.\b3.\b4.\b5.\b6.\b7.(z b1 b2 b3 b4 b5 b6 b7)));;
+
+def aux1 = \w.\x.(x (w F) (w T));;
+
+def aux11 = \w1.(\w.\x.(x (w F) (w T))
+\b1.\x.\y. (w1 \x.\y.(b1 x y) x y));;
+
+def next1 = \p.\t.\z.(t (\x.(aux1 (z (orb x (t \x.p))))));; 
+
+def next11 = \p.\t1.(\t.\z.(t (\x.(aux1 (z (orb x (t \x.p)))))) 
+ \x.(t1 \b1.\b2.(x b1 b2))) ;;
+
+def aux2 = \w.\x1.\x2.(x1 (x2 (w F F) (w F T)) (w T x2));;
+
+def aux21 = \w1.(\w.\x1.\x2.(x1 (x2 (w F F) (w F T)) (w T x2)) \b1.\b2.\x.\y.
+(w1 \x.\y.(b1 x y) \x.\y.(b2 x y) x y));;
+
+def next2 = \p.\t.\z.(t (\x.(aux2 (z (orb x (t \x.p))))));; 
+
+def next21 = \p.\t1.(\t.\z.(t (\x.(aux2 (z (orb x (t \x.p)))))) 
+ \x.(t1 \b1.\b2.\b3.(x b1 b2 b3))) ;;
+
+def aux3 = \w.\x1.\x2.\x3.(x1 (x2 (x3 (w F F F) (w F F T)) (w F T x3)) 
+(w T x2 x3));;
+
+def aux31 = \w1.(\w.\x1.\x2.\x3.(x1 (x2 (x3 (w F F F) (w F F T)) (w F T x3)) 
+(w T x2 x3))
+\b1.\b2.\b3.\x.\y.(w1 \x.\y.(b1 x y) \x.\y.(b2 x y) \x.\y.(b3 x y) x y));;
+
+def next3 = \p.\t.\z.(t (\x.(aux3 (z (orb x (t \x.p))))));;
+
+def next31 = \p.\t1.(\t.\z.(t (\x.(aux3 (z (orb x (t \x.p))))))
+ \x.(t1 \b1.\b2.\b3.\b4.(x b1 b2 b3 b4)));;
+
+def aux4 =  \w.\x1.\x2.\x3.\x4.(x1 (x2 (x3 (x4 (w F F F F) (w F F F T)) 
+(w F F T x4)) (w F T x3 x4 ))  (w T x2 x3 x4));; 
+
+def aux41 =  \w1.(\w.\x1.\x2.\x3.\x4.(x1 (x2 (x3 (x4 (w F F F F) (w F F F T)) 
+(w F F T x4)) (w F T x3 x4 ))  (w T x2 x3 x4)) 
+\b1.\b2.\b3.\b4.\x.\y.(w1 \x.\y.(b1 x y) \x.\y.(b2 x y) \x.\y.(b3 x y) 
+\x.\y.(b4 x y) x y));;
+
+def next4 = \p.\t.\z.(t (\x.(aux4 (z (orb x (t \x.p))))));;
+
+def next41 = \p.\t1.(\t.\z.(t (\x.(aux4 (z (orb x (t \x.p))))))
+  \x.(t1 \b1.\b2.\b3.\b4.\b5.(x b1 b2 b3 b4 b5))) ;;
+
+def aux5 = \w.\x1.\x2.\x3.\x4.\x5.(x1 (x2 (x3 (x4 (x5 (w F F F F F) (w F F F F T)) 
+(w F F F T x5)) (w F F T x4 x5)) (w F T x3 x4 x5)) (w T x2 x3 x4 x5));;
+
+def aux51 = \w1.(\w.\x1.\x2.\x3.\x4.\x5.(x1 (x2 (x3 (x4 (x5 (w F F F F F) (w F F F F T)) 
+(w F F F T x5)) (w F F T x4 x5)) (w F T x3 x4 x5)) (w T x2 x3 x4 x5))
+\b1.\b2.\b3.\b4.\b5.\x.\y.(w1 \x.\y.(b1 x y) \x.\y.(b2 x y) \x.\y.(b3 x y) 
+\x.\y.(b4 x y) \x.\y.(b5 x y) x y));;
+
+def next5 = \p.\t.\z.(t (\x.(aux5 (z (orb x (t \x.p))))));;
+
+def next51 = \p.\t1.(\t.\z.(t (\x.(aux5 (z (orb x (t \x.p))))))
+\x.(t1 \b1.\b2.\b3.\b4.\b5.\b6.(x b1 b2 b3 b4 b5 b6))) ;;
+
+def aux6 = \w.\x1.\x2.\x3.\x4.\x5.\x6.(x1 (x2 (x3 (x4 (x5 (x6 (w F F F F F F) (w F F F F F T)) 
+(w F F F F T x6)) (w F F F T x5 x6)) (w F F T x4 x5 x6)) (w F T x3 x4 x5 x6))
+(w T x2 x3 x4 x5 x6));;
+
+def aux61 = \w1.(\w.\x1.\x2.\x3.\x4.\x5.\x6.(x1 (x2 (x3 (x4 (x5 (x6 (w F F F F F F) (w F F F F F T)) 
+(w F F F F T x6)) (w F F F T x5 x6)) (w F F T x4 x5 x6)) (w F T x3 x4 x5 x6))
+(w T x2 x3 x4 x5 x6))
+\b1.\b2.\b3.\b4.\b5.\b6.\b7.\x.\y.(w1 \x.\y.(b1 x y) \x.\y.(b2 x y) \x.\y.(b3 x y) 
+\x.\y.(b4 x y) \x.\y.(b5 x y) \x.\y.(b6 x y) \x.\y.(b7 x y) x y));;
+
+def next6 = \p.\t.\z.(t (\x.(aux6 (z (orb x (t \x.p))))));;
+
+def next61 = \p.\t1.(\t.\z.(t (\x.(aux6 (z (orb x (t \x.p))))))
+\x.(t1 \b1.\b2.\b3.\b4.\b5.\b6.\b7.(t1 b1 b2 b3 b4 b5 b6 b7)));;
+
+def sat1 = \wff.(\y.(two y) (next1 wff) start1 \val.\x1.val);;
+def sat11 = \wff.(\y.(two1 y) (next11 wff) start1 \val.\x1.val);;
+def ex11 = \x1.(andb x1 T);;
+
+def sat2 = \wff.(\y.(two (two y)) (next2 wff) start2 \val.\x1.\x2.val);;
+def sat21 = \wff.(\y.(two2 (two2 y)) (next21 wff) start2 \val.\x1.\x2.val);;
+
+def ex21 = \x2.\x1.(andb x2 (andb x1 T));;
+
+def ex22 = \x.\y.(andb x (andb (neg x) y));;
+
+def sat3 = \wff.(\y.(two(two(two y))) (next3 wff) start3 \val.\x1.\x2.\x3.val);;
+def sat31 = \wff.(\y.(two3(two3(two3 y))) (next31 wff) start3 \val.\x1.\x2.\x3.val);;
+
+def ex31 = \x3.\x2.\x1.(andb x3 (andb x2 (andb x1 T)));;
+def ex32 = \x.\y.\z.(andb x (andb (andb (neg x) y) z));;
+
+def sat4 = \wff.(\y.(two(two(two(two y)))) (next4 wff) start4 \val.\x1.\x2.\x3.\x4.val);;
+def sat41 = \wff.(\y.(two4(two4(two4(two4 y)))) (next41 wff) start4 \val.\x1.\x2.\x3.\x4.val);;       
+
+def ex41 = \x4.\x3.\x2.\x1.(andb x4 (andb x3 (andb x2 (andb x1 T))));;                 
+def ex42 = \x.\y.\z.\w.(orb (andb x (andb (andb (neg x) y) (orb z w))) w);;
+
+def sat5 = \wff.(\y.(two(two(two(two(two y))))) (next5 wff) start5 \val.\x1.\x2.\x3.\x4.\x5.val);;
+def sat51 = \wff.(\y.(two5(two5(two5(two5(two5 y))))) (next51 wff) start5 \val.\x1.\x2.\x3.\x4.\x5.val);;
+
+def ex51 = \x5.\x4.\x3.\x2.\x1.(andb x5 (andb x4 (andb x3 (andb x2 (andb x1 T)))));;                 
+def ex52 = \x.\y.\z.\w.\r.(andb (orb (andb x (andb (andb (neg x) y) (orb z w))) w) (neg (andb w z)));;
+
+def sat6 = \wff.(\y.(two(two(two(two(two(two y)))))) (next6 wff) start6 \val.\x1.\x2.\x3.\x4.\x5.\x6.val);;
+
+def sat61 = \wff.(\y.(two6(two6(two6(two6(two6(two6 y)))))) (next61 wff) start6 \val.\x1.\x2.\x3.\x4.\x5.\x6.val);;
+
+def ex61 = \x6.\x5.\x4.\x3.\x2.\x1.(andb x6 (andb x5 (andb x4 (andb x3 (andb x2 (andb x1 T))))));;                 
+def ex62 = \x.\y.\z.\w.\r.\t.(andb (neg t) (andb (orb (andb x (andb (andb (neg x) y) (orb z w))) w) (neg (andb w z))));;
+
+

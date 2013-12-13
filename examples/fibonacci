@@ -1,0 +1,23 @@
+def init = \x. if x == 1 then 1 else 0;;
+
+def expl = \f.\x. rec explaux = \n.
+                     if n == 0 then 0 
+                     else if x == n then (f n)
+                                    else (explaux (n-1));;
+
+def next = \f.\x. (f (x-1))+(f x);;
+
+def tartaglia = rec tartaux = \m. if m == 0
+                           then init
+                           else \x.(expl (next (tartaux (m-1))) x (m+1));; 
+
+
+def next1 = \f.\n.\x. if x == n then (f n-1)+(f n-2) else (f x);;
+
+def initfibo = \x. if x == 1 or x == 2  then 1 else 0;;
+ 
+def fibo = rec fiboaux = \m. if m == 2 
+                           then initfibo
+                           else \x.(expl (next1 (fiboaux (m-1)) m) x m);;
+
+def fibonacci = \n. (fibo n n);;

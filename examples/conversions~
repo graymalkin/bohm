@@ -1,0 +1,28 @@
+
+
+def f0 = (K 0);;
+def f1 = (K 1);;
+
+def pr1 = \x.\y.\z.x;;
+def pr2 = \x.\y.\z.y;;
+def pr3 = \x.\y.\z.z;;
+
+def Swap = \t.let f = (t pr1) in
+                 let g = (t pr2) in
+		 let a = (t pr3) in
+	     \z.(z g f (f a));;
+
+def pari = \n.(n Swap \z.(z f0 f1 1) pr3);;
+
+def T = \x.\y.x;;
+def F = \x.\y.y;;
+
+def neg = \b.\x.\y.(b y x);;
+
+def pair = \n.(n neg T 0 1);;
+
+def div2 = \n.\x.\y.(n Swap \z.(z I x y) pr3);;
+
+
+
+  

@@ -1,0 +1,22 @@
+{row 0}
+def init = \x. if x == 1 then 1 else 0;;
+
+{the function "eval" evaluates an input function f in 
+ the interval 0-n}
+
+def eval = \f.\x. rec evalaux = \n.
+                     if n == 0 then 0 
+                     else if x == n then (f n)
+                                    else (evalaux (n-1));;
+
+{next row in tartaglia's triangle}
+def next = \f.\x. (f (x-1))+(f x);;
+
+{tartaglia m n gives the n-th element in the m-th row of 
+ tartaglia's triangle}
+def tartaglia = rec tartaux = \m. if m == 0
+                  then init
+                  else \x.(eval (next (tartaux (m-1)) x m-1));; 
+
+
+

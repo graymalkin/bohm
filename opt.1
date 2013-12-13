@@ -1,0 +1,195 @@
+.TH BOHM 1 "Oct 18 1995" "Bologna University"
+.SH NAME
+
+opt, BOHM \- The BOHM functional interpreter
+
+.SH SYNOPSIS
+
+.B opt
+.RB [ \-i ]
+.RB [ \-s ]
+
+.SH DESCRIPTION
+
+The Bologna Optimal Higher\-order Machine 
+.RI ( BOHM )
+is a prototype implementation of an extension of a variant of
+Lamping\-Gonthier's optimal graph reduction technique to a
+lambda\-calculus enriched with primitive data types (booleans,
+integers, and lists).
+
+The machine reduces terms to their weak head normal forms,
+according to a lazy\-family strategy (i.e. it always reduces the
+whole redex\-family of the leftmost outermost one, untill a weak
+head normal form is reached).
+
+.SH OPTIONS
+
+.B -i
+Invoke the info menu upon start.
+
+.B -s
+Invoke the garbage collection menu upon start.
+
+.SH USAGE
+
+Calling opt will open an interactive environment. You may now
+introduce a term ended by a double semicolon, that will be
+immediately reduced by the interpreter.
+
+The source language is a sugared lambda\-calculus enriched by
+primitive data types and basic operations over them:
+.RS
+.nf
+Integers and mathematical operations,
+Booleans and relational operations,
+Lists and related operators, and
+Fixed point operator for recursive definitions.
+.fi
+.RE
+
+More precisely, the syntax of expressions is given by the following
+grammar:
+.nf
+     <expr> ::= <expr0>
+        |  <expr> < <expr>
+        |  <expr> == <expr>
+        |  <expr> > <expr>
+        |  <expr> <= <expr>
+        |  <expr> >= <expr>
+        |  <expr> <> <expr>
+        |  <expr> + <expr>
+        |  <expr> \- <expr>
+        |  <expr> * <expr>
+        |  <expr> div <expr>
+        |  <expr> mod <expr>
+        |  - <expr>   	
+
+     <expr0> ::= true
+        |  false
+        |  <num\_const>
+        |  <identifier>
+        |  (<applist>)
+        |  \\ <identifier> . <expr>
+        |  let <identifier> = <expr> in  <expr>
+        |  letrec <identifier> = <expr>
+        |  if <expr> then  <expr> else  <expr>
+        |  <expr> and  <expr>
+        |  <expr> or  <expr>
+        |  not <expr>
+        |  <list>
+        |  cons (<expr>,<expr>)
+        |  head (<expr>)
+        |  tail (<expr>)
+        |  isnil (<expr>)
+
+    <list> ::= nil
+        | [<exprlist>]
+
+    <exprlist> ::=                  (* empty *)
+        | <expr>
+        | <expr>,<exprlist>
+        | <expr>|<expr>
+
+    <applist> ::= <expr>
+        |  <applist> <expr0>
+.fi
+
+The <expr0> nonterminal represents an expression that cannot begin with
+a unary minus sign; it serves to avoid conflicts between f(\-g) and
+(f\-g).  Remember to paranthesize arithmetic and boolean expressions
+when passing them as an argument to a function.
+
+Furthermore, any string between `(*' and `*)' is treated as whitespace.
+
+There is also a global let instuction, to build up a global
+environment. The syntax for such a global declaration is:
+.nf
+	def x = e;;
+.fi
+The exact semantics of the def declaration is subject to change;
+beware of name collisions!
+
+The directive
+.nf
+	#quit;;
+.fi
+terminates the session (you may also quit by typing ^D).
+
+After compiling a term, you may visit its graph representation
+by typing the directive
+.nf
+	#inspect;;
+.fi
+This enters in "inspection mode". You are at the root form of the
+term. To move along the graph, type the number of the port you
+wish to exit through: you will move to the next form connected
+with the previous one at the specified port. You may also inspect
+a previously defined term, by typing
+.nf
+	#inspect term_name;;
+.fi
+You may also save it typing the directive
+.nf
+	#save file_name;;
+.fi
+for the last term; otherwise for a generic term
+.nf
+	#save file_name term_name;;
+.fi
+
+The directive
+.nf
+	#load file_name;;
+.fi
+allows the user to compile an external file file_name
+
+The directive
+.nf
+	#option;;
+.fi
+allows you to choose a garbage strategie during execution, by
+presenting a series of menus containing the possible modalities.
+Such menus can also be obtained at the beginning of execution by
+calling opt with the option 
+.BR \-s .
+
+Garbage collection can also be explicitly invoked by the user by
+calling the directive
+.nf
+	#garbage;;
+.fi
+The interpreter also displays some data about the computation, such
+as the dimension of the graph or the time required for reduction.
+These informations can be viewed by typing the directive
+.nf
+	#info;;
+.fi
+and selecting the parameter of interest from the displayed menus.
+These menus are also presented if the program is called with option
+.BR \-i .
+
+.SH AUTHORS
+BOHM has been developed by A. Asperti, J.Chroboczek, C.Giovannetti,
+C.Laneve, P.Gruppioni and A.Naletto at the Department of
+Mathematics of the University of Bologna, Italy.
+
+.SH THANKS
+This work has been partially supported by the
+.I ESPRIT Basic Research Project 6454 \- CONFER.
+
+.SH FILES
+.B examples/*
+Examples of BOHM code.
+
+.B README
+The documentation file.
+
+.SH "SEE ALSO"
+the
+.B README
+file
+
+
+
+

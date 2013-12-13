@@ -153,6 +153,7 @@ FORM                    *lastinputterm;
 %{
 int                    app_nesting_depth;
 PATTERN                *pattmp;
+int                    yyerrstatus;
 %}
 
  /***************************************************************/
@@ -721,7 +722,6 @@ retract_token()
 	yyless(0);
 }
 
-HIDDEN
 yyerror()
 {
 	signal_error(SINTAXERROR);

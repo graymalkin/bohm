@@ -130,11 +130,11 @@ LOCALENVENTRY		*curr_local_env;
 #include		"h/keywords.h"
 #include		"h/iolibrary.h"
 
-HIDDEN LOCALENVENTRY	*external_env;
+LOCALENVENTRY	*external_env;
 			       /* pointer to the entry for the */
 			       /* external environment */
 
-HIDDEN int		curr_nesting_depth;
+int		curr_nesting_depth;
 			       /* current nesting depth */
 
 
@@ -300,7 +300,6 @@ create_local_variable_binding(st,term)
  /* The following function creates an entry for a binding concerning */
  /* an identifier used but not defined. The entry for the binding is */
  /* inserted into the binding entry list for the external environment. */
-
 create_binding_for_undef_id(st,rootform)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */
@@ -320,7 +319,6 @@ create_binding_for_undef_id(st,rootform)
 /****************************************************************/
 
  /* The following function allocates a bucket for an identifier. */
-HIDDEN
 allocate_bucket(st, id)
 	STBUCKET	**st;
 					/* pointer to the bucket to be */
@@ -337,7 +335,6 @@ allocate_bucket(st, id)
 
  /* The following function moves a bucket to the head of the */
  /* list in which it lies. */
-HIDDEN
 move_bucket(st, dict_index)
 	STBUCKET	*st;
 					/* pointer to the bucket to */
@@ -352,7 +349,7 @@ move_bucket(st, dict_index)
 }
 
  /* The following function implements Weinberger's hash function. */
-HIDDEN int
+int
 hash_pjw(id)
 	STRING		id;
 					/* identifier to be hashed */
@@ -371,7 +368,6 @@ hash_pjw(id)
 
  /* The following function pushes the entry for the external environment */
  /* onto the scope stack. */
-HIDDEN
 push_external_env()
 {
 	STBUCKET	*st;
@@ -389,14 +385,12 @@ push_external_env()
 
  /* The following function pushes the entry for the global environment */
  /* onto the scope stack. */
-HIDDEN
 push_global_env()
 {
 	push_local_env();
 }
 
  /* The following function allocates a local environment entry. */
-HIDDEN
 allocate_local_env_entry()
 {
 	LOCALENVENTRY	*le;
@@ -410,7 +404,6 @@ allocate_local_env_entry()
 }
 
  /* The following function allocates a binding entry. */
-HIDDEN
 allocate_binding_entry(st,le,rootform,type)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */
@@ -440,7 +433,6 @@ allocate_binding_entry(st,le,rootform,type)
 }
 
 #if 0
-HIDDEN
 allocate_local_binding_entry(st,le,rootform,port)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */

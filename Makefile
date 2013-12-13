@@ -1,8 +1,8 @@
 # makefile for BOHM
 
-CFLAGS = -O 
+CFLAGS = -O -w -g
 #CFLAGS = -g
-LDLIBS = -ll -ly
+LDLIBS = -ll -ly -g
 YFLAGS = -d
 
 # No user serviceable parts below this line
@@ -34,7 +34,7 @@ utility/numberhandler.o utility/dynallhandler.o \
 utility/filehandler.o utility/stringhandler.o
 
 opt: $(OBJS) $(SUPPORT)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -target $(TARGET_ARCH:-%=%) \
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) \
 	$(OBJS) \
 	-o opt $(LDLIBS)
 

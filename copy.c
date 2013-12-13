@@ -85,7 +85,7 @@ FORM
 
 /* The following function duplicates the input graph and 	*/
 /* returns it as output.					*/
-HIDDEN FORM
+FORM
 *copy_aux(root,p,offset)
       FORM       *root;
       int        p,offset;
@@ -228,7 +228,7 @@ HIDDEN FORM
 }
 
 /* The following function inserts a two-form relation in the table. */
-HIDDEN void
+void
 put_relation(src,dest)
 FORM	*src,*dest;
 {
@@ -245,7 +245,7 @@ FORM	*src,*dest;
 
 /* The following function checks whether or not a form has 	*/
 /* already been copied.						*/
-HIDDEN FORM
+FORM
 *is_in_relation(src)
 FORM	*src;
 {
@@ -262,7 +262,7 @@ FORM	*src;
 }
 
 /* The following function implements hash function.		*/
-HIDDEN int
+int
 entry(src)
 FORM	*src;
 {
@@ -274,7 +274,7 @@ FORM	*src;
 }
 
 /* The following function initialises hash table.	        */
-HIDDEN void
+void
 start_copy()
 {
   int 	i;
@@ -283,7 +283,7 @@ start_copy()
 }
 
 /* The following function eliminates hash table.		*/
-HIDDEN void
+void
 end_copy()
 {
   int 	i;

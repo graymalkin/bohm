@@ -201,7 +201,6 @@ string                  [^\"]*\"
  /* 6. Auxiliary functions.					*/
  /***************************************************************/
 
-HIDDEN
 yywrap()
 {
 	return(NOMOREINPUT);

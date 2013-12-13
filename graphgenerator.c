@@ -92,6 +92,7 @@
 #include		"h/const.h"
 #include		"h/types.h"
 #include                <stdio.h>
+#include                <stdlib.h>
 #include                <malloc.h>
 #include		"e/menu.e"
 #include		"e/copy.e"
@@ -967,7 +968,6 @@ bool_connect(form1,portf1,portf2)
 
 
  /* the following function allocate a new variable entry */
-HIDDEN
 allocate_var(newvar,id,form,nextvar)
 	VARENTRY   **newvar;
 		       /* reference to the pointer of the */
@@ -987,7 +987,6 @@ allocate_var(newvar,id,form,nextvar)
 
 
  /* the following function allocate a new term entry */
-HIDDEN
 allocate_term(term,rootform,rootport,freevars)
 	TERM       **term;
 		       /* reference to the pointer of the */

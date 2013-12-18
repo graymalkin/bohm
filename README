@@ -1,3 +1,8 @@
+This is a restoration attempt for the Bologna Optimal Higher-order Machine,
+which was originally written between '95 and '97. The source is still available
+from the University of Bologna, but I have had to make some changes to restore
+it to working condition. The original README file is below.
+
 /***************************************************************/
 /*		             README 			       */
 /***************************************************************/

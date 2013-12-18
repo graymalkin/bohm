@@ -1,8 +1,8 @@
 # makefile for BOHM
 
-CFLAGS = -O -g
+CFLAGS = -O
 #CFLAGS = -g
-LDLIBS = -ll -ly -g
+LDLIBS = -ll -ly
 YFLAGS = -d
 
 # No user serviceable parts below this line
@@ -124,6 +124,7 @@ clean:
 	-cd utility ; rm -f *.o
 	-rm -f *.o 
 	-rm -f y.tab.c lex.yy.c y.output
+	-rm -f h/y.tab.h opt
 
 distclean: clean
 	-rm -f TAGS tags

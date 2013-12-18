@@ -1,6 +1,6 @@
 # makefile for BOHM
 
-CFLAGS = -O -w -g
+CFLAGS = -O -g
 #CFLAGS = -g
 LDLIBS = -ll -ly -g
 YFLAGS = -d

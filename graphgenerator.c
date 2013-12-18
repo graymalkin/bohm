@@ -91,6 +91,7 @@
 
 #include		"h/const.h"
 #include		"h/types.h"
+#include                <inttypes.h>
 #include                <stdio.h>
 #include                <stdlib.h>
 #include                <malloc.h>
@@ -523,7 +524,7 @@ TERM
 
 	allocate_form(&newf,op,level);
 	if (arg1->rootp==INT) {
-	  newf->num_safe=(int)arg1->rootf;
+	  newf->num_safe=(intptr_t)arg1->rootf;
 	  switch(newf->name) {
 		case ADD: 
 		  newf->name=ADD1;
@@ -546,14 +547,14 @@ TERM
         }
 	else {
 	  if (arg2->rootp==INT && op!=DIV && op!=MOD) {
-	    newf->num_safe=(int)arg2->rootf; 
+	    newf->num_safe=(intptr_t)arg2->rootf; 
 	    switch(newf->name) {
 		case ADD: 
 		  newf->name=ADD1;
 		  break;
 		case SUB:
 		  newf->name=ADD1;
-	          newf->num_safe=-(int)arg2->rootf; 
+	          newf->num_safe=-(intptr_t)arg2->rootf; 
 		  break;
 		case PROD: 
 		  newf->name=PROD1;
@@ -588,7 +589,7 @@ TERM
 
 
 	if (arg1->rootp==INT) {
-	  arg1->rootf=(FORM *)(-((int)arg1->rootf));
+	  arg1->rootf=(FORM *)(-((intptr_t)arg1->rootf));
 	  t=arg1;
 	} 
 	else {
@@ -619,7 +620,7 @@ TERM
 
 	allocate_form(&newf,relop,level);
 	if (arg1->rootp==INT) {
-	  newf->num_safe=(int)arg1->rootf; 
+	  newf->num_safe=(intptr_t)arg1->rootf; 
 	  switch(newf->name) {
 		case LESS: 
 		  newf->name=LESS1;
@@ -645,7 +646,7 @@ TERM
         }
 	else {
 	  if (arg2->rootp==INT) {
-	    newf->num_safe=(int)arg2->rootf; 
+	    newf->num_safe=(intptr_t)arg2->rootf; 
 	    switch(newf->name) {
 		case LESS: 
 		  newf->name=MORE1;

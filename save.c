@@ -17,7 +17,7 @@
 /*  - put_form(): Prints form name.				*/
 /*  - put_int(): Prints NIL, INT and BOOL forms names.		*/
 /*  - num_port(): Returns a form's ports number.		*/
-/*  - index(): Saves a file index row				*/
+/*  - index_(): Saves a file index row				*/
 /****************************************************************/
 
 
@@ -28,6 +28,7 @@
 #define	ENTRY		17
 #define	NUM		13
 #include <stdio.h>
+#include <stdlib.h>
 #include "h/const.h"
 #include "h/types.h"
 #include "e/dynallhandler.e"
@@ -49,7 +50,7 @@ HIDDEN	void		stampa();
 HIDDEN	void		put_int();
 HIDDEN	void		put_form();
 HIDDEN	int		num_port();
-HIDDEN	void		index();
+HIDDEN	void		index_();
 
 
 /****************************************************************/
@@ -76,7 +77,7 @@ save(name,root,id)
     p=head;
     fprintf(save_file,"\n\n\nI N D E X :\n\n");
     while (p!=NULL) {
-      index(p);
+      index_(p);
       dep=p;
       p=p->next;
       free(dep);
@@ -392,7 +393,7 @@ num_port(name)
 
 /* The following function saves a file index row		*/
 HIDDEN void
-index(elem)
+index_(elem)
 	ELEM    *elem;
 {
   fprintf(save_file,"%3d ",elem->num);

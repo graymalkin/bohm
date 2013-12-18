@@ -30,6 +30,7 @@
 /*************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <malloc.h>
 #include <time.h>
 #include <sys/types.h>
@@ -41,6 +42,7 @@
 /* 2. Inclusion of declarations that are being imported.                 */
 /*************************************************************************/
 
+#include "e/dynallhandler.e"
 #include "e/graphgenerator.e"
 #include "e/menu.e"
 

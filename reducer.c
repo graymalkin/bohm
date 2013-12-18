@@ -37,7 +37,9 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
+#include <inttypes.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/times.h>
 #include <time.h>
@@ -863,7 +865,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = LESS1;
-			f1 -> num_safe = (int)(f1->nform[0]);
+			f1 -> num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -877,7 +879,7 @@ FORM	*f1;
 	      case LESS1:
 		 if (f1->nport[0]==INT)	 {
 			eq++;
-			if(f1->num_safe < (int)(f1->nform[0]))
+			if(f1->num_safe < (intptr_t)(f1->nform[0]))
 			  bool_connect(f1->nform[1], f1->nport[1], T);
 			else
 			  bool_connect(f1->nform[1], f1->nport[1], F);
@@ -896,7 +898,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = EQ1;
-			f1 -> num_safe = (int)(f1->nform[0]);
+			f1 -> num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -910,7 +912,7 @@ FORM	*f1;
 	      case EQ1:
 		 if (f1->nport[0]==INT)	 {
 			eq++;
-			if(f1->num_safe == (int)(f1->nform[0]))
+			if(f1->num_safe == (intptr_t)(f1->nform[0]))
 			  bool_connect(f1->nform[1], f1->nport[1], T);
 			else
 			  bool_connect(f1->nform[1], f1->nport[1], F);
@@ -929,7 +931,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = NOTEQ1;
-			f1 -> num_safe = (int)(f1->nform[0]);
+			f1 -> num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -943,7 +945,7 @@ FORM	*f1;
 	      case NOTEQ1:
 		 if (f1->nport[0]==INT)	 {
 			eq++;
-			if(f1->num_safe != (int)(f1->nform[0]))
+			if(f1->num_safe != (intptr_t)(f1->nform[0]))
 			  bool_connect(f1->nform[1], f1->nport[1], T);
 			else
 			  bool_connect(f1->nform[1], f1->nport[1], F);
@@ -963,7 +965,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = LEQ1;
-			f1 -> num_safe = (int)(f1->nform[0]);
+			f1 -> num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -977,7 +979,7 @@ FORM	*f1;
 	      case LEQ1:
 		 if (f1->nport[0]==INT)	 {
 			eq++;
-			if(f1->num_safe <= (int)(f1->nform[0]))
+			if(f1->num_safe <= (intptr_t)(f1->nform[0]))
 			  bool_connect(f1->nform[1], f1->nport[1], T);
 			else
 			  bool_connect(f1->nform[1], f1->nport[1], F);
@@ -996,7 +998,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = MEQ1;
-			f1 -> num_safe = (int)(f1->nform[0]);
+			f1 -> num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -1010,7 +1012,7 @@ FORM	*f1;
 	      case MEQ1:
 		 if (f1->nport[0]==INT)	 {
 			eq++;
-			if(f1->num_safe >= (int)(f1->nform[0]))
+			if(f1->num_safe >= (intptr_t)(f1->nform[0]))
 			  bool_connect(f1->nform[1], f1->nport[1], T);
 			else
 			  bool_connect(f1->nform[1], f1->nport[1], F);
@@ -1029,7 +1031,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = MORE1;
-			f1 -> num_safe = (int)(f1->nform[0]);
+			f1 -> num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -1043,7 +1045,7 @@ FORM	*f1;
 	      case MORE1:
 		 if (f1->nport[0]==INT)	 {
 			eq++;
-			if(f1->num_safe > (int)(f1->nform[0]))
+			if(f1->num_safe > (intptr_t)(f1->nform[0]))
 			  bool_connect(f1->nform[1], f1->nport[1], T);
 			else
 			  bool_connect(f1->nform[1], f1->nport[1], F);
@@ -1062,7 +1064,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1->name = ADD1;
-			f1->num_safe = (int)(f1->nform[0]);
+			f1->num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -1078,7 +1080,7 @@ FORM	*f1;
 			eq++;
 			int_connect(f1->nform[1],
 				    f1->nport[1],
-				    (f1->num_safe+(int)(f1->nform[0])),
+				    (f1->num_safe+(intptr_t)(f1->nform[0])),
 				    INT);
 			myfree(f1);
 			break;
@@ -1095,7 +1097,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = SUB1;
-			f1->num_safe = (int)(f1->nform[0]);
+			f1->num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -1111,7 +1113,7 @@ FORM	*f1;
 			eq++;
 			int_connect(f1->nform[1],
 				    f1->nport[1],
-				    (f1->num_safe-(int)(f1->nform[0])),
+				    (f1->num_safe-(intptr_t)(f1->nform[0])),
 				    INT);
 			myfree(f1);
 			break;
@@ -1128,7 +1130,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = PROD1;
-			f1->num_safe = (int)(f1->nform[0]);
+			f1->num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -1144,7 +1146,7 @@ FORM	*f1;
 			eq++;
 			int_connect(f1->nform[1],
 				    f1->nport[1],
-				    (f1->num_safe*(int)(f1->nform[0])),
+				    (f1->num_safe*(intptr_t)(f1->nform[0])),
 				    INT);
 			myfree(f1);
 			break;
@@ -1161,7 +1163,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = DIV1;
-			f1->num_safe = (int)(f1->nform[0]);
+			f1->num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -1177,7 +1179,7 @@ FORM	*f1;
 			eq++;
 			int_connect(f1->nform[1],
 				    f1->nport[1],
-				    (f1->num_safe/(int)(f1->nform[0])),
+				    (f1->num_safe/(intptr_t)(f1->nform[0])),
 				    INT);
 			myfree(f1);
 			break;
@@ -1194,7 +1196,7 @@ FORM	*f1;
 		 if (f1->nport[0]==INT)	 {
 			eq++;
 			f1 -> name = MOD1;
-			f1->num_safe = (int)(f1->nform[0]);
+			f1->num_safe = (intptr_t)(f1->nform[0]);
 			connect1(f1, 0, f1->nform[2], f1->nport[2]);
 			break;
 		 }
@@ -1210,7 +1212,7 @@ FORM	*f1;
 			eq++;
 			int_connect(f1->nform[1],
 				    f1->nport[1],
-				    (f1->num_safe%(int)(f1->nform[0])),
+				    (f1->num_safe%(intptr_t)(f1->nform[0])),
 				    INT);
 			myfree(f1);
 			break;

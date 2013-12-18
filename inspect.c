@@ -22,6 +22,7 @@
 
 #include "h/const.h"
 #include "h/types.h"
+#include <inttypes.h>
 #include <stdio.h>
 
 /****************************************************************/
@@ -157,7 +158,7 @@ HIDDEN FORM
 		   printf("form = F\n");
 		   break;
 		case INT:
-		   printf("form = INT value = %d\n",(int)nextform);
+		   printf("form = INT value = %d\n",(intptr_t)nextform);
 		   break;
 		case NIL:
 		   printf("form = NIL\n");

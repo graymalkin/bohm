@@ -14,6 +14,7 @@
 /* Inclusion of header files.	  			        */
 /****************************************************************/
 
+#include <inttypes.h>
 #include <stdio.h>
 #include "h/types.h"
 #include "h/const.h"
@@ -53,7 +54,7 @@ HIDDEN void rdbk_1(form,port)
     if(form->nport[port]<0) {
       switch(form->nport[port]){
       case INT:
-	left_to_print-=printf("%d", (int)form->nform[port]);
+	left_to_print-=printf("%d", (intptr_t)form->nform[port]);
 	break;
       case T:
 	left_to_print-=printf("TRUE");

@@ -30,7 +30,7 @@ compile(file)
      STRING  file;
 {
      printf("\n******** loading file %s ********\n",file);
-     yyin = fopen(file,"r");
+     yyrestart(fopen(file,"r"));
      if (yyin==NULL)
 	   printf("Fatal Error: cannot open file %s.\n",file);
      else
@@ -50,7 +50,7 @@ compile(file)
 	   quit = 0;
 	   loading_mode = 0;
 	 }
-     yyin = stdin;
+     yyrestart(stdin);
 }
 
 

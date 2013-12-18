@@ -121,12 +121,12 @@ ctags:
 	utility/stringhandler.c lambda_parser.y lambda_lexan.l
 
 clean:
-	-cd utility ; rm *.o
-	-rm *.o 
-	-rm y.tab.c lex.yy.c y.output
+	-cd utility ; rm -f *.o
+	-rm -f *.o 
+	-rm -f y.tab.c lex.yy.c y.output
 
 distclean: clean
-	-rm TAGS tags
+	-rm -f TAGS tags
 
 
 

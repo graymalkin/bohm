@@ -42,9 +42,9 @@
 /* 2. Inclusion of declarations that are being imported.                 */
 /*************************************************************************/
 
-#include "e/dynallhandler.e"
-#include "e/graphgenerator.e"
-#include "e/menu.e"
+#include "i/dynallhandler.i"
+#include "i/graphgenerator.i"
+#include "i/menu.i"
 
 /*************************************************************************/
 /* 3. Declaration of names strictly local to the module.                 */

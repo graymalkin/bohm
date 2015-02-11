@@ -1,5 +1,5 @@
 /****************************************************************/
-/*	                  ERRORHANDLER.E			*/
+/*		              	MENU.I                          */
 /****************************************************************/
 
 
@@ -7,12 +7,16 @@
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-extern BOOLEAN		error_detected;
-
+extern 	int 		option;
+extern 	unsigned 	limit;
+extern 	BOOLEAN  	seetime;
+extern 	BOOLEAN  	seenode;
+extern 	BOOLEAN  	seegarb;
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern			signal_error(),
-			signal_warning();
+extern 	void	menu();
+extern 	void	info();
+

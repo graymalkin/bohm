@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include "h/const.h"
 #include "h/types.h"
-#include "e/dynallhandler.e"
+#include "i/dynallhandler.i"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

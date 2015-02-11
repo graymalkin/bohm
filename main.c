@@ -15,11 +15,11 @@
 #include <stdlib.h>
 #include "h/const.h"
 #include "h/types.h"
-#include "e/lambda_lexan.e"
-#include "e/lambda_parser.e"
-#include "e/menu.e"
-#include "e/destroyer.e"
-#include "e/garbage.e"
+#include "i/lambda_lexan.i"
+#include "i/lambda_parser.i"
+#include "i/menu.i"
+#include "i/destroyer.i"
+#include "i/garbage.i"
 
 /****************************************************************/
 /* Main program.               			                */

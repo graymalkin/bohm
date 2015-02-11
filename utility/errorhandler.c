@@ -23,7 +23,7 @@
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"../e/lambda_lexan.e"
+#include		"../i/lambda_lexan.i"
 
 
 /****************************************************************/

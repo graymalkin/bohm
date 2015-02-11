@@ -95,11 +95,11 @@
 #include                <stdio.h>
 #include                <stdlib.h>
 #include                <malloc.h>
-#include		"e/menu.e"
-#include		"e/copy.e"
-#include                "e/destroyer.e"
-#include                "e/dynallhandler.e"
-#include                "e/graphgenerator.e"
+#include		"i/menu.i"
+#include		"i/copy.i"
+#include                "i/destroyer.i"
+#include                "i/dynallhandler.i"
+#include                "i/graphgenerator.i"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

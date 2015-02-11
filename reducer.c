@@ -50,12 +50,12 @@
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include "e/graphgenerator.e"
-#include "e/m_stack.e"
-#include "e/readback.e"
-#include "e/menu.e"
-#include "e/garbage.e"
-#include "e/destroyer.e"
+#include "i/graphgenerator.i"
+#include "i/m_stack.i"
+#include "i/readback.i"
+#include "i/menu.i"
+#include "i/garbage.i"
+#include "i/destroyer.i"
 extern clock_t usr_garb_time;
 extern clock_t sys_garb_time;
 

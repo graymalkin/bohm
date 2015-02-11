@@ -12,7 +12,7 @@
 #include		<stdio.h>
 #include		"h/const.h"
 #include		"h/types.h"
-#include		"e/graphgenerator.e"
+#include		"i/graphgenerator.i"
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/

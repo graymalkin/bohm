@@ -106,9 +106,9 @@
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"e/errorhandler.e"
-#include		"e/dynallhandler.e"
-#include		"e/stringhandler.e"
+#include		"i/errorhandler.i"
+#include		"i/dynallhandler.i"
+#include		"i/stringhandler.i"
 
 
 /****************************************************************/

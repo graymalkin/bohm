@@ -1,22 +1,19 @@
 /****************************************************************/
-/*		              	MENU.E                          */
+/*     		         DYNALLHANDLER.I			*/
 /****************************************************************/
-
 
 /****************************************************************/
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-extern 	int 		option;
-extern 	unsigned 	limit;
-extern 	BOOLEAN  	seetime;
-extern 	BOOLEAN  	seenode;
-extern 	BOOLEAN  	seegarb;
+FORM *headfree;
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern 	void	menu();
-extern 	void	info();
+extern 	destroy();
+extern 	init_destroy();
+extern 	no_destroy();
+
 

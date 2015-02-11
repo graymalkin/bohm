@@ -35,9 +35,9 @@
 #include <malloc.h>
 #include "h/const.h"
 #include "h/types.h"
-#include "e/dynallhandler.e"
-#include "e/graphgenerator.e"
-#include "e/garbage.e"
+#include "i/dynallhandler.i"
+#include "i/graphgenerator.i"
+#include "i/garbage.i"
 
 /****************************************************************/
 /* 2. Definitions of variables to be exported.			*/

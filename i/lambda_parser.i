@@ -1,5 +1,5 @@
 /****************************************************************/
-/*     		         DYNALLHANDLER.E			*/
+/*		     	  LAMBDA_LEXAN.I 			*/
 /****************************************************************/
 
 
@@ -12,5 +12,11 @@
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern STRING		malloc_da(),
-			strdup_da();
+extern			yyparse();
+extern                  error_detected,
+                        quit,
+                        loading_mode;
+extern FORM 		*lastinputterm;
+
+			
+

@@ -110,18 +110,18 @@
  /***************************************************************/
 
 %{
-#include		"e/lambda_lexan.e"
-#include		"e/graphgenerator.e"
-#include		"e/sthandler.e"
-#include		"e/errorhandler.e"
-#include		"e/scope_analysis.e"
-#include		"e/reducer.e"
-#include		"e/inspect.e"
-#include		"e/loader.e"
-#include		"e/garbage.e"
-#include		"e/menu.e"
-#include		"e/destroyer.e"
-#include		"e/save.e"
+#include		"i/lambda_lexan.i"
+#include		"i/graphgenerator.i"
+#include		"i/sthandler.i"
+#include		"i/errorhandler.i"
+#include		"i/scope_analysis.i"
+#include		"i/reducer.i"
+#include		"i/inspect.i"
+#include		"i/loader.i"
+#include		"i/garbage.i"
+#include		"i/menu.i"
+#include		"i/destroyer.i"
+#include		"i/save.i"
 
 %}
 

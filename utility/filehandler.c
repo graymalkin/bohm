@@ -21,7 +21,7 @@
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"../e/crashhandler.e"
+#include		"../i/crashhandler.i"
 
 
 /****************************************************************/

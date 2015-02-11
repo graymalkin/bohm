@@ -1,5 +1,5 @@
 /****************************************************************/
-/*	                  LISTINGHANDLER.E			*/
+/*	                     STHANDLER.I			*/
 /****************************************************************/
 
 
@@ -7,23 +7,20 @@
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-extern int		lines,
-			lexemes_in_curr_line;
+extern	STBUCKET		*dictionary[];
 
-extern BOOLEAN		out_listing;
+extern	LOCALENVENTRY		*curr_local_env;
 
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern			open_listing(),
-			produce_listing(),
-			white_space_listing(),
-			tab_listing(),
-			newline_listing(),
-			last_newline_listing(),
-			print_error_listing(),
-			print_warning_listing(),
-			clear_listing(),
-			close_listing();
+extern	void		init_symbol_table(),
+			search_bucket(),
+			push_local_env(),
+			pop_local_env(),
+			pop_all_local_env(),
+			create_variable_binding(),
+                        create_local_variable_binding(),
+			create_binding_for_undef_id();

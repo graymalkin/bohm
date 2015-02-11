@@ -8,12 +8,12 @@ YFLAGS = -d
 # No user serviceable parts below this line
 
 # each time one of the following is modified, everything is recompiled
-SUPPORT = e/crashhandler.e e/dynallhandler.e e/save.e e/copy.e\
-e/errorhandler.e e/filehandler.e e/garbage.e e/graphgenerator.e \
-e/inspect.e e/lambda_lexan.e e/lambda_parser.e e/listinghandler.e \
-e/loader.e e/m_stack.e e/menu.e e/numberhandler.e destroyer.c\
-e/readback.e e/reducer.e e/scope_analysis.e e/sthandler.e \
-e/stringhandler.e h/const.h h/crashmsgs.h h/errormsgs.h \
+SUPPORT = i/crashhandler.i i/dynallhandler.i i/save.i i/copy.i\
+i/errorhandler.i i/filehandler.i i/garbage.i i/graphgenerator.i \
+i/inspect.i i/lambda_lexan.i i/lambda_parser.i i/listinghandler.i \
+i/loader.i i/m_stack.i i/menu.i i/numberhandler.i destroyer.c\
+i/readback.i i/reducer.i i/scope_analysis.i i/sthandler.i \
+i/stringhandler.i h/const.h h/crashmsgs.h h/errormsgs.h \
 h/iolibrary.h h/keywords.h h/types.h Makefile
 
 # the C files -- not the sources (lex and yacc object too)

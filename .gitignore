@@ -1,0 +1,5 @@
+*.o
+opt
+lex.yy.c
+y.tab.c
+h/y.tab.h

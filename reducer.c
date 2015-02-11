@@ -43,8 +43,8 @@
 #include <sys/types.h>
 #include <sys/times.h>
 #include <time.h>
-#include "h/types.h"
-#include "h/const.h"
+#include "include/types.h"
+#include "include/const.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

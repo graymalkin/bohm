@@ -10,8 +10,8 @@
 /****************************************************************/
 
 #include		<stdio.h>
-#include		"h/const.h"
-#include		"h/types.h"
+#include		"include/const.h"
+#include		"include/types.h"
 #include		"i/graphgenerator.i"
 
 /****************************************************************/

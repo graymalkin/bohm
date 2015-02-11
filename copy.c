@@ -37,8 +37,8 @@
 
 #include <stdio.h>
 #include <malloc.h>
-#include "h/types.h"
-#include "h/const.h"
+#include "include/types.h"
+#include "include/const.h"
 #include "i/dynallhandler.i"
 
 /****************************************************************/

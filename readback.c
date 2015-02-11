@@ -16,8 +16,8 @@
 
 #include <inttypes.h>
 #include <stdio.h>
-#include "h/types.h"
-#include "h/const.h"
+#include "include/types.h"
+#include "include/const.h"
 
 /****************************************************************/
 /* Declaration of variables strictly local to the module.	*/

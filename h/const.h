@@ -25,7 +25,7 @@
  /* constants concerning keywords */
 #define		KEYWORDNUM			(sizeof keywords / sizeof *keywords)
 #define		FIRSTKEYWORD			400
-#define		LASTKEYWORD			427
+#define		LASTKEYWORD			(FIRSTKEYWORD + KEYWORDNUM - 1)
 #define		DEF				1
 #define		SHARE				2
 #define 	LOCAL				0

@@ -14,8 +14,8 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"../h/const.h"
-#include		"../h/types.h"
+#include		"../include/const.h"
+#include		"../include/types.h"
 #include		<stdio.h>
 
 
@@ -38,7 +38,7 @@ BOOLEAN			error_detected;
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
-#include		"../h/errormsgs.h"
+#include		"../include/errormsgs.h"
 
 
 /****************************************************************/

@@ -95,9 +95,9 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"h/const.h"
-#include		"h/types.h"
-#include		"h/y.tab.h"
+#include		"include/const.h"
+#include		"include/types.h"
+#include		"include/y.tab.h"
 #include		<stdio.h>
 #include		<malloc.h>
 
@@ -127,8 +127,8 @@ LOCALENVENTRY		*curr_local_env;
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
-#include		"h/keywords.h"
-#include		"h/iolibrary.h"
+#include		"include/keywords.h"
+#include		"include/iolibrary.h"
 
 LOCALENVENTRY	*external_env;
 			       /* pointer to the entry for the */

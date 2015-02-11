@@ -7,7 +7,7 @@
 /* Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"h/types.h"
+#include		"include/types.h"
 #include		<stdio.h>
 
 

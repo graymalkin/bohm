@@ -13,8 +13,8 @@ i/errorhandler.i i/filehandler.i i/garbage.i i/graphgenerator.i \
 i/inspect.i i/lambda_lexan.i i/lambda_parser.i i/listinghandler.i \
 i/loader.i i/m_stack.i i/menu.i i/numberhandler.i destroyer.c\
 i/readback.i i/reducer.i i/scope_analysis.i i/sthandler.i \
-i/stringhandler.i h/const.h h/crashmsgs.h h/errormsgs.h \
-h/iolibrary.h h/keywords.h h/types.h Makefile
+i/stringhandler.i include/const.h include/crashmsgs.h include/errormsgs.h \
+include/iolibrary.h include/keywords.h include/types.h Makefile
 
 # the C files -- not the sources (lex and yacc object too)
 
@@ -41,13 +41,13 @@ opt: $(OBJS) $(SUPPORT)
 # The two following productions are identical
 y.tab.c: lambda_parser.y
 	$(YACC) $(YFLAGS) lambda_parser.y
-	mv y.tab.h h/y.tab.h
+	mv y.tab.h include/y.tab.h
 
-h/y.tab.h: lambda_parser.y
+include/y.tab.h: lambda_parser.y
 	$(YACC) $(YFLAGS) lambda_parser.y
-	mv y.tab.h h/y.tab.h
+	mv y.tab.h include/y.tab.h
 
-lex.yy.c: lambda_lexan.l h/y.tab.h
+lex.yy.c: lambda_lexan.l include/y.tab.h
 	$(LEX) $(LFLAGS) lambda_lexan.l
 
 # the default .c.o rule puts its object in the wrong directory
@@ -64,7 +64,7 @@ graphgenerator.o: graphgenerator.c $(SUPPORT)
 
 inspect.o: inspect.c $(SUPPORT)
 
-lex.yy.o: lex.yy.c $(SUPPORT) h/y.tab.h
+lex.yy.o: lex.yy.c $(SUPPORT) include/y.tab.h
 
 loader.o: loader.c $(SUPPORT)
 
@@ -84,7 +84,7 @@ save.o: save.c $(SUPPORT)
 
 scope_analysis.o: scope_analysis.c $(SUPPORT)
 
-sthandler.o: sthandler.c $(SUPPORT) h/y.tab.h
+sthandler.o: sthandler.c $(SUPPORT) include/y.tab.h
 
 y.tab.o: y.tab.c $(SUPPORT)
 
@@ -124,7 +124,7 @@ clean:
 	-cd utility ; rm -f *.o
 	-rm -f *.o 
 	-rm -f y.tab.c lex.yy.c y.output
-	-rm -f h/y.tab.h opt
+	-rm -f include/y.tab.h opt
 
 distclean: clean
 	-rm -f TAGS tags

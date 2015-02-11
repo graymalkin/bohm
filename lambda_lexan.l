@@ -38,9 +38,9 @@
 %{
 #include                <malloc.h>
 #include                <string.h>
-#include		"h/const.h"
-#include		"h/types.h"
-#include		"h/y.tab.h"
+#include		"include/const.h"
+#include		"include/types.h"
+#include		"include/y.tab.h"
 %}
 
 

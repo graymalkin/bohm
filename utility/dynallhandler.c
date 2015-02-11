@@ -14,8 +14,8 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"../h/const.h"
-#include		"../h/types.h"
+#include		"../include/const.h"
+#include		"../include/types.h"
 #include		<stdio.h>
 #include		<string.h>
 #include		<malloc.h>

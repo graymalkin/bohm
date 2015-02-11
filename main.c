@@ -13,8 +13,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "h/const.h"
-#include "h/types.h"
+#include "include/const.h"
+#include "include/types.h"
 #include "i/lambda_lexan.i"
 #include "i/lambda_parser.i"
 #include "i/menu.i"

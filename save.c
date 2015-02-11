@@ -29,8 +29,8 @@
 #define	NUM		13
 #include <stdio.h>
 #include <stdlib.h>
-#include "h/const.h"
-#include "h/types.h"
+#include "include/const.h"
+#include "include/types.h"
 #include "i/dynallhandler.i"
 
 /****************************************************************/

@@ -100,8 +100,8 @@
 %{
 #include                <malloc.h>
 #include		<stdio.h>
-#include		"include/const.h"
-#include		"include/types.h"
+#include		"const.h"
+#include		"types.h"
 %}
 
 
@@ -110,18 +110,18 @@
  /***************************************************************/
 
 %{
-#include		"i/lambda_lexan.i"
-#include		"i/graphgenerator.i"
-#include		"i/sthandler.i"
-#include		"i/errorhandler.i"
-#include		"i/scope_analysis.i"
-#include		"i/reducer.i"
-#include		"i/inspect.i"
-#include		"i/loader.i"
-#include		"i/garbage.i"
-#include		"i/menu.i"
-#include		"i/destroyer.i"
-#include		"i/save.i"
+#include		"lambda_lexan.i"
+#include		"graphgenerator.i"
+#include		"sthandler.i"
+#include		"errorhandler.i"
+#include		"scope_analysis.i"
+#include		"reducer.i"
+#include		"inspect.i"
+#include		"loader.i"
+#include		"garbage.i"
+#include		"menu.i"
+#include		"destroyer.i"
+#include		"save.i"
 
 %}
 
@@ -715,12 +715,6 @@ term    	:	error  EXPRDELIM
  /***************************************************************/
  /* 11. Auxiliary functions.					*/
  /***************************************************************/
-
-HIDDEN
-retract_token()
-{
-	yyless(0);
-}
 
 yyerror()
 {

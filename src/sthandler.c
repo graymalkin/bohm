@@ -95,9 +95,9 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"include/const.h"
-#include		"include/types.h"
-#include		"include/y.tab.h"
+#include		"const.h"
+#include		"types.h"
+#include		"y.tab.h"
 #include		<stdio.h>
 #include		<malloc.h>
 
@@ -106,9 +106,9 @@
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"i/errorhandler.i"
-#include		"i/dynallhandler.i"
-#include		"i/stringhandler.i"
+#include		"errorhandler.i"
+#include		"dynallhandler.i"
+#include		"stringhandler.i"
 
 
 /****************************************************************/
@@ -127,8 +127,8 @@ LOCALENVENTRY		*curr_local_env;
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
-#include		"include/keywords.h"
-#include		"include/iolibrary.h"
+#include		"keywords.h"
+#include		"iolibrary.h"
 
 LOCALENVENTRY	*external_env;
 			       /* pointer to the entry for the */

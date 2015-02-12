@@ -13,9 +13,9 @@
 /****************************************************************/
 
 #include <stdio.h>
-#include "include/const.h"
-#include "include/types.h"
-#include "i/lambda_parser.i"
+#include "const.h"
+#include "types.h"
+#include "lambda_parser.i"
 
 
 extern FILE             *yyin;

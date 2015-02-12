@@ -10,9 +10,9 @@
 /****************************************************************/
 
 #include		<stdio.h>
-#include		"include/const.h"
-#include		"include/types.h"
-#include		"i/graphgenerator.i"
+#include		"const.h"
+#include		"types.h"
+#include		"graphgenerator.i"
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/

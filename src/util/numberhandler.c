@@ -1,12 +1,10 @@
 /****************************************************************/
-/*		         ERRORHANDLER.C			        */
+/*		         NUMBERHANDLER.C			*/
 /****************************************************************/
-/* This module supplies routines for error handling.		*/
-/* Upon error detection, the corresponding error message is	*/
-/* printed on the screen.                                	*/
-/* - signal_error(): it signals lexical, syntax and semantic	*/
-/*		     errors;					*/
-/* - signal_warning(): it signals warnings.			*/
+/* This module supplies routines for number handling.		*/
+/* It consists of the following function:			*/
+/* - digits_n(): it computes the number of digits of a given	*/
+/*		 integer.					*/
 /****************************************************************/
 
 
@@ -14,64 +12,42 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"../include/const.h"
-#include		"../include/types.h"
-#include		<stdio.h>
+#include		"const.h"
 
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"../i/lambda_lexan.i"
-
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-BOOLEAN			error_detected;
-			      /* flag indicating whether an */
-			      /* error has been detected */
 
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
-
-#include		"../include/errormsgs.h"
 
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
 
- /* The following function signals lexical, syntax and semantic */
- /* errors. */
-signal_error(error_msg_num)
-	int		error_msg_num;
-					/* error message number */
+ /* The following function computes the number of digits of a given */
+ /* integer. */
+digits_n(n)
+	int		n;
+					/* integer whose number of */
+					/* digits is to be computed */
 {
-	error_detected = TRUE;
-	fprintf(stderr,
-		"line %-5d\t--->\t%s\n",
-		lines,
-		error_msgs[error_msg_num]);
-}
+	int		digits;
 
- /* The following function signals warnings. */
-signal_warning(warning_msg_num)
-	int		warning_msg_num;
-					/* warning message number */
-{
-	fprintf(stderr,
-		"line %-5d\t--->\t%s\n",
-		lines,
-		warning_msgs[warning_msg_num]);
+	for (digits = 1; (n = n / NUMBASE) != 0; digits++);
+	return(digits);
 }
 
 
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
-
-

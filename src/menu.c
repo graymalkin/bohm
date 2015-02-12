@@ -26,8 +26,8 @@
 /***************************************************************************/
 
 #include <stdio.h>
-#include "include/const.h"
-#include "include/types.h"
+#include "const.h"
+#include "types.h"
 
 /***************************************************************************/
 /* 2. Definitions of variables to be exported.                             */

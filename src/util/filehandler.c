@@ -12,8 +12,8 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"../include/const.h"
-#include		"../include/types.h"
+#include		"const.h"
+#include		"types.h"
 #include		<stdio.h>
 
 
@@ -21,7 +21,7 @@
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"../i/crashhandler.i"
+#include		"crashhandler.i"
 
 
 /****************************************************************/

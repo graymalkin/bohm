@@ -38,9 +38,9 @@
 %{
 #include                <malloc.h>
 #include                <string.h>
-#include		"include/const.h"
-#include		"include/types.h"
-#include		"include/y.tab.h"
+#include		"const.h"
+#include		"types.h"
+#include		"y.tab.h"
 %}
 
 
@@ -49,11 +49,11 @@
  /***************************************************************/
 
 %{
-#include		"i/sthandler.i"
-#include		"i/errorhandler.i"
-#include		"i/dynallhandler.i"
-#include		"i/stringhandler.i"
-#include		"i/lambda_parser.i"
+#include		"sthandler.i"
+#include		"errorhandler.i"
+#include		"dynallhandler.i"
+#include		"stringhandler.i"
+#include		"lambda_parser.i"
 %}
 
  /***************************************************************/

@@ -14,8 +14,8 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"../include/const.h"
-#include		"../include/types.h"
+#include		"const.h"
+#include		"types.h"
 #include		<stdio.h>
 #include		<stdlib.h>
 
@@ -34,7 +34,7 @@
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
-#include		"../include/crashmsgs.h"
+#include		"crashmsgs.h"
 
 
 /****************************************************************/

@@ -33,11 +33,11 @@
 
 #include <stdio.h>
 #include <malloc.h>
-#include "include/const.h"
-#include "include/types.h"
-#include "i/dynallhandler.i"
-#include "i/graphgenerator.i"
-#include "i/garbage.i"
+#include "const.h"
+#include "types.h"
+#include "dynallhandler.i"
+#include "graphgenerator.i"
+#include "garbage.i"
 
 /****************************************************************/
 /* 2. Definitions of variables to be exported.			*/

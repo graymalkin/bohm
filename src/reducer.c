@@ -43,19 +43,19 @@
 #include <sys/types.h>
 #include <sys/times.h>
 #include <time.h>
-#include "include/types.h"
-#include "include/const.h"
+#include "types.h"
+#include "const.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include "i/graphgenerator.i"
-#include "i/m_stack.i"
-#include "i/readback.i"
-#include "i/menu.i"
-#include "i/garbage.i"
-#include "i/destroyer.i"
+#include "graphgenerator.i"
+#include "m_stack.i"
+#include "readback.i"
+#include "menu.i"
+#include "garbage.i"
+#include "destroyer.i"
 extern clock_t usr_garb_time;
 extern clock_t sys_garb_time;
 

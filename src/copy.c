@@ -37,9 +37,9 @@
 
 #include <stdio.h>
 #include <malloc.h>
-#include "include/types.h"
-#include "include/const.h"
-#include "i/dynallhandler.i"
+#include "types.h"
+#include "const.h"
+#include "dynallhandler.i"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

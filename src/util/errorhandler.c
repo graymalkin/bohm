@@ -1,12 +1,12 @@
 /****************************************************************/
-/*		         DYNALLHANDLER.C			*/
+/*		         ERRORHANDLER.C			        */
 /****************************************************************/
-/* This module supplies routines for dynamic allocation.	*/
-/* It consists of the following functions:			*/
-/* - malloc_da(): it allocates a given amount of bytes; if it	*/
-/*		  is unable to allocate, it signals this fact;	*/
-/* - strdup_da(): it allocates a given string; if it is unable	*/
-/*		  to allocate, it signals this fact.		*/
+/* This module supplies routines for error handling.		*/
+/* Upon error detection, the corresponding error message is	*/
+/* printed on the screen.                                	*/
+/* - signal_error(): it signals lexical, syntax and semantic	*/
+/*		     errors;					*/
+/* - signal_warning(): it signals warnings.			*/
 /****************************************************************/
 
 
@@ -14,67 +14,64 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"../include/const.h"
-#include		"../include/types.h"
+#include		"const.h"
+#include		"types.h"
 #include		<stdio.h>
-#include		<string.h>
-#include		<malloc.h>
 
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"../i/crashhandler.i"
+#include		"lambda_lexan.i"
 
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
+BOOLEAN			error_detected;
+			      /* flag indicating whether an */
+			      /* error has been detected */
 
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
+
+#include		"errormsgs.h"
 
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
 
- /* The following function implements a control interface for the */
- /* library function malloc(). */
-STRING
-malloc_da(size)
-	unsigned	size;
-					/* size of the object to be */
-					/* allocated */
+ /* The following function signals lexical, syntax and semantic */
+ /* errors. */
+signal_error(error_msg_num)
+	int		error_msg_num;
+					/* error message number */
 {
-	STRING		p;
-
-	p = (STRING)malloc(size);
-	if (p != NULL)
-		return(p);
-	else
-		signal_crash(NOTENOUGHMEMORY);
+	error_detected = TRUE;
+	fprintf(stderr,
+		"line %-5d\t--->\t%s\n",
+		lines,
+		error_msgs[error_msg_num]);
 }
 
- /* The following function implements a control interface for the */
- /* library function strdup(). */
-STRING
-strdup_da(s)
-	STRING		s;
-					/* string to be allocated */
+ /* The following function signals warnings. */
+signal_warning(warning_msg_num)
+	int		warning_msg_num;
+					/* warning message number */
 {
-	STRING		p;
-
-	p = strdup(s);
-	if (p != NULL)
-		return(p);
-	else
-		signal_crash(NOTENOUGHMEMORY);
+	fprintf(stderr,
+		"line %-5d\t--->\t%s\n",
+		lines,
+		warning_msgs[warning_msg_num]);
 }
+
 
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
+
+

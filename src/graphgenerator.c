@@ -89,17 +89,17 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"include/const.h"
-#include		"include/types.h"
+#include		"const.h"
+#include		"types.h"
 #include                <inttypes.h>
 #include                <stdio.h>
 #include                <stdlib.h>
 #include                <malloc.h>
-#include		"i/menu.i"
-#include		"i/copy.i"
-#include                "i/destroyer.i"
-#include                "i/dynallhandler.i"
-#include                "i/graphgenerator.i"
+#include		"menu.i"
+#include		"copy.i"
+#include                "destroyer.i"
+#include                "dynallhandler.i"
+#include                "graphgenerator.i"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

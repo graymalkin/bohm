@@ -35,16 +35,16 @@
 #include <time.h>
 #include <sys/types.h>
 #include <sys/times.h>
-#include "include/const.h"
-#include "include/types.h"
+#include "const.h"
+#include "types.h"
 
 /*************************************************************************/
 /* 2. Inclusion of declarations that are being imported.                 */
 /*************************************************************************/
 
-#include "i/dynallhandler.i"
-#include "i/graphgenerator.i"
-#include "i/menu.i"
+#include "dynallhandler.i"
+#include "graphgenerator.i"
+#include "menu.i"
 
 /*************************************************************************/
 /* 3. Declaration of names strictly local to the module.                 */

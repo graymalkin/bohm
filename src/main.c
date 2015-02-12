@@ -13,13 +13,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/const.h"
-#include "include/types.h"
-#include "i/lambda_lexan.i"
-#include "i/lambda_parser.i"
-#include "i/menu.i"
-#include "i/destroyer.i"
-#include "i/garbage.i"
+#include "const.h"
+#include "types.h"
+#include "lambda_lexan.i"
+#include "lambda_parser.i"
+#include "menu.i"
+#include "destroyer.i"
+#include "garbage.i"
 
 /****************************************************************/
 /* Main program.               			                */

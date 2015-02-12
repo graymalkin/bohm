@@ -57,4 +57,4 @@ src/lex.yy.o: include/y.tab.h
 src/sthandler.o: include/y.tab.h
 
 clean:
-	-rm -f $(OBJ) include/y.tab.h src/y.tab.c src/lex.yy.c $(BIN)
+	-rm -f $(OBJS) include/y.tab.h src/y.tab.c src/lex.yy.c $(BIN)

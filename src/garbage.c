@@ -45,7 +45,7 @@
 #include "dynallhandler.h"
 #include "garbage.h"
 #include "graphgenerator.h"
-#include "menu.h"
+#include "options.h"
 
 /*************************************************************************/
 /* 3. Declaration of names strictly local to the module.                 */

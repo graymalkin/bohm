@@ -54,7 +54,7 @@
 #include "garbage.h"
 #include "graphgenerator.h"
 #include "m_stack.h"
-#include "menu.h"
+#include "options.h"
 #include "readback.h"
 
 /****************************************************************/

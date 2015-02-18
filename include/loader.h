@@ -9,6 +9,6 @@
 /* Declarations of functions.    				*/
 /****************************************************************/
 
-void compile(char *);
+bool compile(char *);
 
 #endif

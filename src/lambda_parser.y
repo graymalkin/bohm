@@ -119,7 +119,7 @@
 #include "lambda_lexan.h"
 #include "lambda_parser.h"
 #include "loader.h"
-#include "menu.h"
+#include "options.h"
 #include "reducer.h"
 #include "save.h"
 #include "scope_analysis.h"
@@ -292,16 +292,6 @@ directive       :      '#' INSPECTKW arg EXPRDELIM
 		|       '#' GARBAGEKW EXPRDELIM
 				{
 				   user();
-				   YYACCEPT;
-				}
-		|       '#' OPTIONKW EXPRDELIM
-				{
-				   menu();
-				   YYACCEPT;
-				}
-		|       '#' INFOKW EXPRDELIM
-				{
-				   info();
 				   YYACCEPT;
 				}
 		|       '#' SAVEKW ASTRING EXPRDELIM

@@ -1,16 +1,12 @@
 # makefile for BOHM
 
-CFLAGS = -ansi -g -D_POSIX_C_SOURCE=200809L -Iinclude -Wall
-LDLIBS = -g
-YFLAGS = -d
-
-# No user serviceable parts below this line
+include config.mk
 
 # each time one of the following is modified, everything is recompiled
 SUPPORT = include/crashhandler.h include/dynallhandler.h include/save.h include/copy.h\
           include/errorhandler.h include/garbage.h include/graphgenerator.h \
           include/inspect.h include/lambda_lexan.h include/lambda_parser.h \
-          include/loader.h include/m_stack.h include/menu.h src/destroyer.c \
+          include/loader.h include/m_stack.h include/options.h src/destroyer.c \
           include/readback.h include/reducer.h include/scope_analysis.h include/sthandler.h \
           include/stringhandler.h include/const.h include/crashmsgs.i include/errormsgs.i \
           include/iolibrary.i include/keywords.i include/types.h Makefile
@@ -19,7 +15,7 @@ SUPPORT = include/crashhandler.h include/dynallhandler.h include/save.h include/
 
 CSRC = src/main.c src/y.tab.c src/lex.yy.c src/copy.c\
        src/sthandler.c src/scope_analysis.c src/inspect.c src/graphgenerator.c src/destroyer.c \
-       src/loader.c src/reducer.c src/m_stack.c src/readback.c src/garbage.c src/menu.c src/save.c \
+       src/loader.c src/reducer.c src/m_stack.c src/readback.c src/garbage.c src/save.c \
        src/util/crashhandler.c src/util/errorhandler.c \
        src/util/dynallhandler.c \
        src/util/stringhandler.c

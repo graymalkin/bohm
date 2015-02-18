@@ -135,10 +135,8 @@ static BOOLEAN membervarlist(BINDINGID *, VARLIST *);
 
  /* The following function creates the graph representation of */
  /* a variable */
-TERM
-*buildvarterm(level,id)
-	int             level;
-	STBUCKET	*id;
+TERM *
+buildvarterm(int level, STBUCKET *id)
 {
 	TERM *t;          /* pointer to the term to be created */
 	FORM *newf;       /* pointer to the new form to be created */
@@ -153,9 +151,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a true constant */
-TERM
-*buildtrueterm(level)
-	int             level;
+TERM *
+buildtrueterm(int level)
 {
 	TERM *t;     /* pointer to the term to be created */
 
@@ -165,9 +162,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a false constant */
-TERM
-*buildfalseterm(level)
-	int             level;
+TERM *
+buildfalseterm(int level)
 {
 	TERM *t;     /* pointer to the term to be created */
 
@@ -189,11 +185,8 @@ buildintterm(int level, intptr_t value)
 
  /* The following function creates the graph representation of a */
  /* lambda-abstraction */
-TERM
-*buildlambdaterm(level,id,body)
-	int             level;
-	STBUCKET	*id;
-	TERM            *body;
+TERM *
+buildlambdaterm(int level, STBUCKET *id, TERM *body)
 {
 	TERM 	*t;         /* pointer to the new term to be created */
 	FORM    *newf1;     /* pointers to the new forms to be created */
@@ -225,11 +218,8 @@ TERM
 	return(t);
 }
 
-TERM
-*buildplambdaterm(level,pattern,body)
-	int             level;
-	PATTERN	        *pattern;
-	TERM            *body;
+TERM *
+buildplambdaterm(int level, PATTERN *pattern, TERM *body)
 {
 	TERM 	*t;         /* pointer to the new term to be created */
         VARLIST *vp;
@@ -284,11 +274,8 @@ TERM
 
  /* The following function creates the graph representation of a */
  /* recursive definition. */
-TERM
-*build_mu_term(level,id,body)
-	int             level;
-	STBUCKET	*id;
-	TERM            *body;
+TERM *
+build_mu_term(int level, STBUCKET *id, TERM *body)
 {
 	TERM            *t,
 		   /* pointer to the new term to be created */
@@ -336,11 +323,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* an application */
-TERM
-*buildappterm(level,fun,arg)
-	int             level;
-	TERM            *fun,
-			*arg;
+TERM *
+buildappterm(int level, TERM *fun, TERM *arg)
 {
 	TERM            *t,
 		    /* pointer to the term to be created */
@@ -368,12 +352,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* an if_then_else term */
-TERM
-*buildifelseterm(level,arg1,arg2,arg3)
-	int             level;
-	TERM            *arg1,
-			*arg2,
-			*arg3;
+TERM *
+buildifelseterm(int level, TERM *arg1, TERM *arg2, TERM *arg3)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -404,12 +384,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a let_in expression*/
-TERM
-*buildletinterm(level,id,arg1,arg2)
-	int             level;
-	STBUCKET        *id;
-	TERM            *arg1,
-			*arg2;
+TERM *
+buildletinterm(int level, STBUCKET *id, TERM *arg1, TERM *arg2)
 {
 	TERM            *temp;
 
@@ -419,11 +395,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a boolean and-expression */
-TERM
-*buildandterm(level,arg1,arg2)
-	int             level;
-	TERM            *arg1,
-			*arg2;
+TERM *
+buildandterm(int level, TERM *arg1, TERM *arg2)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -448,11 +421,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a boolean or-expression */
-TERM
-*buildorterm(level,arg1,arg2)
-	int             level;
-	TERM            *arg1,
-			*arg2;
+TERM *
+buildorterm(int level, TERM *arg1, TERM *arg2)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -477,10 +447,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a boolean not-expression */
-TERM
-*buildnotterm(level,arg)
-	int             level;
-	TERM            *arg;
+TERM *
+buildnotterm(int level, TERM *arg)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -499,11 +467,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a mat-expression */
-TERM
-*buildmatterm(level,arg1,arg2,op)
-	int             level,op;
-	TERM            *arg1,
-			*arg2;
+TERM *
+buildmatterm(int level, TERM *arg1, TERM *arg2, int op)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -568,10 +533,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a unary minus-expression */
-TERM
-*buildminusterm(level,arg1)
-	int             level;
-	TERM            *arg1;
+TERM *
+buildminusterm(int level, TERM *arg1)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -595,11 +558,8 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a relop-expression */
-TERM
-*buildrelopterm(level,arg1,arg2,relop)
-	int             level,relop;
-	TERM            *arg1,
-			*arg2;
+TERM *
+buildrelopterm(int level, TERM *arg1, TERM *arg2, int relop)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -673,9 +633,8 @@ TERM
 	return(t);
 }
 
-TERM
-*buildnillist(level)
-	int             level;
+TERM *
+buildnillist(int level)
 {
 	TERM *t;
 		     /* pointer to the term to be created */
@@ -684,11 +643,8 @@ TERM
 	return(t);
 }
 
-TERM
-*buildlist(level,arg1,arg2)
-	int             level;
-	TERM            *arg1,
-			*arg2;
+TERM *
+buildlist(int level, TERM *arg1, TERM *arg2)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -720,11 +676,8 @@ TERM
 	return(t);
 }
 
-TERM
-*buildlist1(level,arg1,arg2)
-	int             level;
-	TERM            *arg1,
-			*arg2;
+TERM *
+buildlist1(int level, TERM *arg1, TERM *arg2)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -756,10 +709,8 @@ TERM
 	return(t);
 }
 
-TERM
-*buildcarterm(level,arg)
-	int             level;
-	TERM            *arg;
+TERM *
+buildcarterm(int level, TERM *arg)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -776,10 +727,8 @@ TERM
 	return(t);
 }
 
-TERM
-*buildcdrterm(level,arg)
-	int             level;
-	TERM            *arg;
+TERM *
+buildcdrterm(int level, TERM *arg)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -796,10 +745,8 @@ TERM
 	return(t);
 }
 
-TERM
-*buildtestnil(level,arg)
-	int             level;
-	TERM            *arg;
+TERM *
+buildtestnil(int level, TERM *arg)
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
@@ -817,10 +764,8 @@ TERM
 }
 
  /* the following function adds a root node to a term */
-FORM
-*closeterm(level,t)
-       int        level;
-       TERM       *t;
+FORM *
+closeterm(int level, TERM *t)
 {
        FORM       *newroot;
        if(t!=NULL){
@@ -844,14 +789,7 @@ FORM
  /* the following function allocate a new graphical form */
  /* and initialize the name and index fields */
 void
-allocate_form(form, name, index)
-	FORM       **form;
-		       /* reference to the pointer of the form */
-		       /* to be created */
-	int        name,
-		       /* name of the form */
-		   index;
-		       /* index of the form */
+allocate_form(FORM **form, int name, int index)
 {
 	FORM	*dep;
 	int	i;
@@ -885,9 +823,7 @@ allocate_form(form, name, index)
 /* the following function adds a graphical form to deallocate */
 /* in a list of free forms (i.e a free-list of forms)         */
 void
-myfree(form)
-	FORM	*form;
-		    /* pointer to the form to deallocate      */
+myfree(FORM *form)
 {
 	form->prev->next=form->next;
 	form->next->prev=form->prev;
@@ -903,11 +839,7 @@ myfree(form)
  /* the following function connects together the port portf1 of */
  /* form1 to the port portf2 of form2 */
 void
-connect(form1,portf1,form2,portf2)
-       FORM       *form1;
-       int        portf1;
-       FORM       *form2;
-       int        portf2;
+connect(FORM *form1, int portf1, FORM *form2, int portf2)
 {
        form1->nport[portf1] = portf2;
        form1->nform[portf1] = form2;
@@ -919,11 +851,7 @@ connect(form1,portf1,form2,portf2)
  /* the port portf2 of form2 and vice versa if the form2 is not */
  /* a NIL, INT, True or False form.				*/
 void
-connect1(form1,portf1,form2,portf2)
-       FORM       *form1;
-       int        portf1;
-       FORM       *form2;
-       int        portf2;
+connect1(FORM *form1, int portf1, FORM *form2, int portf2)
 {
        form1->nport[portf1] = portf2;
        form1->nform[portf1] = form2;
@@ -961,16 +889,7 @@ bool_connect(form1,portf1,portf2)
 
  /* the following function allocate a new variable entry */
 void
-allocate_var(newvar,id,form,nextvar)
-	VARENTRY   **newvar;
-		       /* reference to the pointer of the */
-		       /* free variable entry to be created */
-	STBUCKET   *id;
-		       /* identifier of the variable */
-	FORM       *form;
-		       /* graphical form for the variable */
-	VARENTRY   *nextvar;
-		       /* pointer to the next free variable */
+allocate_var(VARENTRY **newvar, STBUCKET *id, FORM *form, VARENTRY *nextvar)
 {
        *newvar = malloc_da(sizeof(VARENTRY));
        (*newvar)->name = id;
@@ -981,17 +900,7 @@ allocate_var(newvar,id,form,nextvar)
 
  /* the following function allocate a new term entry */
 void
-allocate_term(term,rootform,rootport,freevars)
-	TERM       **term;
-		       /* reference to the pointer of the */
-		       /* term entry to be created */
-	FORM       *rootform;
-		       /* pointer to the root form of the term */
-	int        rootport;
-		       /* root port of the term */
-	VARENTRY   *freevars;
-		       /* pointer to the free variables entries */
-		       /* of the term */
+allocate_term(TERM **term, FORM *rootform, int rootport, VARENTRY *freevars)
 {
        *term = malloc_da(sizeof(TERM));
        (*term)->rootf = rootform;
@@ -1000,10 +909,8 @@ allocate_term(term,rootform,rootport,freevars)
 }
 
  /* the following function build a box around a term  */
-TERM
-*makebox(level,arg)
-	int        level;
-	TERM       *arg;
+TERM *
+makebox(int level, TERM *arg)
 {
 	arg->vars = addbrackets(level,arg->vars);
 	return(arg);
@@ -1011,10 +918,8 @@ TERM
 
  /* the following function add a sequence of square brackets of */
  /* given index at the free variables in listvar */
-VARENTRY
-*addbrackets(index, listvar)
-       int         index;
-       VARENTRY    *listvar;
+VARENTRY *
+addbrackets(int index, VARENTRY *listvar)
 {
        if (listvar == NULL) return(NULL);
        else
@@ -1060,12 +965,8 @@ VARENTRY
 
  /* The following function shares the free variables of	*/
  /* two terms, by adding suitable FANS.  		*/
-VARENTRY
-*share(index,l1,l2)
-       int            index;
-       VARENTRY       *l1,
-		      *l2;
-	       /* pointers to the lists of variables to be shared */
+VARENTRY *
+share(int index, VARENTRY *l1, VARENTRY *l2)
 {
        if (l1 == NULL) return l2;
        else
@@ -1101,12 +1002,8 @@ VARENTRY
 
 
  /* The following function searches for a variable inside a list. */
-VARENTRY
-*lookfor(id,listvar)
-      STBUCKET       *id;
-		/* pointer to the identifier to be found  */
-      VARENTRY       *listvar;
-		/* pointer to the variable list to be scanned */
+VARENTRY *
+lookfor(STBUCKET *id, VARENTRY *listvar)
 {
       if (listvar == NULL)
 	  return NULL;
@@ -1118,12 +1015,8 @@ VARENTRY
 
  /* the following function remove an identifier form a list */
  /* of variables */
-VARENTRY
-*remv(id,listvar)
-      STBUCKET       *id;
-		/* pointer to the identifier to be removed  */
-      VARENTRY       *listvar;
-		/* pointer to the variable list to be scanned */
+VARENTRY *
+remv(STBUCKET *id, VARENTRY *listvar)
 {
       VARENTRY *temp;
       if (listvar == NULL)
@@ -1142,10 +1035,8 @@ VARENTRY
 
 /* the following functions does the set substraction of two variable lists */
 /* it runs in quadratic time, but who cares? */
-VARENTRY
-*remvp(vl,listvar)
-VARLIST *vl;              
-VARENTRY       *listvar;  /* pointer to the variable list to be scanned */
+VARENTRY *
+remvp(VARLIST *vl, VARENTRY *listvar)
 {
   VARLIST *v;
   for(v=vl;v;v=v->next)
@@ -1157,9 +1048,7 @@ VARENTRY       *listvar;  /* pointer to the variable list to be scanned */
  /* The following function copys all the graph of the global */
  /* definition.	*/
 void
-closeglobalvars(listvar)
-      VARENTRY       *listvar;
-		/* pointer to the variable list to be scanned */
+closeglobalvars(VARENTRY *listvar)
 {
       FORM           *formvar,
 		     *formterm,
@@ -1186,101 +1075,10 @@ closeglobalvars(listvar)
 	  }
 }
 
-#if 0
-HIDDEN
-closeglobalvars(listvar)
-      VARENTRY       *listvar;
-		/* pointer to the variable list to be scanned */
-{
-      FORM           *formvar,
-		     *formterm,
-		     *newf;
-      if (listvar != NULL)
-	  {
-	     formvar = listvar->var;
-	     formterm = ((listvar->name)->curr_binding)->root;
-	     allocate_form(&newf,FAN,0);
-	     newf->nlevel[1] = 0;
-	     newf->nlevel[2] = 0;
-	     if (formvar->name == TRIANGLE)
-		     {
-		       newf->nlevel[1] = newf->nlevel[1]+formvar->nlevel[1];
-		       connect(newf,1,formvar->nform[1],formvar->nport[1]);
-		       myfree(formvar);
-		     }
-		     else connect(newf,1,formvar,0);
-	     connect(formterm->nform[0],
-		     formterm->nport[0],
-		     newf,
-		     0);
-	     connect(formterm,
-		     0,
-		     newf,
-		     2);
-	     closeglobalvars(listvar->next);
-	  }
-}
-
-
-HIDDEN
-closeglobalvars(listvar)
-      VARENTRY       *listvar;
-		/* pointer to the variable list to be scanned */
-{
-      FORM           *formvar,
-		     *formterm,
-		     *newf;
-      if (listvar != NULL)
-	  {
-	     formvar = listvar->var;
-	     formterm = ((listvar->name)->curr_binding)->root;
-	     switch (listvar->name->curr_binding->entry_type) {
-	       case SHARE:
-		 allocate_form(&newf,FAN,0);
-		 newf->nlevel[1] = 0;
-		 newf->nlevel[2] = 0;
-		 if (formvar->name == TRIANGLE)
-		     {
-		       newf->nlevel[1] = newf->nlevel[1]+formvar->nlevel[1];
-		       connect(newf,1,formvar->nform[1],formvar->nport[1]);
-		       myfree(formvar);
-		     }
-		     else connect(newf,1,formvar,0);
-		 connect1(newf,0,formterm->nform[0],formterm->nport[0]);
-		 connect(formterm,0,newf,2);
-		 break;
-	       case DEF:
-		 if (formvar->name == TRIANGLE) {
-		   newf = copy(formterm->nform[0],
-			       formterm->nport[0],
-			       formvar->nlevel[1]);
-		   connect1(formvar->nform[1], formvar->nport[1],
-			   newf, formterm->nport[0]);
-		 }
-		 else {
-		   newf = copy(formterm->nform[0],formterm->nport[0],0);
-		   connect(formvar, 0, newf, formterm->nport[0]);
-		 }
-		 break;
-	       default:
-		 printf("ERRORE IN CLOSEGLOBALVARS\n");
-		 exit(1);
-		 break;
-	     }
-	     closeglobalvars(listvar->next);
-	  }
-}
-#endif
-
-
 /* The following function tries to merge two forms into a single one. */
 /* If failing doing so, connects them normally        		      */
-
 void
-intelligent_connect(f1,port,f2)
-	FORM	*f1;
-	int	port;
-	FORM	*f2;
+intelligent_connect(FORM *f1, int port, FORM *f2)
 {
   int dep;
   FORM *new;
@@ -1465,11 +1263,7 @@ intelligent_connect(f1,port,f2)
 /* The following function checks whether it's possible to apply      */
 /* function intelligent_connect. Otherwise applies a normal connect. */
 void
-inspect_connect(f1,p1,f2,p2)
-       FORM       *f1;
-       int        p1;
-       FORM       *f2;
-       int        p2;
+inspect_connect(FORM *f1, int p1, FORM *f2, int p2)
 {
   if (p2==0)
     intelligent_connect(f1,p1,f2);
@@ -1477,9 +1271,8 @@ inspect_connect(f1,p1,f2,p2)
     connect1(f1,p1,f2,p2);
 }
 
-BOOLEAN membervarlist(e,l)
-BINDINGID *e;
-VARLIST *l;
+BOOLEAN
+membervarlist(BINDINGID *e, VARLIST *l)
 {
   while(l)
     if (e->id==l->id->id)
@@ -1490,8 +1283,8 @@ VARLIST *l;
 }
   
 
-VARLIST *mergevarlist(l1,l2)
-VARLIST *l1,*l2;
+VARLIST *
+mergevarlist(VARLIST *l1, VARLIST *l2)
 {
   VARLIST *p;
   if(l1) {
@@ -1509,9 +1302,8 @@ VARLIST *l1,*l2;
     return l2;
 }
 
-VARLIST *makevarlist(e,t)
-STBUCKET *e;
-TERM     *t;
+VARLIST *
+makevarlist(STBUCKET *e, TERM *t)
 {
   BINDINGID *bid;
   VARLIST *vl;
@@ -1524,8 +1316,8 @@ TERM     *t;
   return vl;
 }
 
-TERM *maketerm(f)
-FORM *f;
+TERM *
+maketerm(FORM *f)
 {
   TERM *t;
   t=(TERM*)malloc(sizeof(TERM));
@@ -1535,8 +1327,8 @@ FORM *f;
   return t;
 }
 
-TERM *buildvoidterm(level)
-int level;
+TERM *
+buildvoidterm(int level)
 {
   FORM *newf;
   TERM *t;
@@ -1547,8 +1339,7 @@ int level;
 }
     
 void
-free_pattern(p)
-PATTERN *p;
+free_pattern(PATTERN *p)
 {
   VARLIST *vl,*vln;
   for(vl=p->var_list;vl;vl=vln) {

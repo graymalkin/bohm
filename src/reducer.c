@@ -82,8 +82,7 @@ int counter;
 /*  The following function reduces a term to its weak 	*/
 /*  head (family) normal form.                          */
 void
-reduce_term(root)
-     FORM      *root;
+reduce_term(FORM *root)
 {
      FORM      *f1,
 	       *f2;
@@ -168,9 +167,7 @@ reduce_term(root)
 /*  interacting forms are passed as a parameter and the */
 /*  second form is not a INT, NIL, True or False;	*/
 void
-reduce_redex(f1,f2)
-     FORM      *f1,
-	       *f2;
+reduce_redex(FORM *f1, FORM *f2)
 {
      FORM      *new1,
 	       *new2;
@@ -752,8 +749,7 @@ reduce_redex(f1,f2)
 /*  interacting forms are passed as a parameter and the */
 /*  second form is a INT, NIL, True or False; */
 void
-reduce_form(f1)
-FORM	*f1;
+reduce_form(FORM *f1)
 {
 /*   printf("FORM: f1: name:%d, index:%d, f2: name:%d\n",f1->name,f1->index,f1->nport[0]);*/
 	switch (f1->name) {
@@ -1336,9 +1332,8 @@ FORM	*f1;
 /*  The following function looks for the leftmost outemost  	*/
 /*  redex, saving on the m_stack pointers to the form along	*/
 /*  the main spine of the term.             			*/
-FORM
-*lo_redex(f)
-     FORM    *f;
+FORM *
+lo_redex(FORM *f)
 {
      FORM    *temp;
      FORM    *next;

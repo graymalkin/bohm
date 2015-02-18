@@ -51,7 +51,7 @@ BOOLEAN seegarb;
 /****************************************************************************/
 
 void
-menu()
+menu(void)
 {
     if(do_menu1())
 	if(do_menu2())
@@ -63,7 +63,7 @@ menu()
 }
 
 void
-info()
+info(void)
 {
     int select='x';
     while((select!='y')&&(select!='n')){
@@ -173,7 +173,7 @@ info()
 /****************************************************************************/
 
 int
-take_char()
+take_char(void)
 {
     int taken;
     BOOLEAN warning;
@@ -192,10 +192,8 @@ take_char()
     return(taken);
 }
 
-
-
 BOOLEAN
-do_menu1()
+do_menu1(void)
 {
     BOOLEAN cont = FALSE;
     option=0;
@@ -230,7 +228,7 @@ do_menu1()
 }
 
 BOOLEAN
-do_menu2()
+do_menu2(void)
 {
     BOOLEAN cont=FALSE;
     int select=0;
@@ -270,7 +268,7 @@ do_menu2()
 }
 
 void
-do_menu3()
+do_menu3(void)
 {
     while((limit<1000)||(limit>50000)){
 	printf("Please insert an upper bound for memory utililization:\n>");

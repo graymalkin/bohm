@@ -29,9 +29,7 @@
 /****************************************************************/
 
 int
-main(argc,argv)
-int argc;
-char *argv[];
+main(int argc, char **argv)
 {
   option=1;
   seetime=0;

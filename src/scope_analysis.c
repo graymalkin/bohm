@@ -17,10 +17,7 @@
  /* The following function checks if an identifier has been */
  /* previously declared */
 
-BOOLEAN defined(st)
-	STBUCKET	*st;
-			      /* pointer to the bucket for the */
-			      /* identifier */
+BOOLEAN defined(STBUCKET *st)
 {
         return((st->curr_binding) != NULL);
 }

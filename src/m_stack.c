@@ -21,13 +21,14 @@
 FORM       *stack[STACK_SIZE];
 int        next;
 
-FORM *pop()
+FORM *
+pop(void)
 { 
    return(stack[--next]);
 }
 
-void push(f)
-     FORM    *f;
+void
+push(FORM *f)
 {
      stack[next++] = f;
      if(next>STACK_SIZE){

@@ -42,8 +42,7 @@
 
  /* The following function turns a given string into a lower case one. */
 void
-to_lower_s(s)
-	STRING		s;
+to_lower_s(char *s)
 					/* string to be turned */
 {
 	static int	diff = 'a' - 'A';
@@ -56,9 +55,7 @@ to_lower_s(s)
  /* The following function turns a given string of digits into a natural */
  /* and checks for presence of overflow. */
 int
-to_nat_s(s)
-	STRING		s;
-					/* string to be turned */
+to_nat_s(char *s)
 {
 	long		n;
 
@@ -73,10 +70,7 @@ to_nat_s(s)
  /* The following function computes the length of a given string, */
  /* including the null character terminating the string itself. */
 int
-length_s(s)
-	STRING		s;
-					/* string whose length is to */
-					/* be computed */
+length_s(char *s)
 {
 	int 		i;
 
@@ -87,13 +81,7 @@ length_s(s)
  /* The following function puts the concatenation of two given strings */
  /* into a given string. */
 void
-concat_s(s1, s2, s3)
-	STRING		s1,
-					/* first string */
-			s2,
-					/* second string */
-			s3;
-					/* resulting string */
+concat_s(char *s1, char *s2, char *s3)
 {
 	int		i,
 			j;
@@ -105,11 +93,7 @@ concat_s(s1, s2, s3)
  /* The following function returns the result of the check for */
  /* equality between two given strings. */
 BOOLEAN
-equal_s(s, t)
-	STRING		s,
-					/* first string */
-			t;
-					/* second string */
+equal_s(char *s, char *t)
 {
 	BOOLEAN		equal;
 

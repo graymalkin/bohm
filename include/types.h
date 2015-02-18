@@ -9,7 +9,6 @@
 
  /* utility types */
 typedef int BOOLEAN;
-typedef char * STRING;
 
 /****************************************************************/
 /*		        SYMBOL TABLE TYPES			*/
@@ -17,7 +16,7 @@ typedef char * STRING;
 
  /* symbol table bucket type */
 typedef	struct st_bucket {
-	STRING id; /* identifier */
+	char *id; /* identifier */
 	int token; /* token associated with the identifier (it can be either ID or a keyword token) */
 	struct binding_entry *curr_binding; /* pointer to the current binding entry for the identifier */
 	struct st_bucket *next_st_bucket; /* pointer to the bucket for the next identifier hashing in the same linked list of buckets */

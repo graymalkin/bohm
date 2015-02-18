@@ -66,7 +66,7 @@ static unsigned int start_nodes;
 /* allocating two nodes (headfree and headfull) and 	*/
 /* linking them together.                               */
 void
-init_destroy()
+init_destroy(void)
 {
   headfull = malloc_da(sizeof(FORM));
   headfree = malloc_da(sizeof(FORM));
@@ -82,7 +82,7 @@ init_destroy()
 /* headfull, and doing so makes all the nodes available */
 /* for any furure usage					*/
 void
-destroy()
+destroy(void)
 {
   if(headfree!=headfull->next){
     num_nodes=start_nodes;
@@ -96,7 +96,7 @@ destroy()
 /* global definition permanent, by moving headfull to 	*/
 /* the node preceding headfree.				*/
 void
-no_destroy()
+no_destroy(void)
 {
   headfull=headfree->prev;
 }

@@ -40,9 +40,7 @@
 
  /* The following function signals errors causing abort. */
 void
-signal_crash(crash_type)
-	int		crash_type;
-					/* crash type */
+signal_crash(int crash_type)
 {
 	fprintf(stderr,
 		"%s\n",

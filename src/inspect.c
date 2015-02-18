@@ -15,7 +15,6 @@
 /*               (its name, index, and the port we arrived to). */
 /****************************************************************/
 
-
 /****************************************************************/
 /* Inclusion of header files.       				*/
 /****************************************************************/
@@ -37,8 +36,7 @@ static FORM *inspect(int, FORM *);
 /****************************************************************/
 
 void
-inspect_driver(f)
-     FORM  *f;
+inspect_driver(FORM *f)
 {
      FORM  *travel;
      int   c;
@@ -69,10 +67,8 @@ inspect_driver(f)
 /* Definitions of functions strictly local to the module        */
 /****************************************************************/
 
-FORM
-*inspect(p,f)
-     int     p;
-     FORM    *f;
+FORM *
+inspect(int p, FORM *f)
 {
 	BOOLEAN ok=TRUE;
 	switch(p)

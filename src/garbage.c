@@ -72,7 +72,7 @@ clock_t sys_garb_time;
  /* The following function initializes the erase-list inserting */
  /* the first node. */
 void
-init_garbage()
+init_garbage(void)
 {
 	del_head=malloc_da(sizeof(FORM));
 	del_head->nform[1]=NULL;
@@ -81,8 +81,7 @@ init_garbage()
  /* The following function insert a new erase operator at the 	*/
  /* head of a list to be scanned when the G.C. is activated.  	*/
 void
-ins_del(d)
-FORM *d;
+ins_del(FORM *d)
 {
 	d->index=EXISTENT;
 	d->nform[1]=del_head->nform[1];
@@ -95,7 +94,7 @@ FORM *d;
  /* node and inserts in the erases list new operators 		*/
  /* originated by duplication rules during travelling.          */
 void
-clean()
+clean(void)
 {
 	FORM *q;
 	if (seegarb)
@@ -120,7 +119,7 @@ clean()
  /* and prints some data when the user digits the directive     */
  /* "#garbage".              					*/
 void
-user()
+user(void)
 {
 	printf("*****************************************************\n");
 	printf("Initial number of nodes %u\n",num_nodes);
@@ -137,8 +136,7 @@ user()
  /* The following function performs the propagation of a single	*/
  /* erase node by applicating garbage rules. 			*/
 void
-garbage(erase)
-FORM *erase;
+garbage(FORM *erase)
 {
 	BOOLEAN end=FALSE;
 	FORM *form,*nextform,*newform;

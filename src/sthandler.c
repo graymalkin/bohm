@@ -145,7 +145,7 @@ static int curr_nesting_depth; /* current nesting depth */
  /* P keywords into the dictionary and the external and global */
  /* environments into the scope stack. */
 void
-init_symbol_table()
+init_symbol_table(void)
 {
 	STBUCKET	*st;
 	int		i;
@@ -175,12 +175,7 @@ init_symbol_table()
  /* given identifier. The bucket associated with the given identifier */
  /* becomes the first one in its list. */
 void
-search_bucket(st, id)
-	STBUCKET	**st;
-					/* pointer to the bucket containing */
-					/* the identifier */
-	STRING		id;
-					/* identifier */
+search_bucket(STBUCKET **st, char *id)
 {
 	int		dict_index;
 					/* value returned by the */
@@ -227,7 +222,7 @@ search_bucket(st, id)
  /* The following function pushes a new local environment entry onto */
  /* the scope stack. */
 void
-push_local_env()
+push_local_env(void)
 {
    curr_nesting_depth++;
    allocate_local_env_entry();
@@ -236,7 +231,7 @@ push_local_env()
  /* The following function pops a local environment entry off */
  /* the scope stack. */
 void
-pop_local_env()
+pop_local_env(void)
 {
 	LOCALENVENTRY	*le;
 	BINDINGENTRY	*b;
@@ -261,7 +256,7 @@ pop_local_env()
  /* The following function pops all local environment entry off */
  /* the scope stack. */
 void
-pop_all_local_env()
+pop_all_local_env(void)
 {
   while (curr_nesting_depth>NONESTING)
     pop_local_env();
@@ -270,48 +265,16 @@ pop_all_local_env()
 
  /* The following function creates entries for a variable binding */
 void
-create_variable_binding(st,rootform,type)
-	STBUCKET	*st;
-				/* pointer to the bucket for the */
-				/* identifier which is to be bound */
-				/* to a procedure */
-	FORM            *rootform;
-				/* pointer to the rootform of the */
-				/* term associated with the identifier */
-				/* (for global declarations only) */
-	int		type;
-				/* indicates DEF, SHARE or LOCAL */
-				/* type entry */
+create_variable_binding(STBUCKET *st, FORM *rootform, int type)
 {
 	allocate_binding_entry(st,curr_local_env,rootform,type);
 }
-#if 0
-create_local_variable_binding(st,term)
-	STBUCKET	*st;
-				/* pointer to the bucket for the */
-				/* identifier which is to be bound */
-				/* to a procedure */
-	TERM            *term;
-				/* pointer to the rootform of the */
-				/* term associated with the identifier */
-				/* (for global declarations only) */
-{
-	allocate_local_binding_entry(st,curr_local_env,term->rootf,term->rootp);
-}
-#endif
 
  /* The following function creates an entry for a binding concerning */
  /* an identifier used but not defined. The entry for the binding is */
  /* inserted into the binding entry list for the external environment. */
 void
-create_binding_for_undef_id(st,rootform)
-	STBUCKET	*st;
-				/* pointer to the bucket for the */
-				/* identifier which is to be bound */
-	FORM            *rootform;
-				/* pointer to the rootform of the */
-				/* term associated with the identifier */
-				/* (for global declarations only) */
+create_binding_for_undef_id(STBUCKET *st, FORM *rootform)
 {
 	allocate_binding_entry(st,external_env,rootform,LOCAL);
 }
@@ -324,12 +287,7 @@ create_binding_for_undef_id(st,rootform)
 
  /* The following function allocates a bucket for an identifier. */
 void
-allocate_bucket(st, id)
-	STBUCKET	**st;
-					/* pointer to the bucket to be */
-					/* allocated */
-	STRING		id;
-					/* identifier */
+allocate_bucket(STBUCKET **st, char *id)
 {
 	*st = malloc_da(sizeof(STBUCKET));
 	(*st)->id = strdup_da(id);
@@ -341,14 +299,7 @@ allocate_bucket(st, id)
  /* The following function moves a bucket to the head of the */
  /* list in which it lies. */
 void
-move_bucket(st, dict_index)
-	STBUCKET	*st;
-					/* pointer to the bucket to */
-					/* be moved */
-	int		dict_index;
-					/* index corresponding to */
-					/* the list in which the */
-					/* bucket lies */
+move_bucket(STBUCKET *st, int dict_index)
 {
 	st->next_st_bucket = dictionary[dict_index];
 	dictionary[dict_index] = st;
@@ -356,9 +307,7 @@ move_bucket(st, dict_index)
 
  /* The following function implements Weinberger's hash function. */
 int
-hash_pjw(id)
-	STRING		id;
-					/* identifier to be hashed */
+hash_pjw(char *id)
 {
 	unsigned	h,
 			g;
@@ -375,7 +324,7 @@ hash_pjw(id)
  /* The following function pushes the entry for the external environment */
  /* onto the scope stack. */
 void
-push_external_env()
+push_external_env(void)
 {
 	STBUCKET	*st;
 	int		i;
@@ -393,14 +342,14 @@ push_external_env()
  /* The following function pushes the entry for the global environment */
  /* onto the scope stack. */
 void
-push_global_env()
+push_global_env(void)
 {
 	push_local_env();
 }
 
  /* The following function allocates a local environment entry. */
 void
-allocate_local_env_entry()
+allocate_local_env_entry(void)
 {
 	LOCALENVENTRY	*le;
 					/* pointer to the entry to */
@@ -414,21 +363,7 @@ allocate_local_env_entry()
 
  /* The following function allocates a binding entry. */
 void
-allocate_binding_entry(st,le,rootform,type)
-	STBUCKET	*st;
-				/* pointer to the bucket for the */
-				/* identifier involved in the binding */
-	LOCALENVENTRY	*le;
-				/* pointer to the entry for the */
-				/* environment in which the binding */
-				/* is to be created */
-	FORM            *rootform;
-				/* pointer to the rootform of the */
-				/* term associated with the identifier */
-				/* (for global declarations only) */
-	int		type;
-				/* indicates DEF, SHARE or LOCAL */
-				/* type entry */
+allocate_binding_entry(STBUCKET *st, LOCALENVENTRY *le, FORM *rootform, int type)
 {
 	BINDINGENTRY	*b;
 
@@ -441,32 +376,3 @@ allocate_binding_entry(st,le,rootform,type)
 	le->last_local_binding = b;
 	b->entry_type = type;
 }
-
-#if 0
-allocate_local_binding_entry(st,le,rootform,port)
-	STBUCKET	*st;
-				/* pointer to the bucket for the */
-				/* identifier involved in the binding */
-	LOCALENVENTRY	*le;
-				/* pointer to the entry for the */
-				/* environment in which the binding */
-				/* is to be created */
-	FORM            *rootform;
-				/* pointer to the rootform of the */
-				/* term associated with the identifier */
-				/* (for global declarations only) */
-	int		port;
-{
-	BINDINGENTRY	*b;
-
-	b = malloc_da(sizeof(BINDINGENTRY));
-	b->st_bucket = st;
-	b->root = rootform;
-        b->port = port;
-	b->prev_id_binding = st->curr_binding;
-	st->curr_binding = b;
-	b->prev_local_binding = le->last_local_binding;
-	le->last_local_binding = b;
-	b->entry_type = type;
-}
-#endif

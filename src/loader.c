@@ -24,8 +24,7 @@
 /* The following function changes the parser standard 	*/
 /* input and call the parser function.			*/
 void
-compile(file)
-     STRING  file;
+compile(char *file)
 {
      printf("\n******** loading file %s ********\n",file);
      yyrestart(fopen(file,"r"));

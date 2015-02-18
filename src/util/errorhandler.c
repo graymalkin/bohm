@@ -22,6 +22,7 @@
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
+#include "errorhandler.h"
 #include "lambda_lexan.h"
 
 /****************************************************************/
@@ -42,6 +43,7 @@ BOOLEAN error_detected; /* flag indicating whether an error has been detected */
 
  /* The following function signals lexical, syntax and semantic */
  /* errors. */
+void
 signal_error(error_msg_num)
 	int		error_msg_num;
 					/* error message number */
@@ -54,6 +56,7 @@ signal_error(error_msg_num)
 }
 
  /* The following function signals warnings. */
+void
 signal_warning(warning_msg_num)
 	int		warning_msg_num;
 					/* warning message number */

@@ -17,6 +17,7 @@
 #include <stdlib.h>
 
 #include "const.h"
+#include "crashhandler.h"
 #include "types.h"
 
 /****************************************************************/
@@ -38,6 +39,7 @@
 /****************************************************************/
 
  /* The following function signals errors causing abort. */
+void
 signal_crash(crash_type)
 	int		crash_type;
 					/* crash type */

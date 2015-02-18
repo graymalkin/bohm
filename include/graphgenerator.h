@@ -5,7 +5,6 @@
 #ifndef GRAPHGENERATOR_H
 #define GRAPHGENERATOR_H
 
-#include <stdint.h>
 #include "types.h"
 
 /****************************************************************/

@@ -30,6 +30,8 @@
  /* Comments must be enclosed in "{" and "}".                   */
  /***************************************************************/
 
+%option noinput
+%option nounput
 
  /***************************************************************/
  /* 1. Inclusion of header files.				*/
@@ -201,6 +203,7 @@ string                  [^\"]*\"
  /* 6. Auxiliary functions.					*/
  /***************************************************************/
 
+int
 yywrap()
 {
 	return(NOMOREINPUT);

@@ -17,8 +17,6 @@
 #include "lambda_parser.h"
 #include "types.h"
 
-extern FILE *yyin;
-
 /****************************************************************/
 /* Definitions of functions to be exported.			*/
 /****************************************************************/

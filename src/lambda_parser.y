@@ -98,10 +98,11 @@
  /***************************************************************/
 
 %{
-#include                <malloc.h>
-#include		<stdio.h>
-#include		"const.h"
-#include		"types.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "const.h"
+#include "types.h"
 %}
 
 
@@ -110,40 +111,30 @@
  /***************************************************************/
 
 %{
-#include		"lambda_lexan.h"
-#include		"graphgenerator.h"
-#include		"sthandler.h"
-#include		"errorhandler.h"
-#include		"scope_analysis.h"
-#include		"reducer.h"
-#include		"inspect.h"
-#include		"loader.h"
-#include		"garbage.h"
-#include		"menu.h"
-#include		"destroyer.h"
-#include		"save.h"
-
+#include "destroyer.h"
+#include "errorhandler.h"
+#include "garbage.h"
+#include "graphgenerator.h"
+#include "inspect.h"
+#include "lambda_lexan.h"
+#include "lambda_parser.h"
+#include "loader.h"
+#include "menu.h"
+#include "reducer.h"
+#include "save.h"
+#include "scope_analysis.h"
+#include "sthandler.h"
 %}
-
 
  /***************************************************************/
  /* 3. Definitions of variables to be exported.			*/
  /***************************************************************/
 
 %{
-BOOLEAN			error_detected,
-			       /* flag indicating whether an *
-			       /* error has been detected */
-			       /* during the analysis of the */
-			       /* P source file */
-			quit,
-			       /* flag indicating quit request */
-			loading_mode;
-			       /* flag indicating if parsing is */
-			       /* done after a load directive */
-FORM                    *lastinputterm;
-			       /* pointer to the root of the */
-			       /* term in input */
+BOOLEAN error_detected; /* flag indicating whether an error has been detected during the analysis of the P source file */
+BOOLEAN quit; /* flag indicating quit request */
+BOOLEAN loading_mode; /* flag indicating if parsing is done after a load directive */
+FORM *lastinputterm; /* pointer to the root of the term in input */
 %}
 
  /***************************************************************/
@@ -712,11 +703,9 @@ term    	:	error  EXPRDELIM
  /* 11. Auxiliary functions.					*/
  /***************************************************************/
 
-yyerror()
+void
+yyerror(const char *s)
 {
 	signal_error(SINTAXERROR);
 	yyerrok;
 }
-
-
-

@@ -108,8 +108,6 @@ unsigned int num_nodes, max_nodes;
 BOOLEAN is_global_var;
 FORM *headfree = NULL; /* pointer to the head of the free-form list */
 
-static unsigned int length_list = 0;
-
 /****************************************************************/
 /* 4. Declaration of functions strictly local to the module.	*/
 /****************************************************************/
@@ -117,7 +115,6 @@ static unsigned int length_list = 0;
 static void allocate_var(VARENTRY **, STBUCKET *, FORM *, VARENTRY *);
 static void allocate_term(TERM **, FORM *, int, VARENTRY *);
 
-static TERM *buildglobaldefvarterm(int, STBUCKET *);
 static TERM *makebox(int, TERM *);
 
 static VARENTRY *addbrackets(int, VARENTRY *);
@@ -199,8 +196,7 @@ TERM
 	TERM            *body;
 {
 	TERM 	*t;         /* pointer to the new term to be created */
-	FORM    *newf1,     /* pointers to the new forms to be created */
-		*newf2;
+	FORM    *newf1;     /* pointers to the new forms to be created */
 	VARENTRY *boundvar; /* pointer to the entry for the bound variable */
 	FORM    *varform;   /* pointer to the bound variable form */
 
@@ -297,8 +293,7 @@ TERM
 	TERM            *t,
 		   /* pointer to the new term to be created */
 			*temp;
-	FORM            *newf1,
-			*newf2;
+	FORM            *newf1;
 		   /* pointers to the new forms to be created */
 	VARENTRY        *boundvar;
 		   /* pointer to the entry for the bound variable */
@@ -380,11 +375,8 @@ TERM
 			*arg2,
 			*arg3;
 {
-	TERM            *t,
+	TERM            *t;
 		    /* pointer to the term to be created */
-			*temp;
-		    /* pointer to the temporary term obtained by */
-		    /* building a box around the argument */
 	VARENTRY        *newvars,*tempvars;
 		    /* free variables of the application */
 	FORM            *newf,
@@ -700,7 +692,7 @@ TERM
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
-	FORM            *newf1, *newf2;
+	FORM            *newf1;
 		    /* pointer to the new form to be created */
 	VARENTRY	*newvars;
 
@@ -736,7 +728,7 @@ TERM
 {
 	TERM            *t;
 		    /* pointer to the term to be created */
-	FORM            *newf1, *newf2;
+	FORM            *newf1;
 		    /* pointer to the new form to be created */
 	VARENTRY	*newvars;
 
@@ -830,7 +822,6 @@ FORM
        int        level;
        TERM       *t;
 {
-       VARENTRY   *newvars;
        FORM       *newroot;
        if(t!=NULL){
 	   if(level==1)
@@ -847,6 +838,7 @@ FORM
 	   closeglobalvars(t->vars);
 	   return newroot;
 	}
+	return 0;
 }
 
  /* the following function allocate a new graphical form */
@@ -1007,33 +999,6 @@ allocate_term(term,rootform,rootport,freevars)
        (*term)->vars = freevars;
 }
 
- /* the following function shares the term corresponding to the	*/
- /* globally defined variable (by adding a FAN on top of the   	*/
- /* term). One branch of this fan is returned as result; the    */
- /* other branch is the new root of the globally declared 	*/
- /* variable       */
-TERM
-*buildglobaldefvarterm(level,id)
-	int             level;
-	STBUCKET	*id;
-{
-	TERM *t;
-		     /* pointer to the term to be created */
-	FORM *newf;
-		     /* pointer to the new form to be created */
-
-	allocate_form(&newf,FAN,1);
-	newf->nlevel[1] = 0;
-	newf->nlevel[2] = 0;
-	connect1(newf, 0,
-		id->curr_binding->root->nform[0],
-		id->curr_binding->root->nport[0]);
-	connect(newf, 2, id->curr_binding->root, 0);
-	allocate_term(&t,newf,1,NULL);
-	return(t);
-}
-
-
  /* the following function build a box around a term  */
 TERM
 *makebox(level,arg)
@@ -1118,9 +1083,6 @@ VARENTRY
 		 }
 	      else
 		 {
-		     FORM      *varform1,
-			       *varform2;
-
 		     allocate_form(&fan,FAN,index);
 		     fan->nlevel[1] = 0;
 		     fan->nlevel[2] = 0;

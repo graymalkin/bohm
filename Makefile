@@ -1,8 +1,7 @@
 # makefile for BOHM
 
-CFLAGS = -Iinclude
-#CFLAGS = -g
-LDLIBS = -ll -ly
+CFLAGS = -ansi -g -D_POSIX_C_SOURCE=200809L -Iinclude -Wall
+LDLIBS = -g
 YFLAGS = -d
 
 # No user serviceable parts below this line

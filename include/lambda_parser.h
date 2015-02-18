@@ -15,12 +15,16 @@
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
+extern void yyerror(const char *);
 extern int yyparse(void);
+extern void yyrestart(FILE *);
 
 extern int error_detected;
 extern int quit;
 extern int loading_mode;
 
 extern FORM *lastinputterm;
+
+extern FILE *yyin;
 
 #endif

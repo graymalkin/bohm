@@ -19,12 +19,14 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"const.h"
-#include		"types.h"
+#include "const.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
+
+#include "stringhandler.h"
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
@@ -39,6 +41,7 @@
 /****************************************************************/
 
  /* The following function turns a given string into a lower case one. */
+void
 to_lower_s(s)
 	STRING		s;
 					/* string to be turned */
@@ -52,6 +55,7 @@ to_lower_s(s)
 
  /* The following function turns a given string of digits into a natural */
  /* and checks for presence of overflow. */
+int
 to_nat_s(s)
 	STRING		s;
 					/* string to be turned */
@@ -68,6 +72,7 @@ to_nat_s(s)
 
  /* The following function computes the length of a given string, */
  /* including the null character terminating the string itself. */
+int
 length_s(s)
 	STRING		s;
 					/* string whose length is to */
@@ -81,6 +86,7 @@ length_s(s)
 
  /* The following function puts the concatenation of two given strings */
  /* into a given string. */
+void
 concat_s(s1, s2, s3)
 	STRING		s1,
 					/* first string */
@@ -92,8 +98,8 @@ concat_s(s1, s2, s3)
 	int		i,
 			j;
 
-	for (i = j = 0; s3[i++] = s1[j++];);
-	for (i--, j = 0; s3[i++] = s2[j++];);
+	for (i = j = 0; (s3[i++] = s1[j++]););
+	for (i--, j = 0; (s3[i++] = s2[j++]););
 }
 
  /* The following function returns the result of the check for */

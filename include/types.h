@@ -5,6 +5,8 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <stdint.h>
+
  /* utility types */
 typedef int BOOLEAN;
 typedef char * STRING;

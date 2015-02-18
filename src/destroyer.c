@@ -35,6 +35,7 @@
 #include <stdlib.h>
 
 #include "const.h"
+#include "destroyer.h"
 #include "dynallhandler.h"
 #include "garbage.h"
 #include "graphgenerator.h"
@@ -64,6 +65,7 @@ static unsigned int start_nodes;
 /* The following function initialises the destroyer by 	*/
 /* allocating two nodes (headfree and headfull) and 	*/
 /* linking them together.                               */
+void
 init_destroy()
 {
   headfull = malloc_da(sizeof(FORM));
@@ -79,6 +81,7 @@ init_destroy()
 /* term, moving back headfree to the node following 	*/
 /* headfull, and doing so makes all the nodes available */
 /* for any furure usage					*/
+void
 destroy()
 {
   if(headfree!=headfull->next){
@@ -92,6 +95,7 @@ destroy()
 /* The following function makes a graph associated to a	*/
 /* global definition permanent, by moving headfull to 	*/
 /* the node preceding headfree.				*/
+void
 no_destroy()
 {
   headfull=headfree->prev;

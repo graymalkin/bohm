@@ -55,7 +55,7 @@ void rdbk_1(form,port)
     if(form->nport[port]<0) {
       switch(form->nport[port]){
       case INT:
-	left_to_print-=printf("%d", (intptr_t)form->nform[port]);
+	left_to_print-=printf("%ld", (intptr_t)form->nform[port]);
 	break;
       case T:
 	left_to_print-=printf("TRUE");

@@ -97,6 +97,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "const.h"
 #include "types.h"
 #include "y.tab.h"
@@ -127,8 +128,13 @@ LOCALENVENTRY *curr_local_env; /* pointer to the entry for the current local env
 #include "keywords.i"
 #include "iolibrary.i"
 
-static LOCALENVENTRY *external_env; /* pointer to the entry for the external environment */
+static void push_external_env(void);
+static void push_global_env(void);
 
+static void allocate_local_env_entry(void);
+static void allocate_binding_entry(STBUCKET *, LOCALENVENTRY *, FORM *, int);
+
+static LOCALENVENTRY *external_env; /* pointer to the entry for the external environment */
 static int curr_nesting_depth; /* current nesting depth */
 
 /****************************************************************/
@@ -360,7 +366,7 @@ hash_pjw(id)
 	for (h = 0; *id != EOS; id++)
 	{
 		h = (h << HASH1) + (*id);
-		if (g = h & HASH2)
+		if ((g = h & HASH2))
 			h = h ^ (g >> HASH3) ^ g;
 	}
 	return(h % DICTSIZE);
@@ -368,6 +374,7 @@ hash_pjw(id)
 
  /* The following function pushes the entry for the external environment */
  /* onto the scope stack. */
+void
 push_external_env()
 {
 	STBUCKET	*st;
@@ -385,12 +392,14 @@ push_external_env()
 
  /* The following function pushes the entry for the global environment */
  /* onto the scope stack. */
+void
 push_global_env()
 {
 	push_local_env();
 }
 
  /* The following function allocates a local environment entry. */
+void
 allocate_local_env_entry()
 {
 	LOCALENVENTRY	*le;
@@ -404,6 +413,7 @@ allocate_local_env_entry()
 }
 
  /* The following function allocates a binding entry. */
+void
 allocate_binding_entry(st,le,rootform,type)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */

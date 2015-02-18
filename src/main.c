@@ -13,6 +13,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "const.h"
 #include "destroyer.h"
 #include "garbage.h"
@@ -20,11 +22,13 @@
 #include "lambda_parser.h"
 #include "menu.h"
 #include "types.h"
+#include "sthandler.h"
 
 /****************************************************************/
 /* Main program.               			                */
 /****************************************************************/
 
+int
 main(argc,argv)
 int argc;
 char *argv[];
@@ -33,7 +37,7 @@ char *argv[];
   seetime=0;
   seenode=0;
   seegarb=0;
-  if(argc>1)
+  if(argc>1) {
       if(argc==2)
 	    if (strcmp(argv[1],"-s")==0){
 		/* do_menu4(); */
@@ -62,6 +66,7 @@ char *argv[];
 	       printf("Execution failed:Too many parameters . . .\n");
 	       exit(1);
 	       }
+  }
   printf("\n");
   printf("***********************************************************\n");
   printf("***                  Welcome to the                     ***\n");

@@ -38,7 +38,9 @@
 #include <stdlib.h>
 
 #include "const.h"
+#include "copy.h"
 #include "dynallhandler.h"
+#include "graphgenerator.h"
 #include "types.h"
 
 /****************************************************************/
@@ -94,7 +96,7 @@ FORM
 		 *newf1,
 		 *newf2,
 		 *newf3;
-      int        q,r;
+      int        q;
 
       temp = root;
       switch (temp->name)
@@ -107,7 +109,7 @@ FORM
 		    connect1(newf1,0,newf2,temp->nport[0]);
 		  }
 		  else
-		    int_connect(newf1,0,temp->nform[0],temp->nport[0]);
+		    int_connect(newf1,0,(intptr_t)temp->nform[0],temp->nport[0]);
 		  return(newf1);
 	      break;
 
@@ -136,7 +138,7 @@ FORM
 		connect(newf1,q,newf2,temp->nport[q]);
 	      }
 	      else
-		int_connect(newf1,q,temp->nform[q],temp->nport[q]);
+		int_connect(newf1,q,(intptr_t)temp->nform[q],temp->nport[q]);
 	      return(newf1);
 	      break;
 
@@ -169,7 +171,7 @@ FORM
 		      connect1(newf1,0,newf2,temp->nport[0]);
 		  }
 		  else
-		      int_connect(newf1,0,temp->nform[0],temp->nport[0]);
+		      int_connect(newf1,0,(intptr_t)temp->nform[0],temp->nport[0]);
 		  return(newf1);
 		}
 	      else
@@ -198,13 +200,13 @@ FORM
 		connect(newf1,0,newf2,temp->nport[0]);
 	      }
 	      else
-		int_connect(newf1,0,temp->nform[0],temp->nport[0]);
+		int_connect(newf1,0,(intptr_t)temp->nform[0],temp->nport[0]);
 	      if (temp->nport[2]>=0) {
 		newf3 = copy_aux(temp->nform[2],temp->nport[2],offset);
 		connect(newf1,2,newf3,temp->nport[2]);
 	      }
 	      else
-		int_connect(newf1,2,temp->nform[2],temp->nport[2]);
+		int_connect(newf1,2,(intptr_t)temp->nform[2],temp->nport[2]);
 	      return(newf1);
 	      break;
 
@@ -215,16 +217,17 @@ FORM
 		connect(newf1,1,newf2,temp->nport[1]);
 	      }
 	      else
-		int_connect(newf1,1,temp->nform[1],temp->nport[1]);
+		int_connect(newf1,1,(intptr_t)temp->nform[1],temp->nport[1]);
 	      if (temp->nport[2]>=0) {
 		newf3 = copy_aux(temp->nform[2],temp->nport[2],offset);
 		connect(newf1,2,newf3,temp->nport[2]);
 	      }
 	      else
-		int_connect(newf1,2,temp->nform[2],temp->nport[2]);
+		int_connect(newf1,2,(intptr_t)temp->nform[2],temp->nport[2]);
 	      return(newf1);
 	      break;
 	  }
+	  return NULL;
 }
 
 /* The following function inserts a two-form relation in the table. */

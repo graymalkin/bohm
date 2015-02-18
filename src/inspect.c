@@ -20,10 +20,11 @@
 /* Inclusion of header files.       				*/
 /****************************************************************/
 
-#include "const.h"
-#include "types.h"
 #include <inttypes.h>
 #include <stdio.h>
+#include "const.h"
+#include "inspect.h"
+#include "types.h"
 
 /****************************************************************/
 /* Declarations of functions strictly local to the module    	*/
@@ -35,6 +36,7 @@ static FORM *inspect(int, FORM *);
 /* Definitions of functions to be exported.			*/
 /****************************************************************/
 
+void
 inspect_driver(f)
      FORM  *f;
 {
@@ -158,7 +160,7 @@ FORM
 		   printf("form = F\n");
 		   break;
 		case INT:
-		   printf("form = INT value = %d\n",(intptr_t)nextform);
+		   printf("form = INT value = %ld\n",(intptr_t)nextform);
 		   break;
 		case NIL:
 		   printf("form = NIL\n");

@@ -26,6 +26,8 @@
 /***************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "const.h"
 #include "types.h"
 
@@ -33,11 +35,16 @@
 /* 2. Definitions of variables to be exported.                             */
 /***************************************************************************/
 
-int	 option;  /* Initial option selected */
-unsigned limit;   /* Limit for allocable operators (only for option 2) */
-BOOLEAN  seetime;
-BOOLEAN  seenode;
-BOOLEAN  seegarb;
+static BOOLEAN do_menu1(void);
+static BOOLEAN do_menu2(void);
+static void do_menu3(void);
+static int take_char(void);
+
+int option; /* Initial option selected */
+unsigned limit; /* Limit for allocable operators (only for option 2) */
+BOOLEAN seetime;
+BOOLEAN seenode;
+BOOLEAN seegarb;
 
 /****************************************************************************/
 /* 3. Definitions of functions to be exported.                              */
@@ -262,7 +269,7 @@ do_menu2()
     return(cont);
 }
 
-
+void
 do_menu3()
 {
     while((limit<1000)||(limit>50000)){

@@ -29,6 +29,7 @@
 
 #include "const.h"
 #include "dynallhandler.h"
+#include "save.h"
 #include "types.h"
 
 #define	ENTRY 17
@@ -59,6 +60,7 @@ static int max;
 /****************************************************************/
 
 /* The following function saves a graph on a file.		*/
+void
 save(name,root,id)
 	char	*name;
 	FORM	*root;
@@ -160,9 +162,9 @@ save_aux(root,p)
       FORM       *root;
       int        p;
 {
-  int n,p1,i,card;
+  int n,p1,card;
 
-  if(card=present(root)) {
+  if((card=present(root))) {
     n=num_port(root->name);
     for (p1=0;p1<n;p1++)
 	stampa(root,p1,card);
@@ -322,7 +324,7 @@ put_int(f,p)
 	   fprintf(save_file,"False         ");
 	   break;
 	case INT:
-	   fprintf(save_file,"Int: %d ",f);
+	   fprintf(save_file,"Int: %ld ",(intptr_t)f);
 	   break;
 	case NIL:
 	   fprintf(save_file,"Nil          ");

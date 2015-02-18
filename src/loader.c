@@ -33,16 +33,16 @@ compile(char *file)
      else
 	{
 	   loading_mode = 1;
-	   while ((quit == 0) && (error_detected == FALSE))
+	   while ((quit == 0) && (error_detected == false))
 	     {
 		yyparse();
 	     }
-	   if (error_detected == FALSE)
+	   if (error_detected == false)
 	      printf("\n******** %s loaded ********\n",file);
 	   else
 	      {
 		 printf("\n***** loading file %s aborted *****\n",file);
-		 error_detected = FALSE;
+		 error_detected = false;
 	      }
 	   quit = 0;
 	   loading_mode = 0;

@@ -11,7 +11,7 @@
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-extern BOOLEAN error_detected;
+extern bool error_detected;
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/

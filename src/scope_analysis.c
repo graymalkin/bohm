@@ -17,7 +17,8 @@
  /* The following function checks if an identifier has been */
  /* previously declared */
 
-BOOLEAN defined(STBUCKET *st)
+bool
+defined(STBUCKET *st)
 {
         return((st->curr_binding) != NULL);
 }

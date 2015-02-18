@@ -105,7 +105,7 @@
 /****************************************************************/
 
 unsigned int num_nodes, max_nodes;
-BOOLEAN is_global_var;
+bool is_global_var;
 FORM *headfree = NULL; /* pointer to the head of the free-form list */
 
 /****************************************************************/
@@ -127,7 +127,7 @@ static void closeglobalvars(VARENTRY *);
 static void intelligent_connect(FORM *, int, FORM *);
 static void inspect_connect(FORM *, int, FORM *, int);
 
-static BOOLEAN membervarlist(BINDINGID *, VARLIST *);
+static bool membervarlist(BINDINGID *, VARLIST *);
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
@@ -226,11 +226,11 @@ buildplambdaterm(int level, PATTERN *pattern, TERM *body)
 	FORM    *newf1, *newf2;     /* pointers to the new forms to be created */
 	VARENTRY *boundvar; /* pointer to the entry for the bound variable */
 	FORM    *varform;   /* pointer to the bound variable form */
-        BOOLEAN boundp;
+        bool boundp;
 
-        for(vp=pattern->var_list,boundp=FALSE;vp;vp=vp->next)
+        for(vp=pattern->var_list,boundp=false;vp;vp=vp->next)
           if(lookfor(vp->id->id,body->vars)) {
-            boundp=TRUE;
+            boundp=true;
             break;
           }
 
@@ -770,9 +770,9 @@ closeterm(int level, TERM *t)
        FORM       *newroot;
        if(t!=NULL){
 	   if(level==1)
-		is_global_var=TRUE;
+		is_global_var=true;
 	   else
-		is_global_var=FALSE;
+		is_global_var=false;
 
 	   allocate_form(&newroot,ROOT,0);
 
@@ -817,7 +817,7 @@ allocate_form(FORM **form, int name, int index)
 	(*form)->nform[0]=NULL;
 	(*form)->nform[1]=NULL;
 	(*form)->nform[2]=NULL;
-	(*form)->num_safe=TRUE;   /* initially, all operators are safe */
+	(*form)->num_safe=true;   /* initially, all operators are safe */
 }
 
 /* the following function adds a graphical form to deallocate */
@@ -1271,15 +1271,15 @@ inspect_connect(FORM *f1, int p1, FORM *f2, int p2)
     connect1(f1,p1,f2,p2);
 }
 
-BOOLEAN
+bool
 membervarlist(BINDINGID *e, VARLIST *l)
 {
   while(l)
     if (e->id==l->id->id)
-      return TRUE;
+      return true;
     else
       l=l->next;
-  return FALSE;
+  return false;
 }
   
 

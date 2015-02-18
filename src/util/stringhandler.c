@@ -92,10 +92,10 @@ concat_s(char *s1, char *s2, char *s3)
 
  /* The following function returns the result of the check for */
  /* equality between two given strings. */
-BOOLEAN
+bool
 equal_s(char *s, char *t)
 {
-	BOOLEAN		equal;
+	bool		equal;
 
 	for (; (equal = (*s == *t)) && (*s != EOS); s++, t++);
 	return(equal);

@@ -12,7 +12,7 @@
 /****************************************************************/
 
 extern unsigned int max_nodes, num_nodes;
-extern BOOLEAN is_global_var;
+extern bool is_global_var;
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/

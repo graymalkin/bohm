@@ -7,8 +7,6 @@
 
  /* utility constants */
 #define ENTER 10
-#define FALSE 0
-#define TRUE  1
 #define EOS   '\0'
 
  /* constants concerning files */

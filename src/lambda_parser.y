@@ -131,9 +131,9 @@
  /***************************************************************/
 
 %{
-BOOLEAN error_detected; /* flag indicating whether an error has been detected during the analysis of the P source file */
-BOOLEAN quit; /* flag indicating quit request */
-BOOLEAN loading_mode; /* flag indicating if parsing is done after a load directive */
+bool error_detected; /* flag indicating whether an error has been detected during the analysis of the P source file */
+bool quit; /* flag indicating quit request */
+bool loading_mode; /* flag indicating if parsing is done after a load directive */
 FORM *lastinputterm; /* pointer to the root of the term in input */
 %}
 
@@ -267,7 +267,7 @@ input           :      directive
 				}
 		|
 				{
-				   quit = TRUE;
+				   quit = true;
 				   YYACCEPT;
 				}
 		;
@@ -280,7 +280,7 @@ directive       :      '#' INSPECTKW arg EXPRDELIM
 				}
 		|      '#' QUITKW EXPRDELIM
 				{
-				   quit = TRUE;
+				   quit = true;
 				   YYACCEPT;
 				}
 		|      '#' LOADKW ASTRING EXPRDELIM
@@ -691,7 +691,7 @@ pattern         :       CONSKW '(' pattern ',' pattern ')'
 
 term    	:	error  EXPRDELIM
                                 {
-                                  error_detected = TRUE;
+                                  error_detected = true;
                                   yyerrok;
                                   YYACCEPT;
 				}

@@ -5,10 +5,8 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <stdbool.h>
 #include <stdint.h>
-
- /* utility types */
-typedef int BOOLEAN;
 
 /****************************************************************/
 /*		        SYMBOL TABLE TYPES			*/

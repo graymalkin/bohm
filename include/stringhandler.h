@@ -19,6 +19,6 @@ void to_lower_s(char *);
 int to_nat_s(char *);
 int length_s(char *);
 void concat_s(char *, char *, char *);
-BOOLEAN equal_s(char *, char *);
+bool equal_s(char *, char *);
 
 #endif

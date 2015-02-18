@@ -19,9 +19,9 @@ extern void yyerror(const char *);
 extern int yyparse(void);
 extern void yyrestart(FILE *);
 
-extern int error_detected;
-extern int quit;
-extern int loading_mode;
+extern bool error_detected;
+extern bool quit;
+extern bool loading_mode;
 
 extern FORM *lastinputterm;
 

@@ -11,6 +11,6 @@
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-BOOLEAN defined(STBUCKET *);
+bool defined(STBUCKET *);
 
 #endif

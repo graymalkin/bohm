@@ -83,13 +83,13 @@ main(int argc, char **argv)
   quit = 0;
   loading_mode = 0;
   lastinputterm = NULL;
-  error_detected = FALSE;
+  error_detected = false;
 
   while (quit == 0)
      {
 	printf("opt>");
 	yyparse();
-	error_detected = FALSE;
+	error_detected = false;
 	lines = 0;
      }
   printf("good bye\n");

@@ -13,9 +13,9 @@
 
 extern int option;
 extern unsigned int limit;
-extern BOOLEAN seetime;
-extern BOOLEAN seenode;
-extern BOOLEAN seegarb;
+extern bool seetime;
+extern bool seenode;
+extern bool seegarb;
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/

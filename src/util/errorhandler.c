@@ -29,7 +29,7 @@
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-BOOLEAN error_detected; /* flag indicating whether an error has been detected */
+bool error_detected; /* flag indicating whether an error has been detected */
 
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
@@ -46,7 +46,7 @@ BOOLEAN error_detected; /* flag indicating whether an error has been detected */
 void
 signal_error(int error_msg_num)
 {
-	error_detected = TRUE;
+	error_detected = true;
 	fprintf(stderr,
 		"line %-5d\t--->\t%s\n",
 		lines,

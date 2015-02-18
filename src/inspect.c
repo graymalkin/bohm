@@ -70,7 +70,7 @@ inspect_driver(FORM *f)
 FORM *
 inspect(int p, FORM *f)
 {
-	BOOLEAN ok=TRUE;
+	bool ok=true;
 	switch(p)
 	    {
 	    case 0:
@@ -83,7 +83,7 @@ inspect(int p, FORM *f)
 		    case T:
 		    case F:
 		    case NIL:*/
-			ok=FALSE;
+			ok=false;
 			break;
 		    default:
 			break;
@@ -117,7 +117,7 @@ inspect(int p, FORM *f)
 		    case MOD1:
 		    case UNS_FAN1:
 		    case UNS_FAN2:
-			ok=FALSE;
+			ok=false;
 			break;
 		    default:
 			break;
@@ -128,12 +128,12 @@ inspect(int p, FORM *f)
 		    case IFELSE:
 			break;
 		    default:
-			ok=FALSE;
+			ok=false;
 			break;
 		    }
 		break;
 	    default:
-		ok=FALSE;
+		ok=false;
 		break;
 	    }
 

@@ -865,7 +865,7 @@ allocate_form(form, name, index)
 	int	i;
 
 	if(headfree->next == NULL) {
-	       headfree->next = dep = (FORM *) malloc_da(sizeof(FORM)*FORM_NUM);
+	       headfree->next = dep = malloc_da(sizeof(FORM)*FORM_NUM);
 	       dep->next=dep+1;
 	       dep->prev=headfree;
 	       dep=dep->next;
@@ -980,7 +980,7 @@ allocate_var(newvar,id,form,nextvar)
 	VARENTRY   *nextvar;
 		       /* pointer to the next free variable */
 {
-       *newvar = (VARENTRY *) malloc_da(sizeof(VARENTRY));
+       *newvar = malloc_da(sizeof(VARENTRY));
        (*newvar)->name = id;
        (*newvar)->var = form;
        (*newvar)->next = nextvar;
@@ -1001,7 +1001,7 @@ allocate_term(term,rootform,rootport,freevars)
 		       /* pointer to the free variables entries */
 		       /* of the term */
 {
-       *term = (TERM *) malloc_da(sizeof(TERM));
+       *term = malloc_da(sizeof(TERM));
        (*term)->rootf = rootform;
        (*term)->rootp = rootport;
        (*term)->vars = freevars;

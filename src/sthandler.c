@@ -325,7 +325,7 @@ allocate_bucket(st, id)
 	STRING		id;
 					/* identifier */
 {
-	*st = (STBUCKET *)malloc_da(sizeof(STBUCKET));
+	*st = malloc_da(sizeof(STBUCKET));
 	(*st)->id = strdup_da(id);
 	(*st)->token = ID;
 	(*st)->curr_binding = NULL;
@@ -396,7 +396,7 @@ allocate_local_env_entry()
 	LOCALENVENTRY	*le;
 					/* pointer to the entry to */
 					/* be allocated */
-	le = (LOCALENVENTRY *)malloc_da(sizeof(LOCALENVENTRY));
+	le = malloc_da(sizeof(LOCALENVENTRY));
 	le->nesting_depth = curr_nesting_depth;
 	le->last_local_binding = NULL;
 	le->prev_local_env = curr_local_env;
@@ -422,7 +422,7 @@ allocate_binding_entry(st,le,rootform,type)
 {
 	BINDINGENTRY	*b;
 
-	b = (BINDINGENTRY *)malloc_da(sizeof(BINDINGENTRY));
+	b = malloc_da(sizeof(BINDINGENTRY));
 	b->st_bucket = st;
 	b->root = rootform;
 	b->prev_id_binding = st->curr_binding;
@@ -449,7 +449,7 @@ allocate_local_binding_entry(st,le,rootform,port)
 {
 	BINDINGENTRY	*b;
 
-	b = (BINDINGENTRY *)malloc_da(sizeof(BINDINGENTRY));
+	b = malloc_da(sizeof(BINDINGENTRY));
 	b->st_bucket = st;
 	b->root = rootform;
         b->port = port;

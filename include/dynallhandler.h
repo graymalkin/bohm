@@ -13,7 +13,7 @@
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-char *malloc_da(unsigned int);
+void *malloc_da(unsigned int);
 char *strdup_da(char *);
 
 #endif

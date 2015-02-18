@@ -117,10 +117,10 @@ present(form)
       p=p->next;
   if (risp) {
     if (head==NULL) {
-      head=tail=(ELEM *)malloc_da(sizeof(ELEM));
+      head=tail=malloc_da(sizeof(ELEM));
     }
     else {
-      tail->next=(ELEM *)malloc_da(sizeof(ELEM));
+      tail->next=malloc_da(sizeof(ELEM));
       tail=tail->next;
     }
     tail->node=form;

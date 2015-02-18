@@ -13,7 +13,6 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -40,35 +39,26 @@
 
  /* The following function implements a control interface for the */
  /* library function malloc(). */
-STRING
-malloc_da(size)
-	unsigned	size;
-					/* size of the object to be */
-					/* allocated */
+void *
+malloc_da(size_t size)
 {
-	STRING		p;
+	void *p;
 
-	p = (STRING)malloc(size);
-	if (p != NULL)
-		return(p);
-	else
+	if(!(p = malloc(size)))
 		signal_crash(NOTENOUGHMEMORY);
+	return p;
 }
 
  /* The following function implements a control interface for the */
  /* library function strdup(). */
-STRING
-strdup_da(s)
-	STRING		s;
-					/* string to be allocated */
+char *
+strdup_da(char *s)
 {
-	STRING		p;
+	char *p;
 
-	p = strdup(s);
-	if (p != NULL)
-		return(p);
-	else
+	if(!(p = strdup(s)))
 		signal_crash(NOTENOUGHMEMORY);
+	return p;
 }
 
 /****************************************************************/

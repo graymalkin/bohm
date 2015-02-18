@@ -66,8 +66,8 @@ static unsigned int start_nodes;
 /* linking them together.                               */
 init_destroy()
 {
-  headfull = (FORM *) malloc_da(sizeof(FORM));
-  headfree = (FORM *) malloc_da(sizeof(FORM));
+  headfull = malloc_da(sizeof(FORM));
+  headfree = malloc_da(sizeof(FORM));
   headfull->next=headfree;
   headfull->prev=NULL;
   headfree->next=NULL;

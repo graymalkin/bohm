@@ -74,7 +74,7 @@ clock_t sys_garb_time;
 void
 init_garbage()
 {
-	del_head=(FORM *)malloc_da(sizeof(FORM));
+	del_head=malloc_da(sizeof(FORM));
 	del_head->nform[1]=NULL;
 }
 

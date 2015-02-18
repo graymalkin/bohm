@@ -235,7 +235,7 @@ FORM	*src,*dest;
   COPY_FORM	*dep;
   int		dep1;
 
-  dep=(COPY_FORM *)malloc_da(sizeof(COPY_FORM));
+  dep=malloc_da(sizeof(COPY_FORM));
   dep1=entry(src);
   dep->src=src;
   dep->dest=dest;

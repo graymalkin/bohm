@@ -34,7 +34,7 @@
 #include <malloc.h>
 #include <time.h>
 #include <sys/types.h>
-#include <sys/times.h>
+
 #include "const.h"
 #include "types.h"
 
@@ -42,24 +42,28 @@
 /* 2. Inclusion of declarations that are being imported.                 */
 /*************************************************************************/
 
-#include "dynallhandler.i"
-#include "graphgenerator.i"
-#include "menu.i"
+#include "dynallhandler.h"
+#include "garbage.h"
+#include "graphgenerator.h"
+#include "menu.h"
 
 /*************************************************************************/
 /* 3. Declaration of names strictly local to the module.                 */
 /*************************************************************************/
 
+static void garbage(FORM *);
+
+static struct tms partial_time, final_time;
+
 /*************************************************************************/
 /* 4. Definitions of variables to be exported.                           */
 /*************************************************************************/
 
-long unsigned	er_count;	     /* counter for erasing operations */
-long unsigned   cl_count;	     /* counter for clean() calls.     */
-FORM *del_head=NULL;        	     /* head of erases list */
-clock_t      usr_garb_time;
-clock_t      sys_garb_time;
-struct tms partial_time, final_time;
+unsigned long er_count; /* counter for erasing operations */
+unsigned long cl_count; /* counter for clean() calls. */
+FORM *del_head = NULL; /* head of erases list */
+clock_t usr_garb_time;
+clock_t sys_garb_time;
 
 /*************************************************************************/
 /* 5. Definitions of functions to be exported.                           */
@@ -67,6 +71,7 @@ struct tms partial_time, final_time;
 
  /* The following function initializes the erase-list inserting */
  /* the first node. */
+void
 init_garbage()
 {
 	del_head=(FORM *)malloc_da(sizeof(FORM));
@@ -75,6 +80,7 @@ init_garbage()
 
  /* The following function insert a new erase operator at the 	*/
  /* head of a list to be scanned when the G.C. is activated.  	*/
+void
 ins_del(d)
 FORM *d;
 {
@@ -88,6 +94,7 @@ FORM *d;
  /* the local function "garbage()" which propagates a single    */
  /* node and inserts in the erases list new operators 		*/
  /* originated by duplication rules during travelling.          */
+void
 clean()
 {
 	FORM *q;
@@ -112,6 +119,7 @@ clean()
  /* The following function it only calls the previous function  */
  /* and prints some data when the user digits the directive     */
  /* "#garbage".              					*/
+void
 user()
 {
 	printf("*****************************************************\n");
@@ -126,9 +134,9 @@ user()
 /* 6. Definitions of functions strictly local to the module.             */
 /*************************************************************************/
 
-
  /* The following function performs the propagation of a single	*/
  /* erase node by applicating garbage rules. 			*/
+void
 garbage(erase)
 FORM *erase;
 {
@@ -418,8 +426,3 @@ FORM *erase;
 	  }
 	}
 }
-
-
-
-
-

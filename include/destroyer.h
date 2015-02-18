@@ -1,18 +1,24 @@
 /****************************************************************/
-/*	                  ERRORHANDLER.I			*/
+/*     		         DESTROYER.H				*/
 /****************************************************************/
 
+#ifndef DESTROYER_H
+#define DESTROYER_H
+
+#include "types.h"
 
 /****************************************************************/
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-extern BOOLEAN		error_detected;
-
+extern FORM *headfree;
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern			signal_error(),
-			signal_warning();
+void init_destroy(void);
+void destroy(void);
+void no_destroy(void);
+
+#endif

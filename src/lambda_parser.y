@@ -110,18 +110,18 @@
  /***************************************************************/
 
 %{
-#include		"lambda_lexan.i"
-#include		"graphgenerator.i"
-#include		"sthandler.i"
-#include		"errorhandler.i"
-#include		"scope_analysis.i"
-#include		"reducer.i"
-#include		"inspect.i"
-#include		"loader.i"
-#include		"garbage.i"
-#include		"menu.i"
-#include		"destroyer.i"
-#include		"save.i"
+#include		"lambda_lexan.h"
+#include		"graphgenerator.h"
+#include		"sthandler.h"
+#include		"errorhandler.h"
+#include		"scope_analysis.h"
+#include		"reducer.h"
+#include		"inspect.h"
+#include		"loader.h"
+#include		"garbage.h"
+#include		"menu.h"
+#include		"destroyer.h"
+#include		"save.h"
 
 %}
 
@@ -692,13 +692,9 @@ pattern         :       CONSKW '(' pattern ',' pattern ')'
                 |       ID
                                 {
                                   pattmp=(PATTERN *)malloc(sizeof(PATTERN));
-                                  pattmp->term=
-                                    buildvoidterm(app_nesting_depth);
-                                  create_variable_binding($1,
-                                                          NULL,
-                                                          LOCAL);
-                                  pattmp->var_list=
-                                    makevarlist($1,pattmp->term);
+                                  pattmp->term = buildvoidterm(app_nesting_depth);
+                                  create_variable_binding($1, NULL, LOCAL);
+                                  pattmp->var_list = makevarlist($1,pattmp->term);
                                   $$=pattmp;
                                 }
 

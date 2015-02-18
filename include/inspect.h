@@ -1,9 +1,16 @@
 /****************************************************************/
-/*	                    REDUCER.I     			*/
+/*		            INSPECT.H    			*/
 /****************************************************************/
 
+#ifndef INSPECT_H
+#define INSPECT_H
+
+#include "types.h"
+
 /****************************************************************/
-/* 2. Declarations of functions.				*/
+/* Declarations of functions.    				*/
 /****************************************************************/
 
-extern                  reduce_term();
+void inspect_driver(FORM *);
+
+#endif

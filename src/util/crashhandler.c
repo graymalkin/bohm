@@ -9,33 +9,29 @@
 /*		   that occurred, then exits.			*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"const.h"
-#include		"types.h"
-#include		<stdio.h>
-#include		<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+#include "const.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
-
 
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
-#include		"crashmsgs.h"
-
+#include "crashmsgs.i"
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
@@ -51,14 +47,7 @@ signal_crash(crash_type)
 		crash_msgs[crash_type]);
 	exit(COMPILERCRASH);
 }
-
 	
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
-
-
-
-
-
-

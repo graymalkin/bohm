@@ -95,49 +95,41 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"const.h"
-#include		"types.h"
-#include		"y.tab.h"
-#include		<stdio.h>
-#include		<malloc.h>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "const.h"
+#include "types.h"
+#include "y.tab.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"errorhandler.i"
-#include		"dynallhandler.i"
-#include		"stringhandler.i"
-
+#include "dynallhandler.h"
+#include "errorhandler.h"
+#include "sthandler.h"
+#include "stringhandler.h"
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-STBUCKET		*dictionary[DICTSIZE];
-			       /* pointers to bucket lists */
+static int hash_pjw(char *);
 
-LOCALENVENTRY		*curr_local_env;
-			       /* pointer to the entry for the */
-			       /* current local environment */
+STBUCKET *dictionary[DICTSIZE]; /* pointers to bucket lists */
 
+LOCALENVENTRY *curr_local_env; /* pointer to the entry for the current local environment */
 
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
-#include		"keywords.h"
-#include		"iolibrary.h"
+#include "keywords.i"
+#include "iolibrary.i"
 
-LOCALENVENTRY	*external_env;
-			       /* pointer to the entry for the */
-			       /* external environment */
+static LOCALENVENTRY *external_env; /* pointer to the entry for the external environment */
 
-int		curr_nesting_depth;
-			       /* current nesting depth */
-
-
+static int curr_nesting_depth; /* current nesting depth */
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
@@ -146,6 +138,7 @@ int		curr_nesting_depth;
  /* The following function initializes the symbol table by inserting */
  /* P keywords into the dictionary and the external and global */
  /* environments into the scope stack. */
+void
 init_symbol_table()
 {
 	STBUCKET	*st;
@@ -175,7 +168,7 @@ init_symbol_table()
  /* pointer to the bucket containing information associated with the */
  /* given identifier. The bucket associated with the given identifier */
  /* becomes the first one in its list. */
-
+void
 search_bucket(st, id)
 	STBUCKET	**st;
 					/* pointer to the bucket containing */
@@ -227,6 +220,7 @@ search_bucket(st, id)
 
  /* The following function pushes a new local environment entry onto */
  /* the scope stack. */
+void
 push_local_env()
 {
    curr_nesting_depth++;
@@ -235,6 +229,7 @@ push_local_env()
 
  /* The following function pops a local environment entry off */
  /* the scope stack. */
+void
 pop_local_env()
 {
 	LOCALENVENTRY	*le;
@@ -259,6 +254,7 @@ pop_local_env()
 
  /* The following function pops all local environment entry off */
  /* the scope stack. */
+void
 pop_all_local_env()
 {
   while (curr_nesting_depth>NONESTING)
@@ -267,6 +263,7 @@ pop_all_local_env()
 
 
  /* The following function creates entries for a variable binding */
+void
 create_variable_binding(st,rootform,type)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */
@@ -300,6 +297,7 @@ create_local_variable_binding(st,term)
  /* The following function creates an entry for a binding concerning */
  /* an identifier used but not defined. The entry for the binding is */
  /* inserted into the binding entry list for the external environment. */
+void
 create_binding_for_undef_id(st,rootform)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */
@@ -319,6 +317,7 @@ create_binding_for_undef_id(st,rootform)
 /****************************************************************/
 
  /* The following function allocates a bucket for an identifier. */
+void
 allocate_bucket(st, id)
 	STBUCKET	**st;
 					/* pointer to the bucket to be */
@@ -335,6 +334,7 @@ allocate_bucket(st, id)
 
  /* The following function moves a bucket to the head of the */
  /* list in which it lies. */
+void
 move_bucket(st, dict_index)
 	STBUCKET	*st;
 					/* pointer to the bucket to */
@@ -373,7 +373,7 @@ push_external_env()
 	STBUCKET	*st;
 	int		i;
 
-	push_local_env(NULL);
+	push_local_env();
 	external_env = curr_local_env;
 	for (i = 0; i < LIBRARYPROCNUM; i++)
 	{
@@ -459,5 +459,4 @@ allocate_local_binding_entry(st,le,rootform,port)
 	le->last_local_binding = b;
 	b->entry_type = type;
 }
-
 #endif

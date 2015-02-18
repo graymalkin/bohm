@@ -29,7 +29,7 @@
 /* Declarations of functions strictly local to the module    	*/
 /****************************************************************/
 
-HIDDEN FORM      *inspect();
+static FORM *inspect(int, FORM *);
 
 /****************************************************************/
 /* Definitions of functions to be exported.			*/
@@ -67,7 +67,7 @@ inspect_driver(f)
 /* Definitions of functions strictly local to the module        */
 /****************************************************************/
 
-HIDDEN FORM
+FORM
 *inspect(p,f)
      int     p;
      FORM    *f;
@@ -308,10 +308,3 @@ HIDDEN FORM
 	}
      }
 }
-
-
-
-
-
-
-

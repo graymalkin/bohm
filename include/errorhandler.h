@@ -1,16 +1,23 @@
 /****************************************************************/
-/*     		         DYNALLHANDLER.I			*/
+/*	                  ERRORHANDLER.H			*/
 /****************************************************************/
 
+#ifndef ERRORHANDLER_H
+#define ERRORHANDLER_H
+
+#include "types.h"
 
 /****************************************************************/
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
+extern BOOLEAN error_detected;
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern STRING		malloc_da(),
-			strdup_da();
+void signal_error(int);
+void signal_warning(int);
+
+#endif

@@ -9,7 +9,6 @@
 /*               as input parameter.                            */
 /****************************************************************/
 
-
 /****************************************************************/
 /* Inclusion of header files.	  			        */
 /****************************************************************/
@@ -22,13 +21,15 @@
 /****************************************************************/
 /* Declaration of variables strictly local to the module.	*/
 /****************************************************************/
-HIDDEN left_to_print;         /* maximum number of characters yet to print */
+
+static int left_to_print; /* maximum number of characters yet to print */
 
 /****************************************************************/
 /* Declaration of functions strictly local to the module.	*/
 /****************************************************************/
-HIDDEN void rdbk_1(), rdbk_list();
 
+static void rdbk_1(FORM *, int);
+static void rdbk_list(FORM *, int);
 
 /****************************************************************/
 /* Definitions of functions to be exported.			*/
@@ -46,7 +47,7 @@ void rdbk(form)
   printf("\n");
 }
 
-HIDDEN void rdbk_1(form,port)
+void rdbk_1(form,port)
      FORM *form;
      int port;
 {
@@ -104,7 +105,7 @@ HIDDEN void rdbk_1(form,port)
     left_to_print-=printf("...");
 }
 
-HIDDEN void rdbk_list(form,port)
+void rdbk_list(form,port)
 FORM *form;
 int port;
 {
@@ -129,4 +130,3 @@ int port;
     rdbk_list(form->nform[port],2);
   }
 }
-

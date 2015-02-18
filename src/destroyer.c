@@ -32,12 +32,13 @@
 /******************************************************************/
 
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
+
 #include "const.h"
+#include "dynallhandler.h"
+#include "garbage.h"
+#include "graphgenerator.h"
 #include "types.h"
-#include "dynallhandler.i"
-#include "graphgenerator.i"
-#include "garbage.i"
 
 /****************************************************************/
 /* 2. Definitions of variables to be exported.			*/
@@ -49,8 +50,8 @@ FORM *headfree;
 /* 3. Declaration of names strictly local to the module.	*/
 /****************************************************************/
 
-FORM 		*headfull;
-unsigned        start_nodes;
+static FORM *headfull;
+static unsigned int start_nodes;
 
 /****************************************************************/
 /* 4. Declaration of functions strictly local to the module.	*/
@@ -95,4 +96,3 @@ no_destroy()
 {
   headfull=headfree->prev;
 }
-

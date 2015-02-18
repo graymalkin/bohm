@@ -49,11 +49,11 @@
  /***************************************************************/
 
 %{
-#include		"sthandler.i"
-#include		"errorhandler.i"
-#include		"dynallhandler.i"
-#include		"stringhandler.i"
-#include		"lambda_parser.i"
+#include		"sthandler.h"
+#include		"errorhandler.h"
+#include		"dynallhandler.h"
+#include		"stringhandler.h"
+#include		"lambda_parser.h"
 %}
 
  /***************************************************************/

@@ -14,11 +14,10 @@
 
 #include <stdio.h>
 #include "const.h"
+#include "lambda_parser.h"
 #include "types.h"
-#include "lambda_parser.i"
 
-
-extern FILE             *yyin;
+extern FILE *yyin;
 
 /****************************************************************/
 /* Definitions of functions to be exported.			*/
@@ -26,6 +25,7 @@ extern FILE             *yyin;
 
 /* The following function changes the parser standard 	*/
 /* input and call the parser function.			*/
+void
 compile(file)
      STRING  file;
 {
@@ -52,8 +52,3 @@ compile(file)
 	 }
      yyrestart(stdin);
 }
-
-
-
-
-

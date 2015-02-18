@@ -1,12 +1,16 @@
  /***************************************************************/
- /*		          SCOPE_ANALYSIS.I			*/
+ /*		          SCOPE_ANALYSIS.H			*/
  /***************************************************************/
 
+#ifndef SCOPE_ANALYSIS_H
+#define SCOPE_ANALYSIS_H
+
+#include "types.h"
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern  BOOLEAN     	defined();
+BOOLEAN defined(STBUCKET *);
 
-
+#endif

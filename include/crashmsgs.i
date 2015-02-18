@@ -1,10 +1,9 @@
 /****************************************************************/
-/*		           CRASHMSGS.H			        */
+/*		           CRASHMSGS.I			        */
 /****************************************************************/
 
  /* crash messages */
-HIDDEN STRING		crash_msgs[] =
-				{
-					"not enough memory",
-					"unable to open this file"
-				};
+static char *crash_msgs[] = {
+	"not enough memory",
+	"unable to open this file"
+};

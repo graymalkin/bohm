@@ -30,16 +30,16 @@
 /*  - end_copy(): Eliminates hash table.			*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
 #include <stdio.h>
-#include <malloc.h>
-#include "types.h"
+#include <stdlib.h>
+
 #include "const.h"
-#include "dynallhandler.i"
+#include "dynallhandler.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -49,13 +49,14 @@
 /* 3. Declaration of names strictly local to the module.	*/
 /****************************************************************/
 
-COPY_FORM 	*copy_relation[DIM_REL];
-void            put_relation(),
-		start_copy(),
-		end_copy();
-FORM		*is_in_relation(),
-		*copy_aux();
-int		entry();
+static void put_relation(FORM *, FORM *);
+static void start_copy(void);
+static void end_copy(void);
+static FORM *is_in_relation(FORM *);
+static FORM *copy_aux(FORM *, int, int);
+static int entry(FORM *);
+
+static COPY_FORM *copy_relation[DIM_REL];
 
 /****************************************************************/
 /* 4. Definitions of functions to be exported.			*/
@@ -81,7 +82,6 @@ FORM
 /****************************************************************/
 /* 5. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
-
 
 /* The following function duplicates the input graph and 	*/
 /* returns it as output.					*/

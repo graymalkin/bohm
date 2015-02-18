@@ -9,34 +9,30 @@
 /*		  to allocate, it signals this fact.		*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"const.h"
-#include		"types.h"
-#include		<stdio.h>
-#include		<string.h>
-#include		<malloc.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
+#include "const.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"crashhandler.i"
-
+#include "crashhandler.h"
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
-
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/

@@ -1,19 +1,26 @@
 /****************************************************************/
-/*     		         DYNALLHANDLER.I			*/
+/*		     	  LAMBDA_PARSER.H 			*/
 /****************************************************************/
+
+#ifndef LAMBDA_PARSER_H
+#define LAMBDA_PARSER_H
+
+#include "types.h"
 
 /****************************************************************/
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-FORM *headfree;
-
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern 	destroy();
-extern 	init_destroy();
-extern 	no_destroy();
+extern int yyparse(void);
 
+extern int error_detected;
+extern int quit;
+extern int loading_mode;
 
+extern FORM *lastinputterm;
+
+#endif

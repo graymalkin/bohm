@@ -32,7 +32,6 @@
 /*                along the main spine of the term.             */
 /****************************************************************/
 
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
@@ -40,41 +39,38 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
 #include <sys/times.h>
+#include <sys/types.h>
 #include <time.h>
-#include "types.h"
+
 #include "const.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include "graphgenerator.i"
-#include "m_stack.i"
-#include "readback.i"
-#include "menu.i"
-#include "garbage.i"
-#include "destroyer.i"
-extern clock_t usr_garb_time;
-extern clock_t sys_garb_time;
-
+#include "destroyer.h"
+#include "garbage.h"
+#include "graphgenerator.h"
+#include "m_stack.h"
+#include "menu.h"
+#include "readback.h"
 
 /****************************************************************/
 /* 3. Declaration of names strictly local to the module.	*/
 /****************************************************************/
 
+static void reduce_redex(FORM *, FORM *);
+static void reduce_form(FORM *);
+static FORM *lo_redex(FORM *);
 
-HIDDEN int     unsafe;
-HIDDEN int     optim;
-HIDDEN int     fan_int;
-HIDDEN int     redexes;
-HIDDEN int     eq=0;
-HIDDEN int     type_error;
-HIDDEN void    reduce_redex();
-HIDDEN void    reduce_form();
-HIDDEN FORM    *lo_redex();
-
+static int unsafe;
+static int optim;
+static int fan_int;
+static int redexes;
+static int eq = 0;
+static int type_error;
 
 /****************************************************************/
 /* 4. Definitions of functions to be exported.			*/
@@ -171,7 +167,7 @@ reduce_term(root)
 /*  The following function reduces the redex whose 	*/
 /*  interacting forms are passed as a parameter and the */
 /*  second form is not a INT, NIL, True or False;	*/
-HIDDEN void
+void
 reduce_redex(f1,f2)
      FORM      *f1,
 	       *f2;
@@ -756,7 +752,7 @@ reduce_redex(f1,f2)
 /*  The following function reduces the redex whose 	*/
 /*  interacting forms are passed as a parameter and the */
 /*  second form is a INT, NIL, True or False; */
-HIDDEN void
+void
 reduce_form(f1)
 FORM	*f1;
 {
@@ -1299,11 +1295,11 @@ FORM	*f1;
 		case INT:
 		   int_connect(f1->nform[1],
 			       f1->nport[1],
-			       f1->nform[0],
+			       (intptr_t)f1->nform[0],
 			       f1->nport[0]);
 		   int_connect(f1->nform[2],
 			       f1->nport[2],
-			       f1->nform[0],
+			       (intptr_t)f1->nform[0],
 			       f1->nport[0]);
 		   myfree(f1);
 		   break;
@@ -1327,7 +1323,7 @@ FORM	*f1;
 		case INT:
 		   int_connect(f1->nform[1],
 			       f1->nport[1],
-			       f1->nform[0],
+			       (intptr_t)f1->nform[0],
 			       f1->nport[0]);
 		   myfree(f1);
 		   break;
@@ -1341,7 +1337,7 @@ FORM	*f1;
 /*  The following function looks for the leftmost outemost  	*/
 /*  redex, saving on the m_stack pointers to the form along	*/
 /*  the main spine of the term.             			*/
-HIDDEN FORM
+FORM
 *lo_redex(f)
      FORM    *f;
 {

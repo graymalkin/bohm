@@ -70,9 +70,6 @@
 /*                             returned as result; the other    */
 /*                             branch is the new root of the    */
 /*                             globally declared variable       */
-/*  - buildfreevarterm(): it build the graph representation for */
-/*                        a free variable (this is just a       */
-/*                        CROISSANT of index 1).                */
 /*  - makebox(): it builds a box around a term.                 */
 /*  - addbrackets(): it adds a sequence of brackets of          */
 /*                   specified index along a sequence of        */
@@ -83,23 +80,21 @@
 /*  - remv(): it removes a variable from a list.                */
 /****************************************************************/
 
-
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"const.h"
-#include		"types.h"
-#include                <inttypes.h>
-#include                <stdio.h>
-#include                <stdlib.h>
-#include                <malloc.h>
-#include		"menu.i"
-#include		"copy.i"
-#include                "destroyer.i"
-#include                "dynallhandler.i"
-#include                "graphgenerator.i"
+#include <inttypes.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "const.h"
+#include "copy.h"
+#include "destroyer.h"
+#include "dynallhandler.h"
+#include "graphgenerator.h"
+#include "menu.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -109,32 +104,37 @@
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-int rec_er=FALSE;
-unsigned num_nodes,max_nodes;
+unsigned int num_nodes, max_nodes;
 BOOLEAN is_global_var;
-FORM *headfree=NULL; /* pointer to the head of the free-form list */
+FORM *headfree = NULL; /* pointer to the head of the free-form list */
 
-unsigned length_list = 0;
+static unsigned int length_list = 0;
+
 /****************************************************************/
 /* 4. Declaration of functions strictly local to the module.	*/
 /****************************************************************/
 
-HIDDEN TERM             *buildglobaldefvarterm(),
-			*buildfreevarterm(),
-			*makebox();
-HIDDEN VARENTRY         *addbrackets(),
-			*share(),
-			*lookfor(),
-			*remv(),
-                        *remvp();
-HIDDEN                  closeglobalvars(),
-			intelligent_connect(),
-			inspect_connect();
+static void allocate_var(VARENTRY **, STBUCKET *, FORM *, VARENTRY *);
+static void allocate_term(TERM **, FORM *, int, VARENTRY *);
+
+static TERM *buildglobaldefvarterm(int, STBUCKET *);
+static TERM *makebox(int, TERM *);
+
+static VARENTRY *addbrackets(int, VARENTRY *);
+static VARENTRY *share(int, VARENTRY *, VARENTRY *);
+static VARENTRY *lookfor(STBUCKET *, VARENTRY *);
+static VARENTRY *remv(STBUCKET *, VARENTRY *);
+static VARENTRY *remvp(VARLIST *, VARENTRY *);
+
+static void closeglobalvars(VARENTRY *);
+static void intelligent_connect(FORM *, int, FORM *);
+static void inspect_connect(FORM *, int, FORM *, int);
+
+static BOOLEAN membervarlist(BINDINGID *, VARLIST *);
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
-
 
  /* The following function creates the graph representation of */
  /* a variable */
@@ -180,13 +180,12 @@ TERM
 
  /* The following function creates the graph representation of */
  /* a numerical constant */
-TERM
-*buildintterm(level, value)
-	int             level, value;
+TERM *
+buildintterm(int level, intptr_t value)
 {
 	TERM *t;     /* pointer to the term to be created */
 
-	allocate_term(&t,value,INT,NULL);
+	allocate_term(&t,(FORM *)value,INT,NULL);
 	return(t);
 }
 
@@ -238,7 +237,7 @@ TERM
 {
 	TERM 	*t;         /* pointer to the new term to be created */
         VARLIST *vp;
-	FORM    *newf1,newf2;     /* pointers to the new forms to be created */
+	FORM    *newf1, *newf2;     /* pointers to the new forms to be created */
 	VARENTRY *boundvar; /* pointer to the entry for the bound variable */
 	FORM    *varform;   /* pointer to the bound variable form */
         BOOLEAN boundp;
@@ -852,6 +851,7 @@ FORM
 
  /* the following function allocate a new graphical form */
  /* and initialize the name and index fields */
+void
 allocate_form(form, name, index)
 	FORM       **form;
 		       /* reference to the pointer of the form */
@@ -892,6 +892,7 @@ allocate_form(form, name, index)
 
 /* the following function adds a graphical form to deallocate */
 /* in a list of free forms (i.e a free-list of forms)         */
+void
 myfree(form)
 	FORM	*form;
 		    /* pointer to the form to deallocate      */
@@ -909,6 +910,7 @@ myfree(form)
 
  /* the following function connects together the port portf1 of */
  /* form1 to the port portf2 of form2 */
+void
 connect(form1,portf1,form2,portf2)
        FORM       *form1;
        int        portf1;
@@ -924,6 +926,7 @@ connect(form1,portf1,form2,portf2)
  /* the following function connects the port portf1 of form1 to	*/
  /* the port portf2 of form2 and vice versa if the form2 is not */
  /* a NIL, INT, True or False form.				*/
+void
 connect1(form1,portf1,form2,portf2)
        FORM       *form1;
        int        portf1;
@@ -940,20 +943,17 @@ connect1(form1,portf1,form2,portf2)
 
  /* the following function connects only the port portf1 of 	*/
  /* form1 to the port portf2 of form2, because form2 is a INT	*/
-int_connect(form1,portf1,form2,portf2)
-       FORM       *form1;
-       int        portf1;
-       FORM       *form2;
-       int        portf2;
+void
+int_connect(FORM *form1, int portf1, intptr_t form2, int portf2)
 {
        form1->nport[portf1] = portf2;
-       form1->nform[portf1] = form2;
+       form1->nform[portf1] = (FORM *)form2;
 }
-
 
  /* the following function connects only the port portf1 of 	*/
  /* form1 to the port portf2 of form2, becouse form2 is a INT,	*/
  /* NIL, True or False.						*/
+void
 bool_connect(form1,portf1,portf2)
        FORM       *form1;
        int        portf1;
@@ -967,8 +967,8 @@ bool_connect(form1,portf1,portf2)
 /* 6. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
 
-
  /* the following function allocate a new variable entry */
+void
 allocate_var(newvar,id,form,nextvar)
 	VARENTRY   **newvar;
 		       /* reference to the pointer of the */
@@ -988,6 +988,7 @@ allocate_var(newvar,id,form,nextvar)
 
 
  /* the following function allocate a new term entry */
+void
 allocate_term(term,rootform,rootport,freevars)
 	TERM       **term;
 		       /* reference to the pointer of the */
@@ -1011,7 +1012,7 @@ allocate_term(term,rootform,rootport,freevars)
  /* term). One branch of this fan is returned as result; the    */
  /* other branch is the new root of the globally declared 	*/
  /* variable       */
-HIDDEN TERM
+TERM
 *buildglobaldefvarterm(level,id)
 	int             level;
 	STBUCKET	*id;
@@ -1034,7 +1035,7 @@ HIDDEN TERM
 
 
  /* the following function build a box around a term  */
-HIDDEN TERM
+TERM
 *makebox(level,arg)
 	int        level;
 	TERM       *arg;
@@ -1045,7 +1046,7 @@ HIDDEN TERM
 
  /* the following function add a sequence of square brackets of */
  /* given index at the free variables in listvar */
-HIDDEN VARENTRY
+VARENTRY
 *addbrackets(index, listvar)
        int         index;
        VARENTRY    *listvar;
@@ -1094,7 +1095,7 @@ HIDDEN VARENTRY
 
  /* The following function shares the free variables of	*/
  /* two terms, by adding suitable FANS.  		*/
-HIDDEN VARENTRY
+VARENTRY
 *share(index,l1,l2)
        int            index;
        VARENTRY       *l1,
@@ -1138,7 +1139,7 @@ HIDDEN VARENTRY
 
 
  /* The following function searches for a variable inside a list. */
-HIDDEN VARENTRY
+VARENTRY
 *lookfor(id,listvar)
       STBUCKET       *id;
 		/* pointer to the identifier to be found  */
@@ -1155,7 +1156,7 @@ HIDDEN VARENTRY
 
  /* the following function remove an identifier form a list */
  /* of variables */
-HIDDEN  VARENTRY
+VARENTRY
 *remv(id,listvar)
       STBUCKET       *id;
 		/* pointer to the identifier to be removed  */
@@ -1179,7 +1180,7 @@ HIDDEN  VARENTRY
 
 /* the following functions does the set substraction of two variable lists */
 /* it runs in quadratic time, but who cares? */
-HIDDEN  VARENTRY
+VARENTRY
 *remvp(vl,listvar)
 VARLIST *vl;              
 VARENTRY       *listvar;  /* pointer to the variable list to be scanned */
@@ -1193,7 +1194,7 @@ VARENTRY       *listvar;  /* pointer to the variable list to be scanned */
 
  /* The following function copys all the graph of the global */
  /* definition.	*/
-HIDDEN
+void
 closeglobalvars(listvar)
       VARENTRY       *listvar;
 		/* pointer to the variable list to be scanned */
@@ -1313,7 +1314,7 @@ closeglobalvars(listvar)
 /* The following function tries to merge two forms into a single one. */
 /* If failing doing so, connects them normally        		      */
 
-HIDDEN
+void
 intelligent_connect(f1,port,f2)
 	FORM	*f1;
 	int	port;
@@ -1501,7 +1502,7 @@ intelligent_connect(f1,port,f2)
 
 /* The following function checks whether it's possible to apply      */
 /* function intelligent_connect. Otherwise applies a normal connect. */
-HIDDEN
+void
 inspect_connect(f1,p1,f2,p2)
        FORM       *f1;
        int        p1;
@@ -1514,7 +1515,7 @@ inspect_connect(f1,p1,f2,p2)
     connect1(f1,p1,f2,p2);
 }
 
-HIDDEN BOOLEAN membervarlist(e,l)
+BOOLEAN membervarlist(e,l)
 BINDINGID *e;
 VARLIST *l;
 {
@@ -1583,6 +1584,7 @@ int level;
   return t;
 }
     
+void
 free_pattern(p)
 PATTERN *p;
 {
@@ -1593,4 +1595,3 @@ PATTERN *p;
   }
   free(p);
 }
-

@@ -1,26 +1,24 @@
 /****************************************************************/
-/*	                     STHANDLER.I			*/
+/*	                 STRINGHANDLER.H			*/
 /****************************************************************/
 
+#ifndef STRINGHANDLER_H
+#define STRINGHANDLER_H
+
+#include "types.h"
 
 /****************************************************************/
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-extern	STBUCKET		*dictionary[];
-
-extern	LOCALENVENTRY		*curr_local_env;
-
-
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern	void		init_symbol_table(),
-			search_bucket(),
-			push_local_env(),
-			pop_local_env(),
-			pop_all_local_env(),
-			create_variable_binding(),
-                        create_local_variable_binding(),
-			create_binding_for_undef_id();
+void to_lower_s(char *);
+int to_nat_s(char *);
+int length_s(char *);
+void concat_s(char *, char *, char *);
+BOOLEAN equal_s(char *, char *);
+
+#endif

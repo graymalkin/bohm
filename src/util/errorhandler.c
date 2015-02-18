@@ -9,37 +9,32 @@
 /* - signal_warning(): it signals warnings.			*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"const.h"
-#include		"types.h"
-#include		<stdio.h>
+#include <stdio.h>
 
+#include "const.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"lambda_lexan.i"
-
+#include "lambda_lexan.h"
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-BOOLEAN			error_detected;
-			      /* flag indicating whether an */
-			      /* error has been detected */
+BOOLEAN error_detected; /* flag indicating whether an error has been detected */
 
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
-#include		"errormsgs.h"
-
+#include "errormsgs.i"
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
@@ -69,9 +64,6 @@ signal_warning(warning_msg_num)
 		warning_msgs[warning_msg_num]);
 }
 
-
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
-
-

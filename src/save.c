@@ -20,18 +20,19 @@
 /*  - index_(): Saves a file index row				*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#define	ENTRY		17
-#define	NUM		13
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "const.h"
+#include "dynallhandler.h"
 #include "types.h"
-#include "dynallhandler.i"
+
+#define	ENTRY 17
+#define	NUM   13
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -41,17 +42,17 @@
 /* 3. Declaration of names strictly local to the module.	*/
 /****************************************************************/
 
-FILE	*save_file;
-ELEM	*head,*tail;
-int	max;
-HIDDEN	int		present();
-HIDDEN	void		save_aux();
-HIDDEN	void		stampa();
-HIDDEN	void		put_int();
-HIDDEN	void		put_form();
-HIDDEN	int		num_port();
-HIDDEN	void		index_();
+static int present(FORM *);
+static void stampa(FORM *, int, int);
+static void save_aux(FORM *, int);
+static void put_form(FORM *);
+static void put_int(FORM *, int);
+static int num_port(int);
+static void index_(ELEM *);
 
+static FILE *save_file;
+static ELEM *head, *tail;
+static int max;
 
 /****************************************************************/
 /* 4. Definitions of functions to be exported.			*/
@@ -101,7 +102,7 @@ save(name,root,id)
 
 /* The following function checks whether a form has already 	*/
 /* been copied once.						*/
-HIDDEN int
+int
 present(form)
 	FORM	*form;
 {
@@ -130,7 +131,7 @@ present(form)
 }
 
 /* The following function saves on file a link			*/
-HIDDEN void
+void
 stampa(form,p,card)
       FORM       *form;
       int        p;
@@ -154,7 +155,7 @@ stampa(form,p,card)
 
 
 /* The following function saves any graph part.			*/
-HIDDEN void
+void
 save_aux(root,p)
       FORM       *root;
       int        p;
@@ -172,7 +173,7 @@ save_aux(root,p)
 }
 
 /* The following function prints form name.			*/
-HIDDEN void
+void
 put_form(f)
 	FORM    *f;
 {
@@ -307,9 +308,8 @@ put_form(f)
      }
 }
 
-
 /* The following function prints NIL, INT and BOOL forms names.	*/
-HIDDEN void
+void
 put_int(f,p)
 	FORM    *f;
 	int	p;
@@ -330,9 +330,8 @@ put_int(f,p)
   }
 }
 
-
 /* The following function returns a form's ports number.	*/
-HIDDEN 	int
+int
 num_port(name)
 	int	name;
 {
@@ -392,7 +391,7 @@ num_port(name)
 }
 
 /* The following function saves a file index row		*/
-HIDDEN void
+void
 index_(elem)
 	ELEM    *elem;
 {
@@ -431,5 +430,3 @@ index_(elem)
      }
   fprintf(save_file,"\n");
 }
-
-

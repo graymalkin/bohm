@@ -14,12 +14,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "const.h"
+#include "destroyer.h"
+#include "garbage.h"
+#include "lambda_lexan.h"
+#include "lambda_parser.h"
+#include "menu.h"
 #include "types.h"
-#include "lambda_lexan.i"
-#include "lambda_parser.i"
-#include "menu.i"
-#include "destroyer.i"
-#include "garbage.i"
 
 /****************************************************************/
 /* Main program.               			                */
@@ -92,5 +92,3 @@ char *argv[];
   printf("good bye\n");
   return 0;
 }
-
-

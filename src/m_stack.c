@@ -12,7 +12,7 @@
 #include		<stdio.h>
 #include		"const.h"
 #include		"types.h"
-#include		"graphgenerator.i"
+#include		"graphgenerator.h"
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
@@ -21,13 +21,14 @@
 FORM       *stack[STACK_SIZE];
 int        next;
 
-FORM *pop()
+FORM *
+pop(void)
 { 
    return(stack[--next]);
 }
 
-void push(f)
-     FORM    *f;
+void
+push(FORM *f)
 {
      stack[next++] = f;
      if(next>STACK_SIZE){
@@ -35,4 +36,3 @@ void push(f)
 	getchar();getchar();
      }
 }
-

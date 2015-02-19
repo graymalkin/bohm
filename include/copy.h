@@ -1,22 +1,20 @@
 /****************************************************************/
-/*		              	MENU.I                          */
+/*	                	COPY.H	 			*/
 /****************************************************************/
 
+#ifndef COPY_H
+#define COPY_H
+
+#include "types.h"
 
 /****************************************************************/
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-extern 	int 		option;
-extern 	unsigned 	limit;
-extern 	BOOLEAN  	seetime;
-extern 	BOOLEAN  	seenode;
-extern 	BOOLEAN  	seegarb;
-
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern 	void	menu();
-extern 	void	info();
+FORM *copy(FORM *, int, int);
 
+#endif

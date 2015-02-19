@@ -9,37 +9,33 @@
 /* - signal_warning(): it signals warnings.			*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"const.h"
-#include		"types.h"
-#include		<stdio.h>
+#include <stdio.h>
 
+#include "const.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"lambda_lexan.i"
-
+#include "errorhandler.h"
+#include "lambda_lexan.h"
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-BOOLEAN			error_detected;
-			      /* flag indicating whether an */
-			      /* error has been detected */
+bool error_detected; /* flag indicating whether an error has been detected */
 
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
-#include		"errormsgs.h"
-
+#include "errormsgs.i"
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
@@ -47,11 +43,10 @@ BOOLEAN			error_detected;
 
  /* The following function signals lexical, syntax and semantic */
  /* errors. */
-signal_error(error_msg_num)
-	int		error_msg_num;
-					/* error message number */
+void
+signal_error(int error_msg_num)
 {
-	error_detected = TRUE;
+	error_detected = true;
 	fprintf(stderr,
 		"line %-5d\t--->\t%s\n",
 		lines,
@@ -59,9 +54,8 @@ signal_error(error_msg_num)
 }
 
  /* The following function signals warnings. */
-signal_warning(warning_msg_num)
-	int		warning_msg_num;
-					/* warning message number */
+void
+signal_warning(int warning_msg_num)
 {
 	fprintf(stderr,
 		"line %-5d\t--->\t%s\n",
@@ -69,9 +63,6 @@ signal_warning(warning_msg_num)
 		warning_msgs[warning_msg_num]);
 }
 
-
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
-
-

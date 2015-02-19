@@ -9,7 +9,6 @@
 /*               as input parameter.                            */
 /****************************************************************/
 
-
 /****************************************************************/
 /* Inclusion of header files.	  			        */
 /****************************************************************/
@@ -22,13 +21,15 @@
 /****************************************************************/
 /* Declaration of variables strictly local to the module.	*/
 /****************************************************************/
-HIDDEN left_to_print;         /* maximum number of characters yet to print */
+
+static int left_to_print; /* maximum number of characters yet to print */
 
 /****************************************************************/
 /* Declaration of functions strictly local to the module.	*/
 /****************************************************************/
-HIDDEN void rdbk_1(), rdbk_list();
 
+static void rdbk_1(FORM *, int);
+static void rdbk_list(FORM *, int);
 
 /****************************************************************/
 /* Definitions of functions to be exported.			*/
@@ -37,8 +38,8 @@ HIDDEN void rdbk_1(), rdbk_list();
  /* the following function prints on the standard output the */
  /* standard syntactical representation of the graphical term */
  /* whose root is passed in input */
-void rdbk(form)
-     FORM *form;
+void
+rdbk(FORM *form)
 {
   left_to_print=PRINT_MAX;
   printf("  ");
@@ -46,15 +47,14 @@ void rdbk(form)
   printf("\n");
 }
 
-HIDDEN void rdbk_1(form,port)
-     FORM *form;
-     int port;
+void
+rdbk_1(FORM *form, int port)
 {
   if(left_to_print>0)
     if(form->nport[port]<0) {
       switch(form->nport[port]){
       case INT:
-	left_to_print-=printf("%d", (intptr_t)form->nform[port]);
+	left_to_print-=printf("%ld", (intptr_t)form->nform[port]);
 	break;
       case T:
 	left_to_print-=printf("TRUE");
@@ -104,9 +104,8 @@ HIDDEN void rdbk_1(form,port)
     left_to_print-=printf("...");
 }
 
-HIDDEN void rdbk_list(form,port)
-FORM *form;
-int port;
+void
+rdbk_list(FORM *form, int port)
 {
   if((int)form->nport[port]==NIL)
     left_to_print-=printf("]");
@@ -129,4 +128,3 @@ int port;
     rdbk_list(form->nform[port],2);
   }
 }
-

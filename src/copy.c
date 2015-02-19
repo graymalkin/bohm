@@ -30,16 +30,18 @@
 /*  - end_copy(): Eliminates hash table.			*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
 #include <stdio.h>
-#include <malloc.h>
-#include "types.h"
+#include <stdlib.h>
+
 #include "const.h"
-#include "dynallhandler.i"
+#include "copy.h"
+#include "dynallhandler.h"
+#include "graphgenerator.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -49,13 +51,14 @@
 /* 3. Declaration of names strictly local to the module.	*/
 /****************************************************************/
 
-COPY_FORM 	*copy_relation[DIM_REL];
-void            put_relation(),
-		start_copy(),
-		end_copy();
-FORM		*is_in_relation(),
-		*copy_aux();
-int		entry();
+static void put_relation(FORM *, FORM *);
+static void start_copy(void);
+static void end_copy(void);
+static FORM *is_in_relation(FORM *);
+static FORM *copy_aux(FORM *, int, int);
+static int entry(FORM *);
+
+static COPY_FORM *copy_relation[DIM_REL];
 
 /****************************************************************/
 /* 4. Definitions of functions to be exported.			*/
@@ -63,10 +66,8 @@ int		entry();
 
 /* The following function initialises the hash table, calls 	*/
 /* function copy_aux and eliminates the table.			*/
-FORM
-*copy(root,p,offset)
-      FORM       *root;
-      int        p,offset;
+FORM *
+copy(FORM *root, int p, int offset)
 {
   FORM	*risul;
   start_copy();
@@ -82,19 +83,16 @@ FORM
 /* 5. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
 
-
 /* The following function duplicates the input graph and 	*/
 /* returns it as output.					*/
-FORM
-*copy_aux(root,p,offset)
-      FORM       *root;
-      int        p,offset;
+FORM *
+copy_aux(FORM *root, int p, int offset)
 {
       FORM       *temp,
 		 *newf1,
 		 *newf2,
 		 *newf3;
-      int        q,r;
+      int        q;
 
       temp = root;
       switch (temp->name)
@@ -107,7 +105,7 @@ FORM
 		    connect1(newf1,0,newf2,temp->nport[0]);
 		  }
 		  else
-		    int_connect(newf1,0,temp->nform[0],temp->nport[0]);
+		    int_connect(newf1,0,(intptr_t)temp->nform[0],temp->nport[0]);
 		  return(newf1);
 	      break;
 
@@ -136,7 +134,7 @@ FORM
 		connect(newf1,q,newf2,temp->nport[q]);
 	      }
 	      else
-		int_connect(newf1,q,temp->nform[q],temp->nport[q]);
+		int_connect(newf1,q,(intptr_t)temp->nform[q],temp->nport[q]);
 	      return(newf1);
 	      break;
 
@@ -169,7 +167,7 @@ FORM
 		      connect1(newf1,0,newf2,temp->nport[0]);
 		  }
 		  else
-		      int_connect(newf1,0,temp->nform[0],temp->nport[0]);
+		      int_connect(newf1,0,(intptr_t)temp->nform[0],temp->nport[0]);
 		  return(newf1);
 		}
 	      else
@@ -198,13 +196,13 @@ FORM
 		connect(newf1,0,newf2,temp->nport[0]);
 	      }
 	      else
-		int_connect(newf1,0,temp->nform[0],temp->nport[0]);
+		int_connect(newf1,0,(intptr_t)temp->nform[0],temp->nport[0]);
 	      if (temp->nport[2]>=0) {
 		newf3 = copy_aux(temp->nform[2],temp->nport[2],offset);
 		connect(newf1,2,newf3,temp->nport[2]);
 	      }
 	      else
-		int_connect(newf1,2,temp->nform[2],temp->nport[2]);
+		int_connect(newf1,2,(intptr_t)temp->nform[2],temp->nport[2]);
 	      return(newf1);
 	      break;
 
@@ -215,27 +213,27 @@ FORM
 		connect(newf1,1,newf2,temp->nport[1]);
 	      }
 	      else
-		int_connect(newf1,1,temp->nform[1],temp->nport[1]);
+		int_connect(newf1,1,(intptr_t)temp->nform[1],temp->nport[1]);
 	      if (temp->nport[2]>=0) {
 		newf3 = copy_aux(temp->nform[2],temp->nport[2],offset);
 		connect(newf1,2,newf3,temp->nport[2]);
 	      }
 	      else
-		int_connect(newf1,2,temp->nform[2],temp->nport[2]);
+		int_connect(newf1,2,(intptr_t)temp->nform[2],temp->nport[2]);
 	      return(newf1);
 	      break;
 	  }
+	  return NULL;
 }
 
 /* The following function inserts a two-form relation in the table. */
 void
-put_relation(src,dest)
-FORM	*src,*dest;
+put_relation(FORM *src, FORM *dest)
 {
   COPY_FORM	*dep;
   int		dep1;
 
-  dep=(COPY_FORM *)malloc_da(sizeof(COPY_FORM));
+  dep=malloc_da(sizeof(COPY_FORM));
   dep1=entry(src);
   dep->src=src;
   dep->dest=dest;
@@ -245,9 +243,8 @@ FORM	*src,*dest;
 
 /* The following function checks whether or not a form has 	*/
 /* already been copied.						*/
-FORM
-*is_in_relation(src)
-FORM	*src;
+FORM *
+is_in_relation(FORM *src)
 {
   COPY_FORM	*dep;
   dep=copy_relation[entry(src)];
@@ -263,8 +260,7 @@ FORM	*src;
 
 /* The following function implements hash function.		*/
 int
-entry(src)
-FORM	*src;
+entry(FORM *src)
 {
   unsigned long	risul;
 
@@ -275,7 +271,7 @@ FORM	*src;
 
 /* The following function initialises hash table.	        */
 void
-start_copy()
+start_copy(void)
 {
   int 	i;
   for(i=0;i<DIM_REL;i++)
@@ -284,7 +280,7 @@ start_copy()
 
 /* The following function eliminates hash table.		*/
 void
-end_copy()
+end_copy(void)
 {
   int 	i;
   COPY_FORM	*dep;

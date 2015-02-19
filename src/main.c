@@ -1,96 +1,93 @@
-/****************************************************************/
-/*		             MAIN.C          			*/
-/****************************************************************/
-/* This module implements the main function.			*/
-/* It analizes the input parameters, initializes some variable,	*/
-/* the symbol table, the destroyer, the garbage and call the 	*/
-/* parser.							*/
-/****************************************************************/
-
-/****************************************************************/
-/* Inclusion of header files.           			*/
-/****************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
-#include "const.h"
-#include "types.h"
-#include "lambda_lexan.i"
-#include "lambda_parser.i"
-#include "menu.i"
-#include "destroyer.i"
-#include "garbage.i"
+#include <string.h>
 
-/****************************************************************/
-/* Main program.               			                */
-/****************************************************************/
+#include "destroyer.h"
+#include "garbage.h"
+#include "lambda_lexan.h"
+#include "lambda_parser.h"
+#include "loader.h"
+#include "options.h"
+#include "sthandler.h"
 
-main(argc,argv)
-int argc;
-char *argv[];
+static void usage(void);
+
+unsigned int limit;
+int option;
+bool seetime;
+bool seenode;
+bool seegarb;
+
+static const char *argv0;
+
+int
+main(int argc, char **argv)
 {
-  option=1;
-  seetime=0;
-  seenode=0;
-  seegarb=0;
-  if(argc>1)
-      if(argc==2)
-	    if (strcmp(argv[1],"-s")==0){
-		/* do_menu4(); */
-		menu();
-	    }
-	    else if (strcmp(argv[1],"-i")==0)
-			info();
-		 else{
-			printf("Execution failed:Illegal option . . .\n");
-			exit(1);
-		}
-      else if(argc==3)
-		if(  ( (strcmp(argv[1],"-s")==0)&&
-		       (strcmp(argv[2],"-i")==0) ) ||
-		     ( (strcmp(argv[2],"-s")==0)&&
-		       (strcmp(argv[1],"-i")==0) ) ){
-			info();
-			/* do_menu4(); */
-			menu();
-		}else{
-			printf("Execution failed:Illegal option \n");
-			printf("or duplicated option . . .\n");
-			exit(1);
-		}
-	    else{
-	       printf("Execution failed:Too many parameters . . .\n");
-	       exit(1);
-	       }
-  printf("\n");
-  printf("***********************************************************\n");
-  printf("***                  Welcome to the                     ***\n");
-  printf("***        Bologna Optimal Higher-order Machine         ***\n");
-  printf("***       Version 1.1 by A. Asperti, J. Chroboczek,     ***\n");
-  printf("***               C. Giovannetti, C. Laneve,            ***\n");
-  printf("***              P. Gruppioni and A. Naletto.           ***\n");
-  printf("***          Dipartimento di Matematica, Bologna        ***\n");
-  printf("***********************************************************\n\n");
+	int i = 0;
+	char *p;
 
-  init_symbol_table();
-  init_destroy();
-  init_garbage();
-  lines = 0;
-  error_detected = 0;
-  quit = 0;
-  loading_mode = 0;
-  lastinputterm = NULL;
-  error_detected = FALSE;
+	argv0 = argv[0];
 
-  while (quit == 0)
-     {
-	printf("opt>");
-	yyparse();
-	error_detected = FALSE;
+	seetime = false;
+	seenode = false;
+	seegarb = false;
+
+	for(i = 1; i < argc; i++) {
+		if(!strcmp(argv[i], "--gc")) {
+			if(++i == argc)
+				usage();
+			else if(!strcmp(argv[i], "always"))
+				option = 1;
+			else if(!strcmp(argv[i], "never"))
+				option = 3;
+			else {
+				option = 2;
+				limit = strtol(argv[i+1], &p, 0);
+				if(*p)
+					usage();
+			}
+		}
+		else if(!strcmp(argv[i], "--seetime"))
+			seetime = true;
+		else if(!strcmp(argv[i], "--seenode"))
+			seenode = true;
+		else if(!strcmp(argv[i], "--seegarb"))
+			seegarb = true;
+		else {
+			if(!strcmp(argv[i], "--"))
+				i++;
+			break;
+		}
+	}
+
+	init_symbol_table();
+	init_destroy();
+	init_garbage();
 	lines = 0;
-     }
-  printf("good bye\n");
-  return 0;
+	error_detected = false;
+	quit = false;
+	loading_mode = false;
+	lastinputterm = NULL;
+	error_detected = false;
+
+	puts("Welcome to bohm-ng " VERSION);
+
+	for(; i < argc; i++)
+		if(!compile(argv[i]))
+			return 1;
+
+	while(!quit) {
+		printf("> ");
+		yyparse();
+		error_detected = false;
+		lines = 0;
+	}
+	return 0;
 }
 
-
+void
+usage(void)
+{
+	fprintf(stderr, "usage: %s [--gc always|never|<limit>] [--seetime] [--seenode] [--seegarb]\n", argv0);
+	exit(2);
+}

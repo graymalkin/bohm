@@ -30,17 +30,19 @@
  /* Comments must be enclosed in "{" and "}".                   */
  /***************************************************************/
 
+%option noinput
+%option nounput
 
  /***************************************************************/
  /* 1. Inclusion of header files.				*/
  /***************************************************************/
 
 %{
-#include                <malloc.h>
-#include                <string.h>
-#include		"const.h"
-#include		"types.h"
-#include		"y.tab.h"
+#include <stdlib.h>
+#include <string.h>
+#include "const.h"
+#include "types.h"
+#include "y.tab.h"
 %}
 
 
@@ -49,11 +51,11 @@
  /***************************************************************/
 
 %{
-#include		"sthandler.i"
-#include		"errorhandler.i"
-#include		"dynallhandler.i"
-#include		"stringhandler.i"
-#include		"lambda_parser.i"
+#include "dynallhandler.h"
+#include "errorhandler.h"
+#include "lambda_parser.h"
+#include "sthandler.h"
+#include "stringhandler.h"
 %}
 
  /***************************************************************/
@@ -61,8 +63,8 @@
  /***************************************************************/
 
 %{
-int			lines;
-int                     astringlen;
+int lines;
+int astringlen;
 %}
 
  /***************************************************************/
@@ -94,18 +96,18 @@ string                  [^\"]*\"
 
 <com>{comment}     {
                         /* comment */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
                         BEGIN 0;
                    }
 
 "{"                {
                         /* comment beginning */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
                         BEGIN com;
                    }
 
 <str>{string}      {
-                        if (loading_mode == 1) ECHO;
+                        /*if (loading_mode == 1) ECHO;*/
                         BEGIN 0;
                         astringlen=strlen(yytext);
                         yylval.astring=malloc(astringlen);
@@ -114,29 +116,29 @@ string                  [^\"]*\"
                         return ASTRING;
                     }
 \"                 {
-                        if (loading_mode == 1) ECHO;
+                        /*if (loading_mode == 1) ECHO;*/
                         BEGIN str;
                    }
 
 {blanks}	   {
 			/* sequence of blanks */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 		   }
 
 \t		   {
 			/* tab */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 		   }
 
 \n		   {
 			/* newline */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
                         lines++;
 		   }
 
 {id}		   {
 			/* identifier */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 			search_bucket(&(yylval.st_bucket),
 				      yytext);
 			return(yylval.st_bucket->token);
@@ -144,7 +146,7 @@ string                  [^\"]*\"
 
 {num}		   {
 			/* integer */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 			yylval.num_const = to_nat_s(yytext);
 			if (yylval.num_const == NUMOUTOFRANGE)
 				signal_error(NUMOVERFLOW);
@@ -153,44 +155,44 @@ string                  [^\"]*\"
 
 {one_char_token}   {
 			/* one-character token */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 			return(yytext[0]);
 		   }
 
 
 ";;"		   {
 			/* end of expression  */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 			return(EXPRDELIM);
 		}
 
 "=="		   {
 			/*  */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 			return(EQUAL);
 		}
 
 "<="		   {
 			/*  */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 			return(LEQUAL);
 		}
 
 ">="		   {
 			/*  */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 			return(MEQUAL);
 		}
 "<>"		   {
 			/*  */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 			return(NOTEQUAL);
 		}
 
 
 {illegal_char}	{
 			/* detection of an illegal character */
-                        if (loading_mode == 1) ECHO; 
+                        /*if (loading_mode == 1) ECHO; */
 			signal_error(ILLEGALCHAR);
 		}
 
@@ -201,7 +203,8 @@ string                  [^\"]*\"
  /* 6. Auxiliary functions.					*/
  /***************************************************************/
 
-yywrap()
+int
+yywrap(void)
 {
 	return(NOMOREINPUT);
 }

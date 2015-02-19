@@ -15,28 +15,28 @@
 /*               (its name, index, and the port we arrived to). */
 /****************************************************************/
 
-
 /****************************************************************/
 /* Inclusion of header files.       				*/
 /****************************************************************/
 
-#include "const.h"
-#include "types.h"
 #include <inttypes.h>
 #include <stdio.h>
+#include "const.h"
+#include "inspect.h"
+#include "types.h"
 
 /****************************************************************/
 /* Declarations of functions strictly local to the module    	*/
 /****************************************************************/
 
-HIDDEN FORM      *inspect();
+static FORM *inspect(int, FORM *);
 
 /****************************************************************/
 /* Definitions of functions to be exported.			*/
 /****************************************************************/
 
-inspect_driver(f)
-     FORM  *f;
+void
+inspect_driver(FORM *f)
 {
      FORM  *travel;
      int   c;
@@ -67,12 +67,10 @@ inspect_driver(f)
 /* Definitions of functions strictly local to the module        */
 /****************************************************************/
 
-HIDDEN FORM
-*inspect(p,f)
-     int     p;
-     FORM    *f;
+FORM *
+inspect(int p, FORM *f)
 {
-	BOOLEAN ok=TRUE;
+	bool ok=true;
 	switch(p)
 	    {
 	    case 0:
@@ -85,7 +83,7 @@ HIDDEN FORM
 		    case T:
 		    case F:
 		    case NIL:*/
-			ok=FALSE;
+			ok=false;
 			break;
 		    default:
 			break;
@@ -119,7 +117,7 @@ HIDDEN FORM
 		    case MOD1:
 		    case UNS_FAN1:
 		    case UNS_FAN2:
-			ok=FALSE;
+			ok=false;
 			break;
 		    default:
 			break;
@@ -130,12 +128,12 @@ HIDDEN FORM
 		    case IFELSE:
 			break;
 		    default:
-			ok=FALSE;
+			ok=false;
 			break;
 		    }
 		break;
 	    default:
-		ok=FALSE;
+		ok=false;
 		break;
 	    }
 
@@ -158,7 +156,7 @@ HIDDEN FORM
 		   printf("form = F\n");
 		   break;
 		case INT:
-		   printf("form = INT value = %d\n",(intptr_t)nextform);
+		   printf("form = INT value = %ld\n",(intptr_t)nextform);
 		   break;
 		case NIL:
 		   printf("form = NIL\n");
@@ -308,10 +306,3 @@ HIDDEN FORM
 	}
      }
 }
-
-
-
-
-
-
-

@@ -34,7 +34,7 @@
 #include <malloc.h>
 #include <time.h>
 #include <sys/types.h>
-#include <sys/times.h>
+
 #include "const.h"
 #include "types.h"
 
@@ -42,24 +42,28 @@
 /* 2. Inclusion of declarations that are being imported.                 */
 /*************************************************************************/
 
-#include "dynallhandler.i"
-#include "graphgenerator.i"
-#include "menu.i"
+#include "dynallhandler.h"
+#include "garbage.h"
+#include "graphgenerator.h"
+#include "options.h"
 
 /*************************************************************************/
 /* 3. Declaration of names strictly local to the module.                 */
 /*************************************************************************/
 
+static void garbage(FORM *);
+
+static struct tms partial_time, final_time;
+
 /*************************************************************************/
 /* 4. Definitions of variables to be exported.                           */
 /*************************************************************************/
 
-long unsigned	er_count;	     /* counter for erasing operations */
-long unsigned   cl_count;	     /* counter for clean() calls.     */
-FORM *del_head=NULL;        	     /* head of erases list */
-clock_t      usr_garb_time;
-clock_t      sys_garb_time;
-struct tms partial_time, final_time;
+unsigned long er_count; /* counter for erasing operations */
+unsigned long cl_count; /* counter for clean() calls. */
+FORM *del_head = NULL; /* head of erases list */
+clock_t usr_garb_time;
+clock_t sys_garb_time;
 
 /*************************************************************************/
 /* 5. Definitions of functions to be exported.                           */
@@ -67,16 +71,17 @@ struct tms partial_time, final_time;
 
  /* The following function initializes the erase-list inserting */
  /* the first node. */
-init_garbage()
+void
+init_garbage(void)
 {
-	del_head=(FORM *)malloc_da(sizeof(FORM));
+	del_head=malloc_da(sizeof(FORM));
 	del_head->nform[1]=NULL;
 }
 
  /* The following function insert a new erase operator at the 	*/
  /* head of a list to be scanned when the G.C. is activated.  	*/
-ins_del(d)
-FORM *d;
+void
+ins_del(FORM *d)
 {
 	d->index=EXISTENT;
 	d->nform[1]=del_head->nform[1];
@@ -88,7 +93,8 @@ FORM *d;
  /* the local function "garbage()" which propagates a single    */
  /* node and inserts in the erases list new operators 		*/
  /* originated by duplication rules during travelling.          */
-clean()
+void
+clean(void)
 {
 	FORM *q;
 	if (seegarb)
@@ -112,7 +118,8 @@ clean()
  /* The following function it only calls the previous function  */
  /* and prints some data when the user digits the directive     */
  /* "#garbage".              					*/
-user()
+void
+user(void)
 {
 	printf("*****************************************************\n");
 	printf("Initial number of nodes %u\n",num_nodes);
@@ -126,13 +133,12 @@ user()
 /* 6. Definitions of functions strictly local to the module.             */
 /*************************************************************************/
 
-
  /* The following function performs the propagation of a single	*/
  /* erase node by applicating garbage rules. 			*/
-garbage(erase)
-FORM *erase;
+void
+garbage(FORM *erase)
 {
-	BOOLEAN end=FALSE;
+	bool end=false;
 	FORM *form,*nextform,*newform;
 	int port,nextport;
 	int p1,p2;
@@ -145,7 +151,7 @@ FORM *erase;
 	  port=nextport;
 	  if(port<0) {
 	    er_count++;
-	    end=TRUE;
+	    end=true;
 	  }
 	  else {
 	    switch(form->name){
@@ -187,7 +193,7 @@ FORM *erase;
 		      form->index-=1;
 		    }
 		  }
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -228,7 +234,7 @@ FORM *erase;
 		      form->index-=1;
 		    }
 		  }
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -269,7 +275,7 @@ FORM *erase;
 		      form->index-=1;
 		    }
 		  }
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -289,7 +295,7 @@ FORM *erase;
 		  }
 		  else
 		    form->name=CAR;
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -319,7 +325,7 @@ FORM *erase;
 		    }
 		    else
 		      form->name=UNS_FAN2;
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -400,14 +406,14 @@ FORM *erase;
 		}
 		else{
 		  form->name=LAMBDAUNB;
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
 	      case ERASE:
 		er_count++;
 		form->index=NOTEXISTENT;
-		end=TRUE;
+		end=true;
 		break;
 
 	      default:
@@ -418,8 +424,3 @@ FORM *erase;
 	  }
 	}
 }
-
-
-
-
-

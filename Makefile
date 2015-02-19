@@ -1,29 +1,24 @@
 # makefile for BOHM
 
-CFLAGS = -Iinclude
-#CFLAGS = -g
-LDLIBS = -ll -ly
-YFLAGS = -d
-
-# No user serviceable parts below this line
+include config.mk
 
 # each time one of the following is modified, everything is recompiled
-SUPPORT = include/crashhandler.i include/dynallhandler.i include/save.i include/copy.i\
-          include/errorhandler.i include/filehandler.i include/garbage.i include/graphgenerator.i \
-          include/inspect.i include/lambda_lexan.i include/lambda_parser.i include/listinghandler.i \
-          include/loader.i include/m_stack.i include/menu.i include/numberhandler.i src/destroyer.c \
-          include/readback.i include/reducer.i include/scope_analysis.i include/sthandler.i \
-          include/stringhandler.i include/const.h include/crashmsgs.h include/errormsgs.h \
-          include/iolibrary.h include/keywords.h include/types.h Makefile
+SUPPORT = include/crashhandler.h include/dynallhandler.h include/save.h include/copy.h\
+          include/errorhandler.h include/garbage.h include/graphgenerator.h \
+          include/inspect.h include/lambda_lexan.h include/lambda_parser.h \
+          include/loader.h include/m_stack.h include/options.h src/destroyer.c \
+          include/readback.h include/reducer.h include/scope_analysis.h include/sthandler.h \
+          include/stringhandler.h include/const.h include/crashmsgs.i include/errormsgs.i \
+          include/iolibrary.i include/keywords.i include/types.h Makefile
 
 # the C files -- not the sources (lex and yacc object too)
 
 CSRC = src/main.c src/y.tab.c src/lex.yy.c src/copy.c\
        src/sthandler.c src/scope_analysis.c src/inspect.c src/graphgenerator.c src/destroyer.c \
-       src/loader.c src/reducer.c src/m_stack.c src/readback.c src/garbage.c src/menu.c src/save.c \
+       src/loader.c src/reducer.c src/m_stack.c src/readback.c src/garbage.c src/save.c \
        src/util/crashhandler.c src/util/errorhandler.c \
-       src/util/numberhandler.c src/util/dynallhandler.c \
-       src/util/filehandler.c src/util/stringhandler.c
+       src/util/dynallhandler.c \
+       src/util/stringhandler.c
 
 # all the object files
 OBJS = $(CSRC:.c=.o)

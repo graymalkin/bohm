@@ -20,18 +20,20 @@
 /*  - index_(): Saves a file index row				*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#define	ENTRY		17
-#define	NUM		13
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "const.h"
+#include "dynallhandler.h"
+#include "save.h"
 #include "types.h"
-#include "dynallhandler.i"
+
+#define	ENTRY 17
+#define	NUM   13
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -41,27 +43,25 @@
 /* 3. Declaration of names strictly local to the module.	*/
 /****************************************************************/
 
-FILE	*save_file;
-ELEM	*head,*tail;
-int	max;
-HIDDEN	int		present();
-HIDDEN	void		save_aux();
-HIDDEN	void		stampa();
-HIDDEN	void		put_int();
-HIDDEN	void		put_form();
-HIDDEN	int		num_port();
-HIDDEN	void		index_();
+static int present(FORM *);
+static void stampa(FORM *, int, int);
+static void save_aux(FORM *, int);
+static void put_form(FORM *);
+static void put_int(FORM *, int);
+static int num_port(int);
+static void index_(ELEM *);
 
+static FILE *save_file;
+static ELEM *head, *tail;
+static int max;
 
 /****************************************************************/
 /* 4. Definitions of functions to be exported.			*/
 /****************************************************************/
 
 /* The following function saves a graph on a file.		*/
-save(name,root,id)
-	char	*name;
-	FORM	*root;
-	char	*id;
+void
+save(char *name, FORM *root, char *id)
 {
   ELEM 	*p,*dep;
 
@@ -101,25 +101,24 @@ save(name,root,id)
 
 /* The following function checks whether a form has already 	*/
 /* been copied once.						*/
-HIDDEN int
-present(form)
-	FORM	*form;
+int
+present(FORM *form)
 {
   ELEM  *p;
-  int risp=TRUE;
+  int risp=true;
 
   p=head;
   while(p!=NULL && risp)
     if (p->node==form)
-      risp=FALSE;
+      risp=false;
     else
       p=p->next;
   if (risp) {
     if (head==NULL) {
-      head=tail=(ELEM *)malloc_da(sizeof(ELEM));
+      head=tail=malloc_da(sizeof(ELEM));
     }
     else {
-      tail->next=(ELEM *)malloc_da(sizeof(ELEM));
+      tail->next=malloc_da(sizeof(ELEM));
       tail=tail->next;
     }
     tail->node=form;
@@ -130,11 +129,8 @@ present(form)
 }
 
 /* The following function saves on file a link			*/
-HIDDEN void
-stampa(form,p,card)
-      FORM       *form;
-      int        p;
-      int	card;
+void
+stampa(FORM *form, int p, int card)
 {
   int 	p1;
 
@@ -154,14 +150,12 @@ stampa(form,p,card)
 
 
 /* The following function saves any graph part.			*/
-HIDDEN void
-save_aux(root,p)
-      FORM       *root;
-      int        p;
+void
+save_aux(FORM *root, int p)
 {
-  int n,p1,i,card;
+  int n,p1,card;
 
-  if(card=present(root)) {
+  if((card=present(root))) {
     n=num_port(root->name);
     for (p1=0;p1<n;p1++)
 	stampa(root,p1,card);
@@ -172,9 +166,8 @@ save_aux(root,p)
 }
 
 /* The following function prints form name.			*/
-HIDDEN void
-put_form(f)
-	FORM    *f;
+void
+put_form(FORM *f)
 {
   switch (f->name)
      {
@@ -307,12 +300,9 @@ put_form(f)
      }
 }
 
-
 /* The following function prints NIL, INT and BOOL forms names.	*/
-HIDDEN void
-put_int(f,p)
-	FORM    *f;
-	int	p;
+void
+put_int(FORM *f, int p)
 {
   switch(p) {
 	case T:
@@ -322,7 +312,7 @@ put_int(f,p)
 	   fprintf(save_file,"False         ");
 	   break;
 	case INT:
-	   fprintf(save_file,"Int: %d ",f);
+	   fprintf(save_file,"Int: %ld ",(intptr_t)f);
 	   break;
 	case NIL:
 	   fprintf(save_file,"Nil          ");
@@ -330,11 +320,9 @@ put_int(f,p)
   }
 }
 
-
 /* The following function returns a form's ports number.	*/
-HIDDEN 	int
-num_port(name)
-	int	name;
+int
+num_port(int name)
 {
   int	risp;
   switch (name)
@@ -392,9 +380,8 @@ num_port(name)
 }
 
 /* The following function saves a file index row		*/
-HIDDEN void
-index_(elem)
-	ELEM    *elem;
+void
+index_(ELEM *elem)
 {
   fprintf(save_file,"%3d ",elem->num);
   put_form(elem->node);
@@ -431,5 +418,3 @@ index_(elem)
      }
   fprintf(save_file,"\n");
 }
-
-

@@ -1,18 +1,24 @@
 /****************************************************************/
-/*	                  ERRORHANDLER.I			*/
+/*		              M_STACK.H                         */
 /****************************************************************/
 
+#ifndef M_STACK_H
+#define M_STACK_H
+
+#include "types.h"
 
 /****************************************************************/
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-extern BOOLEAN		error_detected;
-
+extern int next;
+extern FORM **stack;
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern			signal_error(),
-			signal_warning();
+FORM *pop(void);
+void push(FORM *);
+
+#endif

@@ -19,32 +19,30 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"const.h"
-#include		"types.h"
-
+#include "const.h"
+#include "types.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
+#include "stringhandler.h"
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
-
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
 
  /* The following function turns a given string into a lower case one. */
-to_lower_s(s)
-	STRING		s;
+void
+to_lower_s(char *s)
 					/* string to be turned */
 {
 	static int	diff = 'a' - 'A';
@@ -56,9 +54,8 @@ to_lower_s(s)
 
  /* The following function turns a given string of digits into a natural */
  /* and checks for presence of overflow. */
-to_nat_s(s)
-	STRING		s;
-					/* string to be turned */
+int
+to_nat_s(char *s)
 {
 	long		n;
 
@@ -72,10 +69,8 @@ to_nat_s(s)
 
  /* The following function computes the length of a given string, */
  /* including the null character terminating the string itself. */
-length_s(s)
-	STRING		s;
-					/* string whose length is to */
-					/* be computed */
+int
+length_s(char *s)
 {
 	int 		i;
 
@@ -85,36 +80,26 @@ length_s(s)
 
  /* The following function puts the concatenation of two given strings */
  /* into a given string. */
-concat_s(s1, s2, s3)
-	STRING		s1,
-					/* first string */
-			s2,
-					/* second string */
-			s3;
-					/* resulting string */
+void
+concat_s(char *s1, char *s2, char *s3)
 {
 	int		i,
 			j;
 
-	for (i = j = 0; s3[i++] = s1[j++];);
-	for (i--, j = 0; s3[i++] = s2[j++];);
+	for (i = j = 0; (s3[i++] = s1[j++]););
+	for (i--, j = 0; (s3[i++] = s2[j++]););
 }
 
  /* The following function returns the result of the check for */
  /* equality between two given strings. */
-BOOLEAN
-equal_s(s, t)
-	STRING		s,
-					/* first string */
-			t;
-					/* second string */
+bool
+equal_s(char *s, char *t)
 {
-	BOOLEAN		equal;
+	bool		equal;
 
 	for (; (equal = (*s == *t)) && (*s != EOS); s++, t++);
 	return(equal);
 } 
- 
 
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/

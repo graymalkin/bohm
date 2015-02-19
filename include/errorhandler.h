@@ -1,19 +1,23 @@
 /****************************************************************/
-/*     		         DYNALLHANDLER.I			*/
+/*	                  ERRORHANDLER.H			*/
 /****************************************************************/
+
+#ifndef ERRORHANDLER_H
+#define ERRORHANDLER_H
+
+#include "types.h"
 
 /****************************************************************/
 /* 1. Declarations of variables.				*/
 /****************************************************************/
 
-FORM *headfree;
+extern bool error_detected;
 
 /****************************************************************/
 /* 2. Declarations of functions.				*/
 /****************************************************************/
 
-extern 	destroy();
-extern 	init_destroy();
-extern 	no_destroy();
+void signal_error(int);
+void signal_warning(int);
 
-
+#endif

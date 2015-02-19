@@ -98,10 +98,11 @@
  /***************************************************************/
 
 %{
-#include                <malloc.h>
-#include		<stdio.h>
-#include		"const.h"
-#include		"types.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "const.h"
+#include "types.h"
 %}
 
 
@@ -110,40 +111,30 @@
  /***************************************************************/
 
 %{
-#include		"lambda_lexan.i"
-#include		"graphgenerator.i"
-#include		"sthandler.i"
-#include		"errorhandler.i"
-#include		"scope_analysis.i"
-#include		"reducer.i"
-#include		"inspect.i"
-#include		"loader.i"
-#include		"garbage.i"
-#include		"menu.i"
-#include		"destroyer.i"
-#include		"save.i"
-
+#include "destroyer.h"
+#include "errorhandler.h"
+#include "garbage.h"
+#include "graphgenerator.h"
+#include "inspect.h"
+#include "lambda_lexan.h"
+#include "lambda_parser.h"
+#include "loader.h"
+#include "options.h"
+#include "reducer.h"
+#include "save.h"
+#include "scope_analysis.h"
+#include "sthandler.h"
 %}
-
 
  /***************************************************************/
  /* 3. Definitions of variables to be exported.			*/
  /***************************************************************/
 
 %{
-BOOLEAN			error_detected,
-			       /* flag indicating whether an *
-			       /* error has been detected */
-			       /* during the analysis of the */
-			       /* P source file */
-			quit,
-			       /* flag indicating quit request */
-			loading_mode;
-			       /* flag indicating if parsing is */
-			       /* done after a load directive */
-FORM                    *lastinputterm;
-			       /* pointer to the root of the */
-			       /* term in input */
+bool error_detected; /* flag indicating whether an error has been detected during the analysis of the P source file */
+bool quit; /* flag indicating quit request */
+bool loading_mode; /* flag indicating if parsing is done after a load directive */
+FORM *lastinputterm; /* pointer to the root of the term in input */
 %}
 
  /***************************************************************/
@@ -276,7 +267,7 @@ input           :      directive
 				}
 		|
 				{
-				   quit = TRUE;
+				   quit = true;
 				   YYACCEPT;
 				}
 		;
@@ -289,7 +280,7 @@ directive       :      '#' INSPECTKW arg EXPRDELIM
 				}
 		|      '#' QUITKW EXPRDELIM
 				{
-				   quit = TRUE;
+				   quit = true;
 				   YYACCEPT;
 				}
 		|      '#' LOADKW ASTRING EXPRDELIM
@@ -301,16 +292,6 @@ directive       :      '#' INSPECTKW arg EXPRDELIM
 		|       '#' GARBAGEKW EXPRDELIM
 				{
 				   user();
-				   YYACCEPT;
-				}
-		|       '#' OPTIONKW EXPRDELIM
-				{
-				   menu();
-				   YYACCEPT;
-				}
-		|       '#' INFOKW EXPRDELIM
-				{
-				   info();
 				   YYACCEPT;
 				}
 		|       '#' SAVEKW ASTRING EXPRDELIM
@@ -692,19 +673,15 @@ pattern         :       CONSKW '(' pattern ',' pattern ')'
                 |       ID
                                 {
                                   pattmp=(PATTERN *)malloc(sizeof(PATTERN));
-                                  pattmp->term=
-                                    buildvoidterm(app_nesting_depth);
-                                  create_variable_binding($1,
-                                                          NULL,
-                                                          LOCAL);
-                                  pattmp->var_list=
-                                    makevarlist($1,pattmp->term);
+                                  pattmp->term = buildvoidterm(app_nesting_depth);
+                                  create_variable_binding($1, NULL, LOCAL);
+                                  pattmp->var_list = makevarlist($1,pattmp->term);
                                   $$=pattmp;
                                 }
 
 term    	:	error  EXPRDELIM
                                 {
-                                  error_detected = TRUE;
+                                  error_detected = true;
                                   yyerrok;
                                   YYACCEPT;
 				}
@@ -716,11 +693,9 @@ term    	:	error  EXPRDELIM
  /* 11. Auxiliary functions.					*/
  /***************************************************************/
 
-yyerror()
+void
+yyerror(const char *s)
 {
 	signal_error(SINTAXERROR);
 	yyerrok;
 }
-
-
-

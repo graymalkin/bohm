@@ -32,12 +32,14 @@
 /******************************************************************/
 
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
+
 #include "const.h"
+#include "destroyer.h"
+#include "dynallhandler.h"
+#include "garbage.h"
+#include "graphgenerator.h"
 #include "types.h"
-#include "dynallhandler.i"
-#include "graphgenerator.i"
-#include "garbage.i"
 
 /****************************************************************/
 /* 2. Definitions of variables to be exported.			*/
@@ -49,8 +51,8 @@ FORM *headfree;
 /* 3. Declaration of names strictly local to the module.	*/
 /****************************************************************/
 
-FORM 		*headfull;
-unsigned        start_nodes;
+static FORM *headfull;
+static unsigned int start_nodes;
 
 /****************************************************************/
 /* 4. Declaration of functions strictly local to the module.	*/
@@ -63,10 +65,11 @@ unsigned        start_nodes;
 /* The following function initialises the destroyer by 	*/
 /* allocating two nodes (headfree and headfull) and 	*/
 /* linking them together.                               */
-init_destroy()
+void
+init_destroy(void)
 {
-  headfull = (FORM *) malloc_da(sizeof(FORM));
-  headfree = (FORM *) malloc_da(sizeof(FORM));
+  headfull = malloc_da(sizeof(FORM));
+  headfree = malloc_da(sizeof(FORM));
   headfull->next=headfree;
   headfull->prev=NULL;
   headfree->next=NULL;
@@ -78,7 +81,8 @@ init_destroy()
 /* term, moving back headfree to the node following 	*/
 /* headfull, and doing so makes all the nodes available */
 /* for any furure usage					*/
-destroy()
+void
+destroy(void)
 {
   if(headfree!=headfull->next){
     num_nodes=start_nodes;
@@ -91,8 +95,8 @@ destroy()
 /* The following function makes a graph associated to a	*/
 /* global definition permanent, by moving headfull to 	*/
 /* the node preceding headfree.				*/
-no_destroy()
+void
+no_destroy(void)
 {
   headfull=headfree->prev;
 }
-

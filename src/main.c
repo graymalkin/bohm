@@ -10,7 +10,7 @@
 #include "options.h"
 #include "sthandler.h"
 
-static void usage(void);
+static void usage(const char *);
 
 unsigned int limit;
 int option;
@@ -18,15 +18,11 @@ bool seetime;
 bool seenode;
 bool seegarb;
 
-static const char *argv0;
-
 int
 main(int argc, char **argv)
 {
 	int i = 0;
 	char *p;
-
-	argv0 = argv[0];
 
 	seetime = false;
 	seenode = false;
@@ -35,7 +31,7 @@ main(int argc, char **argv)
 	for(i = 1; i < argc; i++) {
 		if(!strcmp(argv[i], "--gc")) {
 			if(++i == argc)
-				usage();
+				usage(argv[0]);
 			else if(!strcmp(argv[i], "always"))
 				option = 1;
 			else if(!strcmp(argv[i], "never"))
@@ -44,7 +40,7 @@ main(int argc, char **argv)
 				option = 2;
 				limit = strtol(argv[i+1], &p, 0);
 				if(*p)
-					usage();
+					usage(argv[0]);
 			}
 		}
 		else if(!strcmp(argv[i], "--seetime"))
@@ -77,7 +73,7 @@ main(int argc, char **argv)
 			return 1;
 
 	while(!quit) {
-		printf("> ");
+		fputs("> ", stdout);
 		yyparse();
 		error_detected = false;
 		lines = 0;
@@ -86,7 +82,7 @@ main(int argc, char **argv)
 }
 
 void
-usage(void)
+usage(const char *argv0)
 {
 	fprintf(stderr, "usage: %s [--gc always|never|<limit>] [--seetime] [--seenode] [--seegarb]\n", argv0);
 	exit(2);

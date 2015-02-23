@@ -73,7 +73,6 @@ main(int argc, char **argv)
 			return 1;
 
 	while(!quit) {
-		fputs("> ", stdout);
 		yyparse();
 		error_detected = false;
 		lines = 0;

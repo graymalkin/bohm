@@ -10,13 +10,18 @@
 static int globalReadOffset = 0;
 
 int
-readInputForLexer(char *buffer, int *numBytesRead, int maxBytesToRead)
+readInputForLexer(char *buffer, int *result, int maxBytesToRead)
 {
-	char *line = readline ("bohm> ");
-	add_history (line);
+	if(globalReadOffset == 0) {
+		int numBytesRead = 0;
+		char *line = readline ("bohm> ");
+		add_history (line);
 
-	numBytesRead = strlen(line);
-	strcpy(buffer, line);
+		numBytesRead = strlen(line);
+		if(numBytesRead < maxBytesToRead)
+			strcpy(buffer, line);
+		*result = 1;
 
-    return 0;
+	}
+	return 0;
 }

@@ -5,9 +5,8 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 
-
-
 #include "input.h"
+
 
 static int globalReadOffset = 0;
 char * prev_line;
@@ -15,12 +14,14 @@ char * prev_line;
 int
 readInputForLexer(char *buffer, int *result, int maxBytesToRead)
 {
-	if(globalReadOffset == 0) {
+	if(globalReadOffset == 0) 
+	{
 		int numBytesRead = 0;
 		char *line = readline ("opt> ");
 		add_history (line);
 
-		if(line){
+		if(line)
+		{
 			numBytesRead = strlen(line);
 			if(numBytesRead <= maxBytesToRead)
 			{
@@ -47,7 +48,8 @@ readInputForLexer(char *buffer, int *result, int maxBytesToRead)
 		strncpy(buffer, prev_line+globalReadOffset, maxBytesToRead);
 		globalReadOffset -= maxBytesToRead;
 		*result = strlen(buffer);
-		if(globalReadOffset <= 0){
+		if(globalReadOffset <= 0)
+		{
 			globalReadOffset = 0;
 			free(prev_line);
 		}

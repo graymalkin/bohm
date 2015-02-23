@@ -70,7 +70,7 @@ int astringlen;
 
 %{
 #undef YY_INPUT
-#define YY_INPUT(b,r,s) readInputForLexer(b,&r,s)
+#define YY_INPUT(b,r,s) readInputForLexer(b,&(r),s)
 %}
 
  /***************************************************************/

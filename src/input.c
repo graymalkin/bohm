@@ -17,30 +17,40 @@ readInputForLexer(char *buffer, int *result, int maxBytesToRead)
 {
 	if(globalReadOffset == 0) {
 		int numBytesRead = 0;
-		char *line = readline ("bohm> ");
+		char *line = readline ("opt> ");
 		add_history (line);
 
-		numBytesRead = strlen(line);
-		if(numBytesRead < maxBytesToRead)
-		{
-			strncpy(buffer, line, maxBytesToRead);
-			free(line);
+		if(line){
+			numBytesRead = strlen(line);
+			if(numBytesRead <= maxBytesToRead)
+			{
+				strncpy(buffer, line, maxBytesToRead);
+				free(line);
+				*result = numBytesRead;
+			}
+			else 
+			{
+				prev_line = line;
+				strncpy(buffer, line, maxBytesToRead);
+				globalReadOffset += maxBytesToRead;
+				*result = maxBytesToRead;
+			}
 		}
-		else 
+		else
 		{
-			prev_line = line;
-			strncpy(buffer, line, maxBytesToRead);
-			globalReadOffset += maxBytesToRead;
+			result = 0;
 		}
-		*result = numBytesRead;
 	}
 	else
 	{
 		/*Copy from the buffer the previous line.*/
-		strncpy(buffer+globalReadOffset, prev_line, maxBytesToRead);
+		strncpy(buffer, prev_line+globalReadOffset, maxBytesToRead);
 		globalReadOffset -= maxBytesToRead;
-		if(globalReadOffset <= 0)
+		*result = strlen(buffer);
+		if(globalReadOffset <= 0){
 			globalReadOffset = 0;
+			free(prev_line);
+		}
 	}
 	return 0;
 }

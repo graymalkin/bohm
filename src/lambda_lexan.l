@@ -56,6 +56,7 @@
 #include "lambda_parser.h"
 #include "sthandler.h"
 #include "stringhandler.h"
+#include "input.h"
 %}
 
  /***************************************************************/
@@ -65,6 +66,11 @@
 %{
 int lines;
 int astringlen;
+%}
+
+%{
+#undef YY_INPUT
+#define YY_INPUT(b,r,s) readInputForLexer(b,&r,s)
 %}
 
  /***************************************************************/

@@ -16,6 +16,7 @@ SUPPORT = include/crashhandler.h include/dynallhandler.h include/save.h include/
 CSRC = src/main.c src/y.tab.c src/lex.yy.c src/copy.c\
        src/sthandler.c src/scope_analysis.c src/inspect.c src/graphgenerator.c src/destroyer.c \
        src/loader.c src/reducer.c src/m_stack.c src/readback.c src/garbage.c src/save.c \
+       src/input.c \
        src/util/crashhandler.c src/util/errorhandler.c \
        src/util/dynallhandler.c \
        src/util/stringhandler.c

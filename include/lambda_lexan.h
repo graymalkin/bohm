@@ -16,5 +16,6 @@ extern int yyleng, lines;
 /****************************************************************/
 
 extern int yylex(void);
+extern int readInputForLexer(char* buffer,int *numBytesRead,int maxBytesToRead);
 
 #endif

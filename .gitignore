@@ -1,6 +1,5 @@
-bin/opt
-include/y.tab.h
-src/*.o
-src/lex.yy.c
-src/util/*.o
-src/y.tab.c
+*.o
+opt
+lex.yy.c
+y.tab.c
+h/y.tab.h
